@@ -1,0 +1,1153 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 51;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		37C642A1694223971E6F32F3 /* Pods_OnePay.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F226F6B4CDC84B6DE8EEF6B1 /* Pods_OnePay.framework */; };
+		E30A92FE2297D3C500A0434F /* SignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30A92FD2297D3C500A0434F /* SignatureViewController.swift */; };
+		E30A930022981ED800A0434F /* YPDrawSignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30A92FF22981ED700A0434F /* YPDrawSignatureView.swift */; };
+		E30FCA5222CA0C7200891B48 /* abeatbyKaiRegular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E30FCA5122CA0C7200891B48 /* abeatbyKaiRegular.otf */; };
+		E316843722AFC6B800A824E9 /* ReceiptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E316843622AFC6B800A824E9 /* ReceiptView.swift */; };
+		E317CC16229D641F00480CD5 /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC15229D641F00480CD5 /* libMTSCRA.a */; };
+		E317CC18229D649800480CD5 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */; };
+		E317CC1A229D64CA00480CD5 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC19229D64CA00480CD5 /* libstdc++.dylib */; };
+		E3259E3F22DC96DB000FD252 /* ApiKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */; };
+		E3259E4122DCD22A000FD252 /* TransactionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */; };
+		E329ADA82385468F004BA12E /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = E329ADA72385468F004BA12E /* Application.swift */; };
+		E332A2512296E6AC00F4D383 /* PaymentService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E332A2502296E6AC00F4D383 /* PaymentService.swift */; };
+		E355EB7A22FD668E000271CF /* Signature.swift in Sources */ = {isa = PBXBuildFile; fileRef = E355EB7922FD668E000271CF /* Signature.swift */; };
+		E355EB7C22FD66A0000271CF /* Receipt.swift in Sources */ = {isa = PBXBuildFile; fileRef = E355EB7B22FD66A0000271CF /* Receipt.swift */; };
+		E355EB7E22FD66BD000271CF /* SignatureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E355EB7D22FD66BD000271CF /* SignatureService.swift */; };
+		E355EB8022FD66C9000271CF /* ReceiptService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E355EB7F22FD66C9000271CF /* ReceiptService.swift */; };
+		E35D49CC22D36E8A00171E30 /* DevicesListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35D49CB22D36E8A00171E30 /* DevicesListTableViewController.swift */; };
+		E3616DFB2293F37900728C3C /* Checkout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3616DFA2293F37900728C3C /* Checkout.swift */; };
+		E3616DFF22953DEF00728C3C /* PaymentModeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3616DFE22953DEF00728C3C /* PaymentModeView.swift */; };
+		E3616E012295463B00728C3C /* Payment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3616E002295463B00728C3C /* Payment.swift */; };
+		E36AF5AD2317F228004D3D63 /* Button.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36AF5AC2317F228004D3D63 /* Button.swift */; };
+		E36C1054228E9BCA00147F67 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C1053228E9BCA00147F67 /* LoginView.swift */; };
+		E36C1059228EA2C800147F67 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C1058228EA2C800147F67 /* LoginService.swift */; };
+		E36C105C228EA45A00147F67 /* BaseRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C105B228EA45A00147F67 /* BaseRequest.swift */; };
+		E36C105E228EA46700147F67 /* BaseAPIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C105D228EA46700147F67 /* BaseAPIs.swift */; };
+		E36C1060228EA51A00147F67 /* Login.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C105F228EA51A00147F67 /* Login.swift */; };
+		E36C1063228EAD5C00147F67 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C1062228EAD5C00147F67 /* Session.swift */; };
+		E36C1065228EE99E00147F67 /* MenuListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C1064228EE99E00147F67 /* MenuListViewController.swift */; };
+		E36C1067228EE9AC00147F67 /* CheckoutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E36C1066228EE9AC00147F67 /* CheckoutViewController.swift */; };
+		E388F95722AA9F85005CA2EB /* ReceiptViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E388F95622AA9F85005CA2EB /* ReceiptViewController.swift */; };
+		E38AB5AE22CDDE7900999CF6 /* TransactionInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38AB5AD22CDDE7900999CF6 /* TransactionInfoViewController.swift */; };
+		E38AB5B022CE0BBA00999CF6 /* AppSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38AB5AF22CE0BBA00999CF6 /* AppSettingsTableViewController.swift */; };
+		E38AB5B122CE51A000999CF6 /* AppSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38AB5AF22CE0BBA00999CF6 /* AppSettingsTableViewController.swift */; };
+		E38D323722CF702A00D71150 /* PaymentSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38D323622CF702A00D71150 /* PaymentSettings.swift */; };
+		E38EC4DF22B2307E00277ECA /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E38EC4DE22B2307E00277ECA /* QuartzCore.framework */; };
+		E38EC4E122B24DB600277ECA /* BorderedButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E38EC4E022B24DB600277ECA /* BorderedButton.swift */; };
+		E390E80C228D5E1F0069004A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390E80B228D5E1F0069004A /* AppDelegate.swift */; };
+		E390E80E228D5E1F0069004A /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390E80D228D5E1F0069004A /* LoginViewController.swift */; };
+		E390E811228D5E1F0069004A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E390E80F228D5E1F0069004A /* Main.storyboard */; };
+		E390E813228D5E200069004A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E390E812228D5E200069004A /* Assets.xcassets */; };
+		E390E816228D5E200069004A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E390E814228D5E200069004A /* LaunchScreen.storyboard */; };
+		E390E821228D5E210069004A /* OnePayTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390E820228D5E210069004A /* OnePayTests.swift */; };
+		E390E82C228D5E210069004A /* OnePayUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E390E82B228D5E210069004A /* OnePayUITests.swift */; };
+		E39A5A672330EB1400AD4CC6 /* CardParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = E39A5A662330EB1400AD4CC6 /* CardParser.swift */; };
+		E3A094E222C4B7A500489480 /* LogoAnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A094E122C4B7A500489480 /* LogoAnimationView.swift */; };
+		E3A094E422C4CE8B00489480 /* iOSDevCenters+GIF.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A094E322C4CE8A00489480 /* iOSDevCenters+GIF.swift */; };
+		E3A094E722C4D43100489480 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3A094E622C4D43100489480 /* Utils.swift */; };
+		E3A094E922C4DB7300489480 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094E822C4DB7300489480 /* CoreLocation.framework */; };
+		E3A094EB22C4DB7B00489480 /* ExternalAccessory.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094EA22C4DB7A00489480 /* ExternalAccessory.framework */; };
+		E3A094ED22C4DB8200489480 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094EC22C4DB8200489480 /* AVFoundation.framework */; };
+		E3A094EF22C4DB8A00489480 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094EE22C4DB8A00489480 /* CoreBluetooth.framework */; };
+		E3A094F122C4DB9900489480 /* MessageUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094F022C4DB9900489480 /* MessageUI.framework */; };
+		E3A094F322C4DBA100489480 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094F222C4DBA100489480 /* MediaPlayer.framework */; };
+		E3A094F522C4DBA900489480 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094F422C4DBA900489480 /* SystemConfiguration.framework */; };
+		E3A094F722C4DBB800489480 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094F622C4DBB700489480 /* UIKit.framework */; };
+		E3A094F922C4DBC000489480 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094F822C4DBC000489480 /* Foundation.framework */; };
+		E3A094FB22C4DBC600489480 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094FA22C4DBC600489480 /* CoreGraphics.framework */; };
+		E3A094FD22C4DBD000489480 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094FC22C4DBCF00489480 /* AudioToolbox.framework */; };
+		E3A094FF22C4DBDA00489480 /* CoreAudio.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A094FE22C4DBDA00489480 /* CoreAudio.framework */; };
+		E3A0950122C4DBE200489480 /* CoreFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950022C4DBE100489480 /* CoreFoundation.framework */; };
+		E3A0950D22C4DC2200489480 /* libBBDevice-iOS-3.6.4-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950422C4DC2200489480 /* libBBDevice-iOS-3.6.4-simulator.a */; };
+		E3A0950E22C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950522C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3.a */; };
+		E3A0950F22C4DC2200489480 /* libCAPK.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950622C4DC2200489480 /* libCAPK.a */; };
+		E3A0951022C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950922C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3-simulator.a */; };
+		E3A0951122C4DC2200489480 /* libCAPK-simulator.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950A22C4DC2200489480 /* libCAPK-simulator.a */; };
+		E3A0951222C4DC2200489480 /* libBBDevice-iOS-3.6.4.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E3A0950C22C4DC2200489480 /* libBBDevice-iOS-3.6.4.a */; };
+		E3ACAA7222C617D800CBEAA1 /* onepay-logo-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = E3ACAA7122C617D800CBEAA1 /* onepay-logo-animation.gif */; };
+		E3ACAA7422C622A500CBEAA1 /* PortalWebviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACAA7322C622A500CBEAA1 /* PortalWebviewViewController.swift */; };
+		E3B64BCA24C58F23004B0FC2 /* MTDataViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B64BC924C58F22004B0FC2 /* MTDataViewerViewController.swift */; };
+		E3B9A8BB2292A3F800B01A28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8BA2292A3F800B01A28 /* ViewController.swift */; };
+		E3B9A8BD2292A86C00B01A28 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8BC2292A86C00B01A28 /* TransactionsViewController.swift */; };
+		E3B9A8BF2292C7FB00B01A28 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8BE2292C7FA00B01A28 /* Menu.swift */; };
+		E3B9A8C32292DA4C00B01A28 /* ReportsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8C22292DA4C00B01A28 /* ReportsViewController.swift */; };
+		E3B9A8C92292E54F00B01A28 /* CheckoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8C82292E54F00B01A28 /* CheckoutView.swift */; };
+		E3B9A8CD2292E59F00B01A28 /* MenuListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8CC2292E59F00B01A28 /* MenuListView.swift */; };
+		E3C64D1423E1B589000A9DC3 /* HexUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C64D1323E1B589000A9DC3 /* HexUtil.swift */; };
+		E3C73E9622BBCD14007DB7FB /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C73E9522BBCD14007DB7FB /* View.swift */; };
+		E3C788FD22DF167C00FABBCE /* TransactionDetailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C788FC22DF167C00FABBCE /* TransactionDetailService.swift */; };
+		E3C788FF22DF168D00FABBCE /* TransactionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C788FE22DF168D00FABBCE /* TransactionDetail.swift */; };
+		E3C7890122DF35E700FABBCE /* VoidTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7890022DF35E700FABBCE /* VoidTransactionService.swift */; };
+		E3CB3CCD231D12B40070D676 /* FullTransnDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB3CCC231D12B40070D676 /* FullTransnDetailTableViewController.swift */; };
+		E3E2EE7322DDE07E00C8C4BC /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */; };
+		E3E2EE7522DE178400C8C4BC /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7422DE178400C8C4BC /* Date.swift */; };
+		E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7622DE1F5700C8C4BC /* Image.swift */; };
+		E3EA7FC524487CF700F09C67 /* AppCenterTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */; };
+		E3EC7C7422A93A9300F43456 /* BLEScannerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E390E81D228D5E210069004A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E390E800228D5E1F0069004A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E390E807228D5E1F0069004A;
+			remoteInfo = OnePay;
+		};
+		E390E828228D5E210069004A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E390E800228D5E1F0069004A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E390E807228D5E1F0069004A;
+			remoteInfo = OnePay;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C0C16A8A0F7ABD3A6EDD61E4 /* Pods-OnePay.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePay.release.xcconfig"; path = "Pods/Target Support Files/Pods-OnePay/Pods-OnePay.release.xcconfig"; sourceTree = "<group>"; };
+		D77FCA58757E10ED69C523FE /* Pods-OnePay.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-OnePay.debug.xcconfig"; path = "Pods/Target Support Files/Pods-OnePay/Pods-OnePay.debug.xcconfig"; sourceTree = "<group>"; };
+		E30A92FD2297D3C500A0434F /* SignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureViewController.swift; sourceTree = "<group>"; };
+		E30A92FF22981ED700A0434F /* YPDrawSignatureView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YPDrawSignatureView.swift; sourceTree = "<group>"; };
+		E30FCA5122CA0C7200891B48 /* abeatbyKaiRegular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = abeatbyKaiRegular.otf; sourceTree = "<group>"; };
+		E316843622AFC6B800A824E9 /* ReceiptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptView.swift; sourceTree = "<group>"; };
+		E317CC14229D640700480CD5 /* MTSCRA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = MTSCRA.h; path = Lib/MTSCRA.h; sourceTree = "<group>"; };
+		E317CC15229D641F00480CD5 /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMTSCRA.a; path = "OnePay/Lib/Release-iphoneos/libMTSCRA.a"; sourceTree = "<group>"; };
+		E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "Lib/iPhoneOS/libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
+		E317CC19229D64CA00480CD5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Lib/iPhoneSimulator/libstdc++.dylib"; sourceTree = "<group>"; };
+		E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyService.swift; sourceTree = "<group>"; };
+		E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryService.swift; sourceTree = "<group>"; };
+		E329ADA72385468F004BA12E /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
+		E332A2502296E6AC00F4D383 /* PaymentService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentService.swift; sourceTree = "<group>"; };
+		E355EB7922FD668E000271CF /* Signature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Signature.swift; sourceTree = "<group>"; };
+		E355EB7B22FD66A0000271CF /* Receipt.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Receipt.swift; sourceTree = "<group>"; };
+		E355EB7D22FD66BD000271CF /* SignatureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureService.swift; sourceTree = "<group>"; };
+		E355EB7F22FD66C9000271CF /* ReceiptService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptService.swift; sourceTree = "<group>"; };
+		E35D49CB22D36E8A00171E30 /* DevicesListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DevicesListTableViewController.swift; sourceTree = "<group>"; };
+		E3616DFA2293F37900728C3C /* Checkout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Checkout.swift; sourceTree = "<group>"; };
+		E3616DFE22953DEF00728C3C /* PaymentModeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentModeView.swift; sourceTree = "<group>"; };
+		E3616E002295463B00728C3C /* Payment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Payment.swift; sourceTree = "<group>"; };
+		E36AF5AC2317F228004D3D63 /* Button.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Button.swift; sourceTree = "<group>"; };
+		E36C1053228E9BCA00147F67 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		E36C1058228EA2C800147F67 /* LoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		E36C105B228EA45A00147F67 /* BaseRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRequest.swift; sourceTree = "<group>"; };
+		E36C105D228EA46700147F67 /* BaseAPIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPIs.swift; sourceTree = "<group>"; };
+		E36C105F228EA51A00147F67 /* Login.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Login.swift; sourceTree = "<group>"; };
+		E36C1062228EAD5C00147F67 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		E36C1064228EE99E00147F67 /* MenuListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListViewController.swift; sourceTree = "<group>"; };
+		E36C1066228EE9AC00147F67 /* CheckoutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutViewController.swift; sourceTree = "<group>"; };
+		E388F95622AA9F85005CA2EB /* ReceiptViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptViewController.swift; sourceTree = "<group>"; };
+		E38AB5AD22CDDE7900999CF6 /* TransactionInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = TransactionInfoViewController.swift; path = magTekClass/TransactionInfoViewController.swift; sourceTree = "<group>"; };
+		E38AB5AF22CE0BBA00999CF6 /* AppSettingsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTableViewController.swift; sourceTree = "<group>"; };
+		E38D323622CF702A00D71150 /* PaymentSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentSettings.swift; sourceTree = "<group>"; };
+		E38EC4DE22B2307E00277ECA /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E38EC4E022B24DB600277ECA /* BorderedButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BorderedButton.swift; sourceTree = "<group>"; };
+		E390E808228D5E1F0069004A /* OnePay.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OnePay.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E390E80B228D5E1F0069004A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E390E80D228D5E1F0069004A /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
+		E390E810228D5E1F0069004A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E390E812228D5E200069004A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E390E815228D5E200069004A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E390E817228D5E200069004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E390E81C228D5E210069004A /* OnePayTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnePayTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E390E820228D5E210069004A /* OnePayTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePayTests.swift; sourceTree = "<group>"; };
+		E390E822228D5E210069004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E390E827228D5E210069004A /* OnePayUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OnePayUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E390E82B228D5E210069004A /* OnePayUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnePayUITests.swift; sourceTree = "<group>"; };
+		E390E82D228D5E210069004A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E39A5A662330EB1400AD4CC6 /* CardParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardParser.swift; sourceTree = "<group>"; };
+		E3A094E122C4B7A500489480 /* LogoAnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogoAnimationView.swift; sourceTree = "<group>"; };
+		E3A094E322C4CE8A00489480 /* iOSDevCenters+GIF.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "iOSDevCenters+GIF.swift"; sourceTree = "<group>"; };
+		E3A094E622C4D43100489480 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E3A094E822C4DB7300489480 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E3A094EA22C4DB7A00489480 /* ExternalAccessory.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ExternalAccessory.framework; path = System/Library/Frameworks/ExternalAccessory.framework; sourceTree = SDKROOT; };
+		E3A094EC22C4DB8200489480 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		E3A094EE22C4DB8A00489480 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		E3A094F022C4DB9900489480 /* MessageUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MessageUI.framework; path = System/Library/Frameworks/MessageUI.framework; sourceTree = SDKROOT; };
+		E3A094F222C4DBA100489480 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		E3A094F422C4DBA900489480 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		E3A094F622C4DBB700489480 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		E3A094F822C4DBC000489480 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E3A094FA22C4DBC600489480 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E3A094FC22C4DBCF00489480 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E3A094FE22C4DBDA00489480 /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
+		E3A0950022C4DBE100489480 /* CoreFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreFoundation.framework; path = System/Library/Frameworks/CoreFoundation.framework; sourceTree = SDKROOT; };
+		E3A0950322C4DC2200489480 /* CAPK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CAPK.h; sourceTree = "<group>"; };
+		E3A0950422C4DC2200489480 /* libBBDevice-iOS-3.6.4-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBBDevice-iOS-3.6.4-simulator.a"; sourceTree = "<group>"; };
+		E3A0950522C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBBDeviceOTA-iOS-1.5.3.a"; sourceTree = "<group>"; };
+		E3A0950622C4DC2200489480 /* libCAPK.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libCAPK.a; sourceTree = "<group>"; };
+		E3A0950722C4DC2200489480 /* BBDeviceOTAController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBDeviceOTAController.h; sourceTree = "<group>"; };
+		E3A0950822C4DC2200489480 /* VASMerchantConfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VASMerchantConfig.h; sourceTree = "<group>"; };
+		E3A0950922C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBBDeviceOTA-iOS-1.5.3-simulator.a"; sourceTree = "<group>"; };
+		E3A0950A22C4DC2200489480 /* libCAPK-simulator.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libCAPK-simulator.a"; sourceTree = "<group>"; };
+		E3A0950B22C4DC2200489480 /* BBDeviceController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BBDeviceController.h; sourceTree = "<group>"; };
+		E3A0950C22C4DC2200489480 /* libBBDevice-iOS-3.6.4.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = "libBBDevice-iOS-3.6.4.a"; sourceTree = "<group>"; };
+		E3ACAA7122C617D800CBEAA1 /* onepay-logo-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "onepay-logo-animation.gif"; sourceTree = "<group>"; };
+		E3ACAA7322C622A500CBEAA1 /* PortalWebviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalWebviewViewController.swift; sourceTree = "<group>"; };
+		E3B64BC924C58F22004B0FC2 /* MTDataViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDataViewerViewController.swift; sourceTree = "<group>"; };
+		E3B9A8BA2292A3F800B01A28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E3B9A8BC2292A86C00B01A28 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
+		E3B9A8BE2292C7FA00B01A28 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
+		E3B9A8C22292DA4C00B01A28 /* ReportsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReportsViewController.swift; sourceTree = "<group>"; };
+		E3B9A8C82292E54F00B01A28 /* CheckoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckoutView.swift; sourceTree = "<group>"; };
+		E3B9A8CC2292E59F00B01A28 /* MenuListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuListView.swift; sourceTree = "<group>"; };
+		E3C64D1323E1B589000A9DC3 /* HexUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HexUtil.swift; sourceTree = "<group>"; };
+		E3C6590922A13863005F5A53 /* OnePay-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "OnePay-Bridging-Header.h"; sourceTree = "<group>"; };
+		E3C73E9522BBCD14007DB7FB /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		E3C788FC22DF167C00FABBCE /* TransactionDetailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetailService.swift; sourceTree = "<group>"; };
+		E3C788FE22DF168D00FABBCE /* TransactionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetail.swift; sourceTree = "<group>"; };
+		E3C7890022DF35E700FABBCE /* VoidTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidTransactionService.swift; sourceTree = "<group>"; };
+		E3CB3CCC231D12B40070D676 /* FullTransnDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransnDetailTableViewController.swift; sourceTree = "<group>"; };
+		E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
+		E3E2EE7422DE178400C8C4BC /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		E3E2EE7622DE1F5700C8C4BC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCenterTrack.swift; sourceTree = "<group>"; };
+		E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEScannerList.swift; sourceTree = "<group>"; };
+		F226F6B4CDC84B6DE8EEF6B1 /* Pods_OnePay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E390E805228D5E1F0069004A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3A0950122C4DBE200489480 /* CoreFoundation.framework in Frameworks */,
+				E3A094FF22C4DBDA00489480 /* CoreAudio.framework in Frameworks */,
+				E3A094FD22C4DBD000489480 /* AudioToolbox.framework in Frameworks */,
+				E3A094FB22C4DBC600489480 /* CoreGraphics.framework in Frameworks */,
+				E3A094F922C4DBC000489480 /* Foundation.framework in Frameworks */,
+				E3A094F722C4DBB800489480 /* UIKit.framework in Frameworks */,
+				E3A094F522C4DBA900489480 /* SystemConfiguration.framework in Frameworks */,
+				E3A094F322C4DBA100489480 /* MediaPlayer.framework in Frameworks */,
+				E3A094F122C4DB9900489480 /* MessageUI.framework in Frameworks */,
+				E3A094EF22C4DB8A00489480 /* CoreBluetooth.framework in Frameworks */,
+				E3A0950E22C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3.a in Frameworks */,
+				E3A094ED22C4DB8200489480 /* AVFoundation.framework in Frameworks */,
+				E3A094EB22C4DB7B00489480 /* ExternalAccessory.framework in Frameworks */,
+				E3A0951022C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3-simulator.a in Frameworks */,
+				E3A0950D22C4DC2200489480 /* libBBDevice-iOS-3.6.4-simulator.a in Frameworks */,
+				E3A094E922C4DB7300489480 /* CoreLocation.framework in Frameworks */,
+				E38EC4DF22B2307E00277ECA /* QuartzCore.framework in Frameworks */,
+				E317CC1A229D64CA00480CD5 /* libstdc++.dylib in Frameworks */,
+				E3A0951122C4DC2200489480 /* libCAPK-simulator.a in Frameworks */,
+				37C642A1694223971E6F32F3 /* Pods_OnePay.framework in Frameworks */,
+				E317CC18229D649800480CD5 /* libstdc++.6.0.9.tbd in Frameworks */,
+				E317CC16229D641F00480CD5 /* libMTSCRA.a in Frameworks */,
+				E3A0950F22C4DC2200489480 /* libCAPK.a in Frameworks */,
+				E3A0951222C4DC2200489480 /* libBBDevice-iOS-3.6.4.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E390E819228D5E210069004A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E390E824228D5E210069004A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		6235962004E33CDB2CC6C048 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E3A0950022C4DBE100489480 /* CoreFoundation.framework */,
+				E3A094FE22C4DBDA00489480 /* CoreAudio.framework */,
+				E3A094FC22C4DBCF00489480 /* AudioToolbox.framework */,
+				E3A094FA22C4DBC600489480 /* CoreGraphics.framework */,
+				E3A094F822C4DBC000489480 /* Foundation.framework */,
+				E3A094F622C4DBB700489480 /* UIKit.framework */,
+				E3A094F422C4DBA900489480 /* SystemConfiguration.framework */,
+				E3A094F222C4DBA100489480 /* MediaPlayer.framework */,
+				E3A094F022C4DB9900489480 /* MessageUI.framework */,
+				E3A094EE22C4DB8A00489480 /* CoreBluetooth.framework */,
+				E3A094EC22C4DB8200489480 /* AVFoundation.framework */,
+				E3A094EA22C4DB7A00489480 /* ExternalAccessory.framework */,
+				E3A094E822C4DB7300489480 /* CoreLocation.framework */,
+				E38EC4DE22B2307E00277ECA /* QuartzCore.framework */,
+				E317CC15229D641F00480CD5 /* libMTSCRA.a */,
+				F226F6B4CDC84B6DE8EEF6B1 /* Pods_OnePay.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B565B24A8C124B95B188F57F /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				D77FCA58757E10ED69C523FE /* Pods-OnePay.debug.xcconfig */,
+				C0C16A8A0F7ABD3A6EDD61E4 /* Pods-OnePay.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		E30FCA5022CA0C5900891B48 /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E30FCA5122CA0C7200891B48 /* abeatbyKaiRegular.otf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
+		E317CC1B229D667600480CD5 /* magtekParser */ = {
+			isa = PBXGroup;
+			children = (
+				E3C64D1323E1B589000A9DC3 /* HexUtil.swift */,
+			);
+			name = magtekParser;
+			path = Controller/magtekParser;
+			sourceTree = "<group>";
+		};
+		E36C104F228E9A1000147F67 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				E36C1058228EA2C800147F67 /* LoginService.swift */,
+				E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */,
+				E332A2502296E6AC00F4D383 /* PaymentService.swift */,
+				E355EB7D22FD66BD000271CF /* SignatureService.swift */,
+				E355EB7F22FD66C9000271CF /* ReceiptService.swift */,
+				E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */,
+				E3C788FC22DF167C00FABBCE /* TransactionDetailService.swift */,
+				E3C7890022DF35E700FABBCE /* VoidTransactionService.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
+		E36C1050228E9A1A00147F67 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				E3B9A8BE2292C7FA00B01A28 /* Menu.swift */,
+				E36C105F228EA51A00147F67 /* Login.swift */,
+				E3616DFA2293F37900728C3C /* Checkout.swift */,
+				E3616E002295463B00728C3C /* Payment.swift */,
+				E355EB7922FD668E000271CF /* Signature.swift */,
+				E355EB7B22FD66A0000271CF /* Receipt.swift */,
+				E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */,
+				E3C788FE22DF168D00FABBCE /* TransactionDetail.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		E36C1051228E9A2100147F67 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E36C1053228E9BCA00147F67 /* LoginView.swift */,
+				E3B9A8C82292E54F00B01A28 /* CheckoutView.swift */,
+				E3B9A8CC2292E59F00B01A28 /* MenuListView.swift */,
+				E3616DFE22953DEF00728C3C /* PaymentModeView.swift */,
+				E316843622AFC6B800A824E9 /* ReceiptView.swift */,
+				E30A92FF22981ED700A0434F /* YPDrawSignatureView.swift */,
+				E3A094E122C4B7A500489480 /* LogoAnimationView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E36C1052228E9A2700147F67 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				E390E80D228D5E1F0069004A /* LoginViewController.swift */,
+				E36C1066228EE9AC00147F67 /* CheckoutViewController.swift */,
+				E30A92FD2297D3C500A0434F /* SignatureViewController.swift */,
+				E388F95622AA9F85005CA2EB /* ReceiptViewController.swift */,
+				E3B9A8BC2292A86C00B01A28 /* TransactionsViewController.swift */,
+				E38AB5AD22CDDE7900999CF6 /* TransactionInfoViewController.swift */,
+				E3CB3CCC231D12B40070D676 /* FullTransnDetailTableViewController.swift */,
+				E38AB5AF22CE0BBA00999CF6 /* AppSettingsTableViewController.swift */,
+				E35D49CB22D36E8A00171E30 /* DevicesListTableViewController.swift */,
+				E3ACAA7322C622A500CBEAA1 /* PortalWebviewViewController.swift */,
+				E3B9A8C22292DA4C00B01A28 /* ReportsViewController.swift */,
+				E36C1064228EE99E00147F67 /* MenuListViewController.swift */,
+				E3B64BC924C58F22004B0FC2 /* MTDataViewerViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		E36C1055228E9ED900147F67 /* Extention */ = {
+			isa = PBXGroup;
+			children = (
+				E39A5A662330EB1400AD4CC6 /* CardParser.swift */,
+				E3B9A8BA2292A3F800B01A28 /* ViewController.swift */,
+				E3C73E9522BBCD14007DB7FB /* View.swift */,
+				E38EC4E022B24DB600277ECA /* BorderedButton.swift */,
+				E3A094E322C4CE8A00489480 /* iOSDevCenters+GIF.swift */,
+				E3E2EE7422DE178400C8C4BC /* Date.swift */,
+				E3E2EE7622DE1F5700C8C4BC /* Image.swift */,
+				E36AF5AC2317F228004D3D63 /* Button.swift */,
+				E329ADA72385468F004BA12E /* Application.swift */,
+			);
+			path = Extention;
+			sourceTree = "<group>";
+		};
+		E36C105A228EA41600147F67 /* BaseService */ = {
+			isa = PBXGroup;
+			children = (
+				E36C105D228EA46700147F67 /* BaseAPIs.swift */,
+				E36C105B228EA45A00147F67 /* BaseRequest.swift */,
+			);
+			path = BaseService;
+			sourceTree = "<group>";
+		};
+		E36C1061228EAD4D00147F67 /* Session */ = {
+			isa = PBXGroup;
+			children = (
+				E36C1062228EAD5C00147F67 /* Session.swift */,
+			);
+			path = Session;
+			sourceTree = "<group>";
+		};
+		E38D323322CF6FD300D71150 /* DeviceSettings */ = {
+			isa = PBXGroup;
+			children = (
+				E38D323622CF702A00D71150 /* PaymentSettings.swift */,
+			);
+			path = DeviceSettings;
+			sourceTree = "<group>";
+		};
+		E390E7FF228D5E1F0069004A = {
+			isa = PBXGroup;
+			children = (
+				E390E80A228D5E1F0069004A /* OnePay */,
+				E390E81F228D5E210069004A /* OnePayTests */,
+				E390E82A228D5E210069004A /* OnePayUITests */,
+				E390E809228D5E1F0069004A /* Products */,
+				B565B24A8C124B95B188F57F /* Pods */,
+				6235962004E33CDB2CC6C048 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		E390E809228D5E1F0069004A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E390E808228D5E1F0069004A /* OnePay.app */,
+				E390E81C228D5E210069004A /* OnePayTests.xctest */,
+				E390E827228D5E210069004A /* OnePayUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E390E80A228D5E1F0069004A /* OnePay */ = {
+			isa = PBXGroup;
+			children = (
+				E317CC14229D640700480CD5 /* MTSCRA.h */,
+				E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */,
+				E317CC19229D64CA00480CD5 /* libstdc++.dylib */,
+				E3C6590922A13863005F5A53 /* OnePay-Bridging-Header.h */,
+				E317CC1B229D667600480CD5 /* magtekParser */,
+				E3C658E322A13432005F5A53 /* magTekClass */,
+				E3A0950222C4DC2200489480 /* bbPosLibrary */,
+				E36C1055228E9ED900147F67 /* Extention */,
+				E36C105A228EA41600147F67 /* BaseService */,
+				E3A094E522C4D41A00489480 /* Common */,
+				E36C1061228EAD4D00147F67 /* Session */,
+				E38D323322CF6FD300D71150 /* DeviceSettings */,
+				E36C1052228E9A2700147F67 /* Controller */,
+				E36C1051228E9A2100147F67 /* View */,
+				E36C1050228E9A1A00147F67 /* Model */,
+				E36C104F228E9A1000147F67 /* Data */,
+				E390E80B228D5E1F0069004A /* AppDelegate.swift */,
+				E390E80F228D5E1F0069004A /* Main.storyboard */,
+				E30FCA5022CA0C5900891B48 /* Fonts */,
+				E3A094DC22C4B0DE00489480 /* Images */,
+				E390E812228D5E200069004A /* Assets.xcassets */,
+				E390E814228D5E200069004A /* LaunchScreen.storyboard */,
+				E390E817228D5E200069004A /* Info.plist */,
+			);
+			path = OnePay;
+			sourceTree = "<group>";
+		};
+		E390E81F228D5E210069004A /* OnePayTests */ = {
+			isa = PBXGroup;
+			children = (
+				E390E820228D5E210069004A /* OnePayTests.swift */,
+				E390E822228D5E210069004A /* Info.plist */,
+			);
+			path = OnePayTests;
+			sourceTree = "<group>";
+		};
+		E390E82A228D5E210069004A /* OnePayUITests */ = {
+			isa = PBXGroup;
+			children = (
+				E390E82B228D5E210069004A /* OnePayUITests.swift */,
+				E390E82D228D5E210069004A /* Info.plist */,
+			);
+			path = OnePayUITests;
+			sourceTree = "<group>";
+		};
+		E3A094DC22C4B0DE00489480 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				E3ACAA7122C617D800CBEAA1 /* onepay-logo-animation.gif */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		E3A094E522C4D41A00489480 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				E3A094E622C4D43100489480 /* Utils.swift */,
+				E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		E3A0950222C4DC2200489480 /* bbPosLibrary */ = {
+			isa = PBXGroup;
+			children = (
+				E3A0950322C4DC2200489480 /* CAPK.h */,
+				E3A0950422C4DC2200489480 /* libBBDevice-iOS-3.6.4-simulator.a */,
+				E3A0950522C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3.a */,
+				E3A0950622C4DC2200489480 /* libCAPK.a */,
+				E3A0950722C4DC2200489480 /* BBDeviceOTAController.h */,
+				E3A0950822C4DC2200489480 /* VASMerchantConfig.h */,
+				E3A0950922C4DC2200489480 /* libBBDeviceOTA-iOS-1.5.3-simulator.a */,
+				E3A0950A22C4DC2200489480 /* libCAPK-simulator.a */,
+				E3A0950B22C4DC2200489480 /* BBDeviceController.h */,
+				E3A0950C22C4DC2200489480 /* libBBDevice-iOS-3.6.4.a */,
+			);
+			name = bbPosLibrary;
+			path = Controller/bbPosLibrary;
+			sourceTree = "<group>";
+		};
+		E3C658E322A13432005F5A53 /* magTekClass */ = {
+			isa = PBXGroup;
+			children = (
+				E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */,
+			);
+			name = magTekClass;
+			path = Controller/magTekClass;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E390E807228D5E1F0069004A /* OnePay */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E390E830228D5E210069004A /* Build configuration list for PBXNativeTarget "OnePay" */;
+			buildPhases = (
+				5007F4FF026EE6AB4C3F424B /* [CP] Check Pods Manifest.lock */,
+				E390E804228D5E1F0069004A /* Sources */,
+				E390E805228D5E1F0069004A /* Frameworks */,
+				E390E806228D5E1F0069004A /* Resources */,
+				5374E290B26A96B2F4E9FCFC /* [CP] Embed Pods Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = OnePay;
+			productName = OnePay;
+			productReference = E390E808228D5E1F0069004A /* OnePay.app */;
+			productType = "com.apple.product-type.application";
+		};
+		E390E81B228D5E210069004A /* OnePayTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E390E833228D5E210069004A /* Build configuration list for PBXNativeTarget "OnePayTests" */;
+			buildPhases = (
+				E390E818228D5E210069004A /* Sources */,
+				E390E819228D5E210069004A /* Frameworks */,
+				E390E81A228D5E210069004A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E390E81E228D5E210069004A /* PBXTargetDependency */,
+			);
+			name = OnePayTests;
+			productName = OnePayTests;
+			productReference = E390E81C228D5E210069004A /* OnePayTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		E390E826228D5E210069004A /* OnePayUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E390E836228D5E210069004A /* Build configuration list for PBXNativeTarget "OnePayUITests" */;
+			buildPhases = (
+				E390E823228D5E210069004A /* Sources */,
+				E390E824228D5E210069004A /* Frameworks */,
+				E390E825228D5E210069004A /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E390E829228D5E210069004A /* PBXTargetDependency */,
+			);
+			name = OnePayUITests;
+			productName = OnePayUITests;
+			productReference = E390E827228D5E210069004A /* OnePayUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E390E800228D5E1F0069004A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 1020;
+				LastUpgradeCheck = 1020;
+				ORGANIZATIONNAME = "Certify Global";
+				TargetAttributes = {
+					E390E807228D5E1F0069004A = {
+						CreatedOnToolsVersion = 10.2.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
+					};
+					E390E81B228D5E210069004A = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = E390E807228D5E1F0069004A;
+					};
+					E390E826228D5E210069004A = {
+						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = E390E807228D5E1F0069004A;
+					};
+				};
+			};
+			buildConfigurationList = E390E803228D5E1F0069004A /* Build configuration list for PBXProject "OnePay" */;
+			compatibilityVersion = "Xcode 9.3";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = E390E7FF228D5E1F0069004A;
+			productRefGroup = E390E809228D5E1F0069004A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E390E807228D5E1F0069004A /* OnePay */,
+				E390E81B228D5E210069004A /* OnePayTests */,
+				E390E826228D5E210069004A /* OnePayUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E390E806228D5E1F0069004A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3ACAA7222C617D800CBEAA1 /* onepay-logo-animation.gif in Resources */,
+				E390E816228D5E200069004A /* LaunchScreen.storyboard in Resources */,
+				E390E813228D5E200069004A /* Assets.xcassets in Resources */,
+				E390E811228D5E1F0069004A /* Main.storyboard in Resources */,
+				E30FCA5222CA0C7200891B48 /* abeatbyKaiRegular.otf in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E390E81A228D5E210069004A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E390E825228D5E210069004A /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		5007F4FF026EE6AB4C3F424B /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-OnePay-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5374E290B26A96B2F4E9FCFC /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnePay/Pods-OnePay-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-OnePay/Pods-OnePay-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-OnePay/Pods-OnePay-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E390E804228D5E1F0069004A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E355EB7C22FD66A0000271CF /* Receipt.swift in Sources */,
+				E38AB5AE22CDDE7900999CF6 /* TransactionInfoViewController.swift in Sources */,
+				E3B64BCA24C58F23004B0FC2 /* MTDataViewerViewController.swift in Sources */,
+				E355EB7E22FD66BD000271CF /* SignatureService.swift in Sources */,
+				E38D323722CF702A00D71150 /* PaymentSettings.swift in Sources */,
+				E3A094E422C4CE8B00489480 /* iOSDevCenters+GIF.swift in Sources */,
+				E3ACAA7422C622A500CBEAA1 /* PortalWebviewViewController.swift in Sources */,
+				E35D49CC22D36E8A00171E30 /* DevicesListTableViewController.swift in Sources */,
+				E3C788FD22DF167C00FABBCE /* TransactionDetailService.swift in Sources */,
+				E3EA7FC524487CF700F09C67 /* AppCenterTrack.swift in Sources */,
+				E329ADA82385468F004BA12E /* Application.swift in Sources */,
+				E390E80E228D5E1F0069004A /* LoginViewController.swift in Sources */,
+				E3EC7C7422A93A9300F43456 /* BLEScannerList.swift in Sources */,
+				E30A92FE2297D3C500A0434F /* SignatureViewController.swift in Sources */,
+				E3616DFB2293F37900728C3C /* Checkout.swift in Sources */,
+				E332A2512296E6AC00F4D383 /* PaymentService.swift in Sources */,
+				E3C788FF22DF168D00FABBCE /* TransactionDetail.swift in Sources */,
+				E3259E4122DCD22A000FD252 /* TransactionHistoryService.swift in Sources */,
+				E3259E3F22DC96DB000FD252 /* ApiKeyService.swift in Sources */,
+				E36C1054228E9BCA00147F67 /* LoginView.swift in Sources */,
+				E3CB3CCD231D12B40070D676 /* FullTransnDetailTableViewController.swift in Sources */,
+				E3B9A8BF2292C7FB00B01A28 /* Menu.swift in Sources */,
+				E36AF5AD2317F228004D3D63 /* Button.swift in Sources */,
+				E355EB7A22FD668E000271CF /* Signature.swift in Sources */,
+				E38EC4E122B24DB600277ECA /* BorderedButton.swift in Sources */,
+				E36C105C228EA45A00147F67 /* BaseRequest.swift in Sources */,
+				E3E2EE7522DE178400C8C4BC /* Date.swift in Sources */,
+				E3C64D1423E1B589000A9DC3 /* HexUtil.swift in Sources */,
+				E3C73E9622BBCD14007DB7FB /* View.swift in Sources */,
+				E3B9A8C32292DA4C00B01A28 /* ReportsViewController.swift in Sources */,
+				E36C1059228EA2C800147F67 /* LoginService.swift in Sources */,
+				E3A094E722C4D43100489480 /* Utils.swift in Sources */,
+				E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */,
+				E3B9A8BD2292A86C00B01A28 /* TransactionsViewController.swift in Sources */,
+				E3B9A8C92292E54F00B01A28 /* CheckoutView.swift in Sources */,
+				E316843722AFC6B800A824E9 /* ReceiptView.swift in Sources */,
+				E3B9A8CD2292E59F00B01A28 /* MenuListView.swift in Sources */,
+				E36C105E228EA46700147F67 /* BaseAPIs.swift in Sources */,
+				E3B9A8BB2292A3F800B01A28 /* ViewController.swift in Sources */,
+				E390E80C228D5E1F0069004A /* AppDelegate.swift in Sources */,
+				E36C1067228EE9AC00147F67 /* CheckoutViewController.swift in Sources */,
+				E355EB8022FD66C9000271CF /* ReceiptService.swift in Sources */,
+				E3616E012295463B00728C3C /* Payment.swift in Sources */,
+				E3616DFF22953DEF00728C3C /* PaymentModeView.swift in Sources */,
+				E30A930022981ED800A0434F /* YPDrawSignatureView.swift in Sources */,
+				E36C1060228EA51A00147F67 /* Login.swift in Sources */,
+				E39A5A672330EB1400AD4CC6 /* CardParser.swift in Sources */,
+				E388F95722AA9F85005CA2EB /* ReceiptViewController.swift in Sources */,
+				E38AB5B022CE0BBA00999CF6 /* AppSettingsTableViewController.swift in Sources */,
+				E3C7890122DF35E700FABBCE /* VoidTransactionService.swift in Sources */,
+				E36C1063228EAD5C00147F67 /* Session.swift in Sources */,
+				E36C1065228EE99E00147F67 /* MenuListViewController.swift in Sources */,
+				E3A094E222C4B7A500489480 /* LogoAnimationView.swift in Sources */,
+				E3E2EE7322DDE07E00C8C4BC /* TransactionHistory.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E390E818228D5E210069004A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E38AB5B122CE51A000999CF6 /* AppSettingsTableViewController.swift in Sources */,
+				E390E821228D5E210069004A /* OnePayTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E390E823228D5E210069004A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E390E82C228D5E210069004A /* OnePayUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E390E81E228D5E210069004A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E390E807228D5E1F0069004A /* OnePay */;
+			targetProxy = E390E81D228D5E210069004A /* PBXContainerItemProxy */;
+		};
+		E390E829228D5E210069004A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E390E807228D5E1F0069004A /* OnePay */;
+			targetProxy = E390E828228D5E210069004A /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E390E80F228D5E1F0069004A /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E390E810228D5E1F0069004A /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E390E814228D5E200069004A /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E390E815228D5E200069004A /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E390E82E228D5E210069004A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		E390E82F228D5E210069004A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		E390E831228D5E210069004A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = D77FCA58757E10ED69C523FE /* Pods-OnePay.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEVELOPMENT_TEAM = 25NMC73834;
+				INFOPLIST_FILE = OnePay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnePay/Lib/Release-iphoneos",
+					"$(PROJECT_DIR)/OnePay/Lib/iPhoneOS",
+					"$(PROJECT_DIR)/OnePay/Lib/iPhoneSimulator",
+					"$(PROJECT_DIR)/OnePay/Controller/bbPosLibrary",
+				);
+				MARKETING_VERSION = 1.3;
+				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"SideMenuSwift\"",
+					"-framework",
+					"\"SkyFloatingLabelTextField\"",
+					"-framework",
+					"\"Stripe\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-lstdc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.onepay.onepaygo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OnePay/OnePay-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Debug;
+		};
+		E390E832228D5E210069004A /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = C0C16A8A0F7ABD3A6EDD61E4 /* Pods-OnePay.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1.6;
+				DEVELOPMENT_TEAM = 25NMC73834;
+				INFOPLIST_FILE = OnePay/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/OnePay/Lib/Release-iphoneos",
+					"$(PROJECT_DIR)/OnePay/Lib/iPhoneOS",
+					"$(PROJECT_DIR)/OnePay/Lib/iPhoneSimulator",
+					"$(PROJECT_DIR)/OnePay/Controller/bbPosLibrary",
+				);
+				MARKETING_VERSION = 1.3;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-framework",
+					"\"IQKeyboardManagerSwift\"",
+					"-framework",
+					"\"SideMenuSwift\"",
+					"-framework",
+					"\"SkyFloatingLabelTextField\"",
+					"-framework",
+					"\"Stripe\"",
+					"-framework",
+					"\"SwiftyJSON\"",
+					"-lstdc++",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.onepay.onepaygo;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/OnePay/OnePay-Bridging-Header.h";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_WORKSPACE = YES;
+			};
+			name = Release;
+		};
+		E390E834228D5E210069004A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 25NMC73834;
+				INFOPLIST_FILE = OnePayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.certifyglobal.OnePayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnePay.app/OnePay";
+			};
+			name = Debug;
+		};
+		E390E835228D5E210069004A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 25NMC73834;
+				INFOPLIST_FILE = OnePayTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.certifyglobal.OnePayTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/OnePay.app/OnePay";
+			};
+			name = Release;
+		};
+		E390E837228D5E210069004A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 25NMC73834;
+				INFOPLIST_FILE = OnePayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.certifyglobal.OnePayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OnePay;
+			};
+			name = Debug;
+		};
+		E390E838228D5E210069004A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 25NMC73834;
+				INFOPLIST_FILE = OnePayUITests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.certifyglobal.OnePayUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = OnePay;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E390E803228D5E1F0069004A /* Build configuration list for PBXProject "OnePay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E390E82E228D5E210069004A /* Debug */,
+				E390E82F228D5E210069004A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E390E830228D5E210069004A /* Build configuration list for PBXNativeTarget "OnePay" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E390E831228D5E210069004A /* Debug */,
+				E390E832228D5E210069004A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E390E833228D5E210069004A /* Build configuration list for PBXNativeTarget "OnePayTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E390E834228D5E210069004A /* Debug */,
+				E390E835228D5E210069004A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E390E836228D5E210069004A /* Build configuration list for PBXNativeTarget "OnePayUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E390E837228D5E210069004A /* Debug */,
+				E390E838228D5E210069004A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E390E800228D5E1F0069004A /* Project object */;
+}
