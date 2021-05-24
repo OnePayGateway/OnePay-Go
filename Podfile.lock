@@ -1,0 +1,53 @@
+PODS:
+  - AppCenter (4.1.1):
+    - AppCenter/Analytics (= 4.1.1)
+    - AppCenter/Crashes (= 4.1.1)
+  - AppCenter/Analytics (4.1.1):
+    - AppCenter/Core
+  - AppCenter/Core (4.1.1)
+  - AppCenter/Crashes (4.1.1):
+    - AppCenter/Core
+  - ApplicationInsights (1.0-beta.8)
+  - IQKeyboardManagerSwift (6.5.6)
+  - ReachabilitySwift (5.0.0)
+  - SideMenuSwift (2.0.7)
+  - SkyFloatingLabelTextField (3.8.0)
+  - Stripe (21.5.1):
+    - Stripe/Stripe3DS2 (= 21.5.1)
+  - Stripe/Stripe3DS2 (21.5.1)
+  - SwiftyJSON (4.3.0)
+
+DEPENDENCIES:
+  - AppCenter
+  - ApplicationInsights (= 1.0-beta.8)
+  - IQKeyboardManagerSwift
+  - ReachabilitySwift
+  - SideMenuSwift
+  - SkyFloatingLabelTextField (~> 3.0)
+  - Stripe
+  - SwiftyJSON (~> 4.0)
+
+SPEC REPOS:
+  trunk:
+    - AppCenter
+    - ApplicationInsights
+    - IQKeyboardManagerSwift
+    - ReachabilitySwift
+    - SideMenuSwift
+    - SkyFloatingLabelTextField
+    - Stripe
+    - SwiftyJSON
+
+SPEC CHECKSUMS:
+  AppCenter: cd53e3ed3563cc720bcb806c9731a12389b40d44
+  ApplicationInsights: 40e61e9ee7cce11aac7e5f8bffc91e1309f3c3de
+  IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
+  SideMenuSwift: ffbbc88d23741932177ad1320df837cedfb3bc5e
+  SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
+  Stripe: 515db5536fd659b5d79a0898ce1b882b61ab597e
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
+
+PODFILE CHECKSUM: eaf3aacad4901dbc521bd0d542abe4488a42f488
+
+COCOAPODS: 1.10.1
