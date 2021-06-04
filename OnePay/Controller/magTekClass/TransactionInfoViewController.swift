@@ -61,7 +61,7 @@ class TransactionInfoViewController: UITableViewController {
         
        // self.tableView.contentInset = UIEdgeInsets(top: 120, left: 0, bottom: 0, right: 0)
 
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 120)
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
         imageView.image = UIImage.init(named: "CheckoutBg")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true

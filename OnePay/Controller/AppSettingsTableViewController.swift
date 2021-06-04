@@ -37,7 +37,7 @@ class AppSettingsTableViewController: UITableViewController, MTSCRAEventDelegate
         locationManager.delegate = self
        // self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80)
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
         imageView.image = UIImage.init(named: "CheckoutBg")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -308,6 +308,12 @@ class AppSettingsTableViewController: UITableViewController, MTSCRAEventDelegate
 //        }
         else {
             imageView?.image = nil
+        }
+        
+        if indexPath.section == 4 {
+            if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
+                cell.textLabel?.text = "OnePay Go Version \(version)"
+            }
         }
     }
    

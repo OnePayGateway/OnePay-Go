@@ -36,7 +36,7 @@ class FullTransnDetailTableViewController: UITableViewController {
         
         
         let imageView = UIImageView()
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80)
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
         imageView.image = UIImage.init(named: "CheckoutBg")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true

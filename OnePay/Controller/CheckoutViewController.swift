@@ -184,6 +184,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     func makeTransaction() {
         self.paymentService.makePayment(payment:payment, cardInfo: self.cardInfo, customerInfo: self.customerInfo, emv: emv) { (jsonValue, err) in
             DispatchQueue.main.async {
+                self.removeDisplayedBrandImage()
                 self.connectBtn.setTitle("CONNECT", for: .normal)
                 guard err == nil else {
                     self.hideSpinner()
@@ -268,7 +269,8 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             if(self.plsSwipeView != nil) {
                 self.plsSwipeView.removeFromSuperview()
             }
-            self.creditcardSwipeLbl.text = "Credit Card Swipe or Insert"
+            self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+            self.removeDisplayedBrandImage()
             self.connectBtn.setTitle("CONNECT", for: .normal)
             self.confirmBtn.isEnabled = false
             self.confirmBtn.alpha = 0.5
@@ -607,6 +609,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
                         self.devicePaired = true
                         self.setText(text: "Disconnected")
                         PaymentSettings.shared.setPaymentDevice(id: 0)
+                        self.removeDisplayedBrandImage()
                         self.connectBtn.setTitle("CONNECT", for: .normal)
                         self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
                         if(self.plsSwipeView != nil) {
@@ -621,6 +624,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
                     self.devicePaired = true
                     self.setText(text: "Disconnected")
                     PaymentSettings.shared.setPaymentDevice(id: 0)
+                    self.removeDisplayedBrandImage()
                     self.connectBtn.setTitle("CONNECT", for: .normal)
                     self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
                     if(self.plsSwipeView != nil) {
@@ -1622,7 +1626,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
              if(self.plsSwipeView != nil) {
              self.plsSwipeView.removeFromSuperview()
              }
-             self.creditcardSwipeLbl.text = "Credit Card Swipe or Insert"
+             self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
         default: returnString = "\(transactionResult.rawValue)"
         }
         return returnString;
@@ -1704,9 +1708,16 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         
     }
     
+    func removeDisplayedBrandImage() {
+        if let imageView = cardSwipeView.viewWithTag(111) as? UIImageView {
+            imageView.removeFromSuperview()
+        }
+    }
+    
     func setDisplayBrandImage(cardState:CardState) {
         let imgView = UIImageView(frame: CGRect(x: connectBtn.frame.origin.x+20, y: connectBtn.frame.origin.y, width: 30, height: connectBtn.frame.height))
         imgView.contentMode = .scaleAspectFit
+        imgView.tag = 111
         imgView.image = cardImage(forState: cardState)
         cardSwipeView.addSubview(imgView)
     }

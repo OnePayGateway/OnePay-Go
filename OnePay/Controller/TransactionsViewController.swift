@@ -21,7 +21,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         
        // transactionTableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
         
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 80)
+        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
         imageView.image = UIImage.init(named: "CheckoutBg")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
@@ -161,8 +161,8 @@ extension TransactionsViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let y = 80 - (scrollView.contentOffset.y + 80)
-        let height = min(max(y, 80), 400)
+        let y = 105 - (scrollView.contentOffset.y + 105)
+        let height = min(max(y, 105), 400)
         imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
     }
     
