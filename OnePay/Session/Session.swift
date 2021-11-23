@@ -26,7 +26,9 @@ class Session : NSObject {
     private let REFRESH_TOKEN: String = "REFRESH_TOKEN"
     private let TERMINAL_ID: String = "TERMINAL_ID"
     private let USER_LOC: String = "USER_LOC"
-    
+    private let DEFAULT_PED_KEY: String = "DEFAULT_PED_KEY"
+    private let DEFAULT_POS_KEY: String = "DEFAULT_POS_KEY"
+
     private override init() {}
     static let shared = Session()
     private let defaults = UserDefaults.standard
@@ -148,6 +150,26 @@ class Session : NSObject {
     
     func userLoc() -> String? {
         return defaults.value(forKey: USER_LOC) as? String
+    }
+    
+    
+    var defaultPED: String? {
+        get {
+            return defaults.string(forKey: DEFAULT_PED_KEY)
+        }
+        set(newValue) {
+            defaults.set(newValue, forKey: DEFAULT_PED_KEY)
+            defaults.synchronize()
+        }
+    }
+    var defaultPOS: String? {
+        get {
+            return defaults.string(forKey: DEFAULT_POS_KEY)
+        }
+        set(newValue) {
+            defaults.set(newValue, forKey: DEFAULT_POS_KEY)
+            defaults.synchronize()
+        }
     }
     
     func logOut() {

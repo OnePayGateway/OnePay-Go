@@ -19,6 +19,7 @@ let actualViewHeight:Float = 477.0
 let modeViewHeight:Float = 70.0
 let modeExpandedHeight:Float = 140.0
 
+
 class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate, BBDeviceControllerDelegate, CLLocationManagerDelegate, settingDelegate, UITextFieldDelegate,UIActionSheetDelegate, MTSCRAEventDelegate, BLEScanListEvent {
     
     var lib: MTSCRA!;
@@ -87,6 +88,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     var ref_tran_id: String!
     var flashing = false
 
+
     var checkout: Checkout? {
         didSet {
             guard let checkout = checkout else {
@@ -106,7 +108,39 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             checkOutView.chargeBtn.setTitle("Charge \(finalStr)", for: .normal)
         }
     }
-   
+    
+    let className = String(describing: [CheckoutViewController.self])
+//    let print = PrintDebuggingLog()
+//    let qrImages  = ["3px_v9_53x53.png","3px_v10_57x57.png","3px_v11_61x61.png",
+//                     "3px_v12_65x65.png","3px_v13_69x69.png"]
+   // let rights : String = "All rights reserved. The trademarks and logos displayed on this, Miura-Demo-application include the registered and unregistered trademarks of Miura Systems Ltd. All other trademarks are the property of their respective owners."
+    
+    var alert : UIAlertController!
+    var spinner: UIActivityIndicatorView!
+    var miura : MiuraManager!
+    var device: EAAccessory!
+    var appDelegate : AppDelegate!
+    var defaultAccessories = [EAAccessory]()
+    var otherAccessories = [EAAccessory]()
+  //  var prefs: PreferenceManager!
+    var serialNumers : [String] = []
+    var defaultPED: String?
+   // var message: String!
+    //for in-app pairing
+    var settingsAction = UIAlertAction()
+    var resultFailed = EABluetoothAccessoryPickerError.resultFailed
+    var resultNotFound = EABluetoothAccessoryPickerError.resultNotFound
+    var resultCancelled = EABluetoothAccessoryPickerError.resultCancelled
+    var alreadyConnected = EABluetoothAccessoryPickerError.alreadyConnected
+    var capabilities = [String : String]()
+    var counter = 0
+    var ctlsCancelledCardInsert = false
+    var emvCardInserted = false
+    var track2Data: Track2Data!
+    var miuraKSN : String?
+    var device_code = ""
+
+
     @IBAction func chargeBtnClicked(_ sender: Any) {
         if(checkout != nil) {
             startLocationFetching()
@@ -117,18 +151,18 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     }
     
     func resetPaymentModeView() {
-        
-        self.firstNameField.text = ""
-        self.lastNameField.text = ""
-        self.customerIdField.text = ""
-        self.invoiceNumberField.text = ""
-        self.notesField.text = ""
+        DispatchQueue.main.async {
+            self.firstNameField.text = ""
+            self.lastNameField.text = ""
+            self.customerIdField.text = ""
+            self.invoiceNumberField.text = ""
+            self.notesField.text = ""
 
-        if(self.pvIsUp) {
-            pullDownPaymentModeView()
+            if(self.pvIsUp) {
+                self.pullDownPaymentModeView()
+            }
+            self.pullDownPaymentModeView()
         }
-        pullDownPaymentModeView()
-        
     }
     
     @IBAction func confirmBtnClicked(_ sender: Any) {
@@ -182,7 +216,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     }
     
     func makeTransaction() {
-        self.paymentService.makePayment(payment:payment, cardInfo: self.cardInfo, customerInfo: self.customerInfo, emv: emv) { (jsonValue, err) in
+        self.paymentService.makePayment(payment:payment, cardInfo: self.cardInfo, customerInfo: self.customerInfo, emv: emv, device_code: self.device_code) { (jsonValue, err) in
             DispatchQueue.main.async {
                 self.removeDisplayedBrandImage()
                 self.connectBtn.setTitle("CONNECT", for: .normal)
@@ -208,10 +242,12 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
                     self.confirmBtn.isEnabled = false
                     self.confirmBtn.alpha = 0.5
                     self.stopLocationFetching()
+                    self.miura.displayText("Transaction Approved\n Thank you.".center, completion: nil)
                     self.showPaymentAlertWith(title: "Approved", btnName: "Continue", amount: amount, authCode: authcode, success: true)
                 } else if let status = response["result_text"]?.stringValue {
                     print(status)
                     self.resetPaymentInfo()
+                    self.miura.displayText("Transaction Declined\n Try again.".center, completion: nil)
                     self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
                 }
             }
@@ -249,6 +285,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         showAlert.view.addConstraint(width)
         
         showAlert.addAction(UIAlertAction(title: btnName, style: .default, handler: { action in
+            self.miura.closeSession()
             if(success) {
                 self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
             }
@@ -265,6 +302,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     func resetPaymentInfo() {
         DispatchQueue.main.async {
             self.lib.cancelTransaction()
+            self.miura.closeSession()
             //self.lib.closeDevice()
             if(self.plsSwipeView != nil) {
                 self.plsSwipeView.removeFromSuperview()
@@ -376,7 +414,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     }
     
     
-    @objc func connectDevices()
+    @objc func selectDevice()
     {
         if(self.lib.isDeviceOpened())
         {
@@ -409,6 +447,23 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             })
         })
         
+        let miUra = UIAlertAction(title: "Miura", style: .default, handler: { action in
+            DispatchQueue.main.async(execute: {
+                if self.device == nil {
+                    if self.defaultAccessories.count > 0 {
+                        self.device = self.defaultAccessories[0]
+                        self.setAsDefaultDevice()
+                    } else if self.otherAccessories.count > 0 {
+                        self.device = self.otherAccessories[0]
+                        self.setAsDefaultDevice()
+                    } else {
+                        self.ShowMiuraDevices()
+                    }
+                } else {
+                    self.setAsDefaultDevice()
+                }
+            })
+        })
         
         let btnCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
             
@@ -416,6 +471,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         alert.addAction(eDynamo)
         alert.addAction(tDynamo)
         alert.addAction(kDynamo)
+        alert.addAction(miUra)
         alert.addAction(btnCancel)
         present(alert, animated: true)
 
@@ -425,23 +481,37 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     @IBAction func connectClicked(_ sender: Any) {
         DispatchQueue.main.async {
            if(PaymentSettings.shared.paymentDeviceId() == 3) {
-               print(BBDeviceController.shared()?.getState() as Any)
-               print(BBDeviceController.shared()?.getConnectionMode() as Any)
-              if BBDeviceController.shared()?.getConnectionMode() == BBDeviceConnectionMode.bluetooth ,BBDeviceController.shared()?.getState() == BBDeviceControllerState.idle {
-                self.startBbPosEMV()
-                self.startLocationFetching()
-                self.connectBtn.setTitle("CONNECTED", for: .normal)
-                   self.designPleaseSwipeView()
-               } else {
-                self.showPopUpToSetupCardReader()
-               }
+//               print(BBDeviceController.shared()?.getState() as Any)
+//               print(BBDeviceController.shared()?.getConnectionMode() as Any)
+//              if BBDeviceController.shared()?.getConnectionMode() == BBDeviceConnectionMode.bluetooth ,BBDeviceController.shared()?.getState() == BBDeviceControllerState.idle {
+//                self.startBbPosEMV()
+//                self.startLocationFetching()
+//                self.connectBtn.setTitle("CONNECTED", for: .normal)
+//                   self.designPleaseSwipeView()
+//               } else {
+//                self.showPopUpToSetupCardReader()
+//               }
+                
+                if self.device != nil {
+                    self.setAsDefaultDevice()
+                } else {
+                    self.fetchAccessoryList()
+                    if self.defaultAccessories.count > 0 {
+                        self.device = self.defaultAccessories[0]
+                        self.setAsDefaultDevice()
+                    } else if self.otherAccessories.count > 0 {
+                        self.device = self.otherAccessories[0]
+                        self.setAsDefaultDevice()
+                    }
+                }
+               
              } else if self.lib.isDeviceOpened() {
                 self.startLocationFetching()
                 self.connectBtn.setTitle("CONNECTED", for: .normal)
                 self.designPleaseSwipeView()
                 self.startEMV()
             } else {
-                 self.connectDevices()
+                 self.selectDevice()
                // self.showPopUpToSetupCardReader()
             }
         }
@@ -755,6 +825,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             }
             
             self.cardInfo.updateValue(cardDataObj.deviceKSN! as Any, forKey: "ksn")
+            self.device_code = ""
             self.connectBtn.setTitle("************\(cardDataObj.cardLast4!)", for: .normal)
             self.confirmBtn.isEnabled = true
             self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
@@ -1098,6 +1169,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             self.emv?.updateValue(dataString, forKey: "emv_data")
             self.emv?.updateValue(pos_entry_mode, forKey: "pos_entry_mode")
             self.emv?.updateValue(service_code, forKey: "service_code")
+            self.device_code = ""
 
             self.confirmBtn.isEnabled = true
             self.confirmBtn.alpha = 1.0
@@ -1310,6 +1382,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        PaymentSettings.shared.setPaymentDevice(id: 0)
         devicePaired = true
 
         self.lib = MTSCRA();
@@ -1325,7 +1398,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         self.invoiceNumberField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         self.notesField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         
-        customerInfo = ["first_name":"Unknown", "last_name":"user", "street_1":"", "street_2":"", "city":"", "state":"", "zip":"", "country":"", "phone_number":"", "company":"", "customer_id":"", "invoice_number":"", "email":"", "email_receipt":"NO", "notes":""]
+        customerInfo = ["first_name":"", "last_name":"", "street_1":"", "street_2":"", "city":"", "state":"", "zip":"", "country":"", "phone_number":"", "company":"", "customer_id":"", "invoice_number":"", "email":"", "email_receipt":"NO", "notes":""]
         
         pvIsUp = false
         modeViewUpdatedHeight = 140
@@ -1365,7 +1438,21 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         if(PaymentSettings.shared.selectedTerminalType() == "MOTO") {
             cardSwipeView.isHidden = true
         }
+
+        EAAccessoryManager.shared().registerForLocalNotifications()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accessoryDidDisconnect),
+                                               name: NSNotification.Name.EAAccessoryDidDisconnect,
+                                               object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(self.accessoryDidConnect),
+                                               name: NSNotification.Name.EAAccessoryDidConnect,
+                                               object: nil)
+        
+        appDelegate = UIApplication.shared.delegate as? AppDelegate
+        miura = appDelegate.miura
+        miura.delegate = self
+        miura.closeSession()
         // Do any additional setup after loading the view.
     }
     
@@ -1427,10 +1514,14 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.lib.closeDevice()
+        miura.closeSession()
+
         if (self.isMovingFromParent) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
+        
     }
+
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         textField.resignFirstResponder()
@@ -1690,7 +1781,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
                 }
                 self.connectBtn.setTitle("************\(lastFour)", for: .normal)
             }
-            
+            self.device_code = ""
             self.confirmBtn.isEnabled = true
             if(self.plsSwipeView != nil) {
             self.plsSwipeView.removeFromSuperview()
@@ -1705,8 +1796,10 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         paymentTextField.clear()
-        
+        removeFromDefaults()
+        fetchAccessoryList()
     }
+
     
     func removeDisplayedBrandImage() {
         if let imageView = cardSwipeView.viewWithTag(111) as? UIImageView {
@@ -1730,7 +1823,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             case .visa:
                 return STPPaymentCardTextField.brandImage(for: .visa)
             case .masterCard:
-                return STPPaymentCardTextField.brandImage(for: .mastercard)
+                return STPPaymentCardTextField.brandImage(for: .masterCard)
             case .amex:
                 return STPPaymentCardTextField.brandImage(for: .amex)
             case .diners:
@@ -1763,6 +1856,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
                 self.cardInfo.updateValue("Amex", forKey: "type")
                 self.cardInfo.updateValue("", forKey: "track_data")
                 self.cardInfo.updateValue("", forKey: "ksn")
+                self.device_code = ""
                 self.confirmBtn.isEnabled = true
                 self.confirmBtn.alpha = 1.0
                 
@@ -1900,4 +1994,733 @@ extension CheckoutViewController {
         // Save location to disk
     }
  */
+}
+ 
+extension CheckoutViewController: MiuraManagerDelegate {
+    
+    
+    func ShowMiuraDevices() {
+        DispatchQueue.main.async {
+        EAAccessoryManager.shared().showBluetoothAccessoryPicker(withNameFilter: nil) { (response) in
+            if let response = response {
+                switch response {
+                case self.alreadyConnected:
+                    print("Connected")
+                    self.fetchAccessoryList()
+                    if self.defaultAccessories.count > 0 {
+                        self.device = self.defaultAccessories[0]
+                        self.setAsDefaultDevice()
+                    } else if self.otherAccessories.count > 0 {
+                        self.device = self.otherAccessories[0]
+                        self.setAsDefaultDevice()
+                    }
+                   // self.print.log(tag: self.className, log: "Connected" as AnyObject)
+                    /* if device is already connected then we move to next screen*/
+                   // self.performSegue(withIdentifier: "deviceInfoSegue", sender: self)
+                case self.resultCancelled:
+                    print("result Cancelled")
+                    //self.print.log(tag: self.className, log: "result Cancelled" as AnyObject)
+                   // self.removeAlert(message: "Canceled pairing request")
+                case self.resultNotFound:
+                    print("Not Found")
+                    //self.print.log(tag: self.className, log: "Not Found" as AnyObject)
+                   // self.removeAlert (message: "Failed pairing request")
+                case self.resultFailed :
+                    print("Result failed")
+                    //self.print.log(tag: self.className, log: "Result failed" as AnyObject)
+                   // self.failedToPair(message: "Forget device from Settings?")
+                default:
+                    break
+                }
+            } else {
+                print("paired success")
+                self.fetchAccessoryList()
+                if self.defaultAccessories.count > 0 {
+                    self.device = self.defaultAccessories[0]
+                    self.setAsDefaultDevice()
+                } else if self.otherAccessories.count > 0 {
+                    self.device = self.otherAccessories[0]
+                    self.setAsDefaultDevice()
+                }
+            }
+         }
+        }
+        
+    }
+    
+    func failedToPair(message: String) {
+        
+        alert = UIAlertController (title: "Device not connected",
+                                   message: message,
+                                   preferredStyle: .alert)
+        
+        settingsAction = UIAlertAction(title: "Settings", style: .default) { (_) -> Void in
+            guard let settingsUrl = URL(string:"App-prefs:root=Bluetooth") else {
+                return
+            }
+            
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                if #available(iOS 10.0, *) {
+                    UIApplication.shared.open(settingsUrl, options: [:], completionHandler: nil)
+                } else {
+                    // Fallback on earlier versions
+                    UIApplication.shared.openURL(settingsUrl)
+                }
+            }
+            
+        }
+        
+        alert.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancel",
+                                         style: .default,
+                                         handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+        
+    }
+    
+    func removeAlert (message: String){
+        //this removes alert while tapping screen
+        alert = UIAlertController(title: message,
+                                  message:nil,
+                                  preferredStyle: UIAlertController.Style.alert)
+        
+        self.present(alert, animated: true, completion: {
+            self.alert.view.superview?.isUserInteractionEnabled = true
+            self.alert.view.superview?.addGestureRecognizer(
+                UITapGestureRecognizer(target: self, action: #selector(self.tapRemove)))
+        })
+    }
+    
+    @objc func tapRemove () {
+        
+        self.dismiss(animated: true) { () in }
+    }
+    
+    
+    func fetchAccessoryList() {
+            
+        let allAccessories = miura.connectedAccessories() as! [EAAccessory]?
+        
+        defaultAccessories = []
+        otherAccessories = []
+        
+        for accessory in allAccessories!{
+            var skipDevice:Bool = false
+            
+            for serial in serialNumers {
+                if serial == accessory.serialNumber {
+                    skipDevice = true;
+                }
+            }
+            
+            if (skipDevice == false) {
+                serialNumers.append(accessory.serialNumber)
+                
+                if accessory.serialNumber == Session.shared.defaultPED || accessory.serialNumber == Session.shared.defaultPOS {
+                    
+                    defaultAccessories.append(accessory)
+                } else {
+                    otherAccessories.append(accessory)
+                    
+                }
+             }
+            
+           }
+        
+        serialNumers.removeAll()
+        print(defaultAccessories)
+        print(otherAccessories)
+    }
+    
+    func showAlert() {
+        let alert = UIAlertController(title: "Device Asleep!", message: "Please wake device and wait 10 secs", preferredStyle: UIAlertController.Style.alert)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func accessoryDidConnect(name : Notification.Name) {
+        print("Connected to device")
+        PaymentSettings.shared.setPaymentDevice(id: 3)
+      //  self.dismiss(animated: true) { () in }
+       // fetchDeviceInfo()
+    }
+    
+    @objc func accessoryDidDisconnect(name : Notification.Name) {
+        print("Device disconnected")
+        PaymentSettings.shared.setPaymentDevice(id: 0)
+        removeFromDefaults()
+        self.connectBtn.setTitle("CONNECT", for: .normal)
+        self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+        if(self.plsSwipeView != nil) {
+        self.plsSwipeView.removeFromSuperview()
+        }
+       // showAlert()
+    }
+    
+    func setAsDefaultDevice() {
+        switch device.deviceType {
+        case .PED:
+            Session.shared.defaultPED = device.serialNumber
+        case .POS:
+            Session.shared.defaultPOS = device.serialNumber
+        }
+        miura.targetDevice = self.device.deviceType
+        self.checkContactLessCapabilities()
+       // self.keyInjection()
+    }
+    
+    func checkContactLessCapabilities() {
+        if device != nil {
+            miura.closeSession()
+            if !self.miura.openSession(withAccessorySerialNumber: device.serialNumber) {
+                print(className,"FetchDeviceInfo - Open Session failed!" as AnyObject)
+            }
+        }
+        self.miura.getDeviceCapabilities { (capabilities) in
+            if let capabilities = capabilities {
+                self.capabilities = capabilities
+                if (self.capabilities.keys.contains("Contactless")) {
+                  self.contactLessTouch()
+                } else {
+                    self.armCardReader()
+                }
+                self.startLocationFetching()
+                self.connectBtn.setTitle("CONNECTED", for: .normal)
+                self.designPleaseSwipeView()
+            } else {
+                print("capabilities file error!")
+            }
+        }
+    }
+    
+    func removeFromDefaults() {
+        if device != nil {
+            switch device.deviceType {
+            case .PED:
+                Session.shared.defaultPED = nil
+            case .POS:
+                Session.shared.defaultPOS = nil
+            }
+        }
+    }
+    
+    
+    func sendStartTransaction() {
+        
+        guard let isamount = checkout?.enteredAmount else {
+            return
+        }
+        let amountDesi = NSDecimalNumber(string: isamount)
+        let amountUInt = amountDesi.uintValue
+        
+        miura.startTransaction(with: .purchase, amount: amountUInt, currencyCode: CurrencyCode.usd.rawValue) { (manager, response) in
+            
+            if response.isSuccess() {
+                print("startTransactionResponse \(String(describing: (response.tlv[0] as AnyObject).description))")
+                
+                self.miura.displayText("Authorization\nin progress\nPlease wait...".center, completion: nil)
+                self.sendContinueTransaction()
+               // self.performSegue(withIdentifier: self.START_TRANSACTION_RESULT_SEGUE, sender: self)
+                
+            } else if !response.isSuccess() {
+                
+                if (response.sw == "9F21"){
+                    print(self.className,TransactionResponse.invalid_Data_In_Command as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.invalid_Data_In_Command)")
+                }
+                if (response.sw == "9F22") {
+                    print(self.className,TransactionResponse.terminal_Not_Ready as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.terminal_Not_Ready)")
+                }
+                if (response.sw == "9F23"){
+                    print(self.className,TransactionResponse.no_Smartcard_In_Slot as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.no_Smartcard_In_Slot)")
+                }
+                if (response.sw == "9F25") {
+                    print(self.className,TransactionResponse.invalid_Card_Responded_Incorrectly as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.invalid_Card_Responded_Incorrectly)")
+                }
+                if (response.sw == "9F26") {
+                    print(self.className,TransactionResponse.command_Not_Allows_At_This_State as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.command_Not_Allows_At_This_State)")
+                }
+                if (response.sw == "9F27"){
+                    print(self.className, TransactionResponse.data_Missing_From_Command_APDU as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.data_Missing_From_Command_APDU)")
+                }
+                if (response.sw == "9F28") {
+                    print(self.className, TransactionResponse.unsupported_Card_EMV_Kernal as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.unsupported_Card_EMV_Kernal)")
+                }
+                if (response.sw == "9F2A"){
+                    print(self.className, TransactionResponse.missing_File as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.missing_File)")
+                }
+                if (response.sw == "9F30"){
+                    print(self.className, TransactionResponse.icc_Read_Error as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.icc_Read_Error)")
+                }
+                if (response.sw == "9F40"){
+                    print(self.className,TransactionResponse.invalid_Issuer_Public_Key as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.invalid_Issuer_Public_Key)")
+                }
+                if (response.sw == "9F41"){
+                    print(self.className,TransactionResponse.user_Cancelled as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.user_Cancelled)")
+                }
+                if (response.sw == "9F88"){
+                    print(self.className,TransactionResponse.missing_Mandatory_Input_Parameters as AnyObject)
+                    self.cardRemovedAlert(message:"\(TransactionResponse.missing_Mandatory_Input_Parameters)")
+                }
+                
+                print(self.className,"Start transaction failed - : \(String(describing: response.sw))" as AnyObject)
+            }
+        }
+    }
+    
+    func cardRemovedAlert( message: String) {
+        
+        let msg = "Card Error\nPlease re-enter card"
+        self.miura.displayText(msg.center, completion: nil)
+        self.alert = UIAlertController(title: "Card Error", message: message, preferredStyle: UIAlertController.Style.alert)
+        self.alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+            
+            self.dismiss(animated: true, completion: nil)
+            self.miura.closeSession()
+        }))
+        
+        self.present(self.alert, animated: true, completion: nil)
+    }
+    
+    func sendContinueTransaction() {
+        //
+        // Note:
+        // For the purpose of this Sample App, we're passing Approved (0x3030) response.
+        // But this will vary depending on the real life scenario.
+        //
+        
+        var value = Data.init()
+        value.append(0x30)
+        value.append(0x30)
+        
+        let arcTag = MPITLVObject(tag: TLVTag.TLVTag_Authorisation_Response_Code, value: value);
+        let commandDataTag = MPITLVObject(tag:TLVTag.TLVTag_Command_Data, construct:[arcTag as Any ]);
+        
+        miura.continueTransaction(commandDataTag!, completion: { (manager, response) in
+            
+            if response.isSuccess() {
+                
+                print("continueTransactionResponse \(((response.tlv[0] as AnyObject)))")
+                print("signature is required")
+
+                if let tlvObj = response.tlv[0] as? MPITLVObject {
+                    
+                    switch tlvObj.tag.tagDescription.tag {
+                    case .TLVTag_Transaction_Approved:
+                        print("Approved")
+                    default:
+                        print("Failed")
+                    }
+
+                    if let trackData = MPIUtil.tlvObject(from: response.tlv, tag: .TLVTag_ICC_Masked_Track_2)?.data,
+                    let sredKSN = MPIUtil.tlvObject(from: response.tlv, tag: .TLVTag_SRED_KSN).data,
+                       let maskedPan = MPIUtil.tlvObject(from: response.tlv, tag: .TLVTag_Masked_PAN).data {
+                        
+                       DispatchQueue.main.async {
+                            AudioServicesPlaySystemSound(1200);
+                            self.cardInfo.updateValue(trackData, forKey: "track_data")
+                            self.cardInfo.updateValue(sredKSN, forKey: "ksn")
+                            self.cardInfo.updateValue("02", forKey: "entry_mode")
+                            self.device_code = "41"
+                           self.connectBtn.setTitle(maskedPan as String, for: .normal)
+                            self.confirmBtn.isEnabled = true
+                            self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                            self.emv = nil
+                            if(self.plsSwipeView != nil) {
+                              self.plsSwipeView.removeFromSuperview()
+                            }
+                            self.confirmBtn.alpha = 1.0
+                       }
+                  }
+                }
+                
+            } else if !response.isSuccess() {
+                
+                //continue error response string message
+                if (response.sw == "9F21"){
+                    print(self.className, TransactionResponse.invalid_Data_In_Command as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.invalid_Data_In_Command)")
+                }
+                if (response.sw == "9F22") {
+                    print(self.className,  TransactionResponse.terminal_Not_Ready as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.terminal_Not_Ready)")
+                }
+                if(response.sw == "9F23"){
+                    print(self.className,  TransactionResponse.no_Smartcard_In_Slot as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.no_Smartcard_In_Slot)")
+                }
+                if (response.sw == "9F25") {
+                    print(self.className, TransactionResponse.invalid_Card_Responded_Incorrectly as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.invalid_Card_Responded_Incorrectly)")
+                }
+                if (response.sw == "9F26") {
+                    print(self.className, TransactionResponse.command_Not_Allows_At_This_State as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.command_Not_Allows_At_This_State)")
+                }
+                if(response.sw == "9F27"){
+                    print(self.className, TransactionResponse.data_Missing_From_Command_APDU as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.data_Missing_From_Command_APDU)")
+                }
+                if(response.sw == "9F28"){
+                    print(self.className,  TransactionResponse.unsupported_Card_EMV_Kernal as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.unsupported_Card_EMV_Kernal)")
+                }
+                if(response.sw == "9F2A"){
+                    print(self.className, TransactionResponse.missing_File as AnyObject)
+                    self.cardErrorAlert(message: "\(TransactionResponse.missing_File)")
+                }
+                if(response.sw == "9F30"){
+                    print(self.className, TransactionResponse.icc_Read_Error as AnyObject)
+                    self.cardErrorAlert(message:"\(TransactionResponse.icc_Read_Error)")
+                }
+                if(response.sw == "9F40"){
+                    print(self.className, TransactionResponse.invalid_Issuer_Public_Key as AnyObject)
+                    self.cardErrorAlert(message:"\(TransactionResponse.invalid_Issuer_Public_Key)")
+                }
+                if(response.sw == "9F41"){
+                    print(self.className, TransactionResponse.user_Cancelled as AnyObject)
+                    self.cardErrorAlert(message:"\(TransactionResponse.user_Cancelled)")
+                }
+                
+                print(self.className, "Contunied transaction failed: \(String(describing: response.sw))" as AnyObject)
+                
+            }
+        })
+    }
+    
+    
+    
+    func contactLessTouch (){
+        
+        guard let isamount = checkout?.enteredAmount else {
+            return
+        }
+        let amountDesi = NSDecimalNumber(string: isamount)
+        let amountUInt = amountDesi.uintValue
+        print(amountDesi)
+        print(amountUInt)
+       // let amount = amountDesi.multiplying(byPowerOf10: -2)
+       // amountLabel.text = "Amount: £\(amount)"
+       // transaction.isContactlessTx = true
+
+        //mag and chip payments
+        miura.magAndChipCardStatusEnable(true) { (success) in
+            print(" Mag&chip status \(success)")
+            
+            //Contactless payments
+            self.miura.startContactlessTransaction(with: .purchase, amount: amountUInt, currencyCode: CurrencyCode.usd.rawValue) {
+                (manager, response) in
+                if response.isSuccess() {
+                    print("ContactlessTransaction \((response.tlv[0] as AnyObject).description)")
+                    self.sendContinueTransaction()
+                   // self.performSegue(withIdentifier: self.START_TRANSACTION_RESULT_SEGUE, sender: self)
+                    
+                } else if !success && !response.isSuccess() {
+                    
+                    //alert message is for amex cards
+                    self.amEx()
+                    
+                } else {
+                    
+                    if (response.sw == "9F26"){
+                        print(self.className, ContactlessResponse.command_Not_Allowed as AnyObject)
+                        self.cardErrorAlert(message: "\(ContactlessResponse.command_Not_Allowed)")
+                    }
+                    if (response.sw == "9F41") {
+                        print(self.className,ContactlessResponse.user_Cancelled as AnyObject)
+                        let msg = "Transaction Canceled"
+                        self.miura.displayText(msg.center, completion: nil)
+                    }
+                    if(response.sw == "9F42"){
+                        print(self.className,ContactlessResponse.contactless_Timedout as AnyObject)
+                        self.cardErrorAlert(message: "\(ContactlessResponse.contactless_Timedout)")
+                    }
+                    if (response.sw == "9F43") {
+                        print(self.className,ContactlessResponse.aborted_By_Card_Insert as AnyObject)
+                        if (self.emvCardInserted) {
+                            self.miura.displayText("Processing Card.\nPlease wait...".center, completion: nil)
+                            self.sendStartTransaction()
+                           // self.performSegue(withIdentifier: self.START_TRANSACTION_SEGUE, sender: self)
+                        } else {
+                            self.ctlsCancelledCardInsert = true
+                        }
+                    }
+                    if (response.sw == "9F44") {
+                        print(self.className,ContactlessResponse.aborted_By_Swipe as AnyObject)
+                    }
+                    if(response.sw == "9FC1"){
+                        print(self.className,ContactlessResponse.insert_Or_Swiped as AnyObject)
+                        self.cardErrorAlert(message: "\(ContactlessResponse.insert_Or_Swiped)")
+                    }
+                    if(response.sw == "9FC2"){
+                        print(self.className,ContactlessResponse.insert_Swipe_Or_Other_Card as AnyObject)
+                        self.cardErrorAlert(message: "\(ContactlessResponse.insert_Swipe_Or_Other_Card)")
+                    }
+                    if(response.sw == "9FC3"){
+                        print(self.className,ContactlessResponse.insert_Card as AnyObject)
+                        self.cardErrorAlert(message: "\(ContactlessResponse.insert_Card)")
+                    }
+                    if(response.sw == "9FCF"){
+                        print(self.className, ContactlessResponse.hardware_Error as AnyObject)
+                        self.cardErrorAlert(message: "\(ContactlessResponse.hardware_Error)")
+                    }
+                    
+                    print(self.className, "Start contactless transaction failed - :, \(String(describing: response.sw))" as AnyObject)
+                }
+            }
+        }
+    }
+    
+    func armCardReader() {
+        //DEBUG: enable keyboard for testing purpose
+        miura.keyboardStatus(KeyPadStatusSettings.enable, backlightSetting: BacklightSettings.enable, completion: nil)
+        
+        miura.magAndChipCardStatusEnable(true) { (response) in
+            print(self.className,"cardStatus: \(response)" as AnyObject)
+            self.miura.displayText("Amount: $\(self.payment.amount!)\n\nSwipe your card".center, completion: nil)
+        }
+    }
+    
+    func amEx () {
+        //alert message is for Amex cards
+        let msg = "Invaild Card\n Please re-try"
+        self.miura.displayText(msg.center, completion: nil)
+        
+        cardAlert(title: "Invaild Card", message:  "Please re-try")
+        
+    }
+    
+    //for error transaction response
+    func cardErrorAlert(message: String){
+        
+        let msg = "Card Error\nPlease Re-Try"
+        self.miura.displayText(msg.center, completion: nil)
+        
+        cardAlert(title: "Card Error", message: message)
+        
+    }
+    
+   
+    func abortTransaction() {
+        
+        miura.abortTransaction { (success) in
+            if success  {
+                print("Abort transaction:\(success)")
+            } else {
+                print("Abort transaction failed")
+            }
+        }
+    }
+    
+    
+    func cardAlert (title: String, message: String){
+        //this shows message to user
+        self.alert = UIAlertController(title: title,
+                                       message: message,
+                                       preferredStyle: .alert)
+        self.alert.addAction(UIAlertAction(title: "Ok", style: .default, handler:{ (action: UIAlertAction!) in
+            
+            self.dismiss(animated: true) { () in }
+            
+//            let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//            let vc = storyboard.instantiateViewController(withIdentifier: "New") as! NewPaymentController
+//            self.navigationController!.pushViewController(vc, animated: true)
+            self.miura.closeSession()
+            
+        }))
+        
+        self.present(self.alert, animated: false) { () in }
+    }
+    
+    func abortTransactionAlert (title: String, message: String){
+        //this shows message to user
+        let alert = UIAlertController(title: title, message:message,
+                                      preferredStyle: UIAlertController.Style.alert)
+        self.present(alert, animated: true, completion: {
+            alert.view.superview?.isUserInteractionEnabled = true
+            alert.view.superview?.addGestureRecognizer(UITapGestureRecognizer(target: self,
+                                                                              action: #selector(self.tapRemove)))
+        })
+    }
+    
+    // MARK: - Miura manager delegate
+    
+    func miuraManager(_ manager: MiuraManager, accessoryDidDisconnect accessory: EAAccessory) {
+        
+        print("accessoryDidDisconnect: \(accessory)")
+    }
+    
+    func miuraManager(_ manager: MiuraManager, deviceStatusChange deviceStatus: DeviceStatus, text statusText: String) {
+        print(String(format: self.className, "deviceStatusChange: code = %d (0x%02X) = %@, text = %@", deviceStatus.rawValue, deviceStatus.rawValue, statusText))
+    }
+    
+    func miuraManager(_ manager: MiuraManager, keyPressed keyCode: UInt) {
+        print(String(format:  self.className, "keyPressed: %d (0x%02X)", keyCode, keyCode))
+    }
+    
+    func miuraManager(_ manager: MiuraManager, cardStatusChange cardData: CardData) {
+        print("cardStatusChange: \(cardData)")
+        
+        self.connectBtn.setTitle("PRESENT CARD", for: .normal)
+        let trackData = cardData.track2Data
+        
+        if (trackData != nil) {
+        
+            self.track2Data = trackData
+            self.miuraKSN = cardData.sredKSN
+            self.miura.displayText("Processing Card.\nPlease wait...".center, completion: nil)
+            if isPinRequired(trackData?.serviceCode) {
+                print("pin is required")
+              //  performSegue(withIdentifier: ONLINE_PIN_SEGUE, sender: self)
+            } else {
+                print("signature is required")
+                DispatchQueue.main.async {
+                    AudioServicesPlaySystemSound(1200);
+                    
+                    self.cardInfo.updateValue(cardData.sredData?.uppercased() ?? "", forKey: "track_data")
+                    self.cardInfo.updateValue(cardData.sredKSN?.uppercased() ?? "", forKey: "ksn")
+                    self.cardInfo.updateValue("02", forKey: "entry_mode")
+                    self.device_code = "41"
+                    self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
+                    self.confirmBtn.isEnabled = true
+                    self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                    self.emv = nil
+                    if(self.plsSwipeView != nil) {
+                      self.plsSwipeView.removeFromSuperview()
+                    }
+                    self.confirmBtn.alpha = 1.0
+                }
+             //   performSegue(withIdentifier: SIGNATURE_SEGUE, sender: self)
+            }
+            
+            if (trackData == nil) {
+                print("SWIPE ERROR\nPlease try again")
+//                cardStatusLabel.text = "SWIPE ERROR\nPlease try again"
+                miura.displayText("SWIPE ERROR\n\nPlease try again".center, completion: nil)
+            }
+            
+        } else {
+            
+            if cardData.cardStatus.isCardPresent && cardData.cardStatus.isEMVCompatible {
+                
+                if (self.ctlsCancelledCardInsert) {
+                    print("Processing Card.\nPlease wait...")
+                    self.miura.displayText("Processing Card.\nPlease wait...".center, completion: nil)
+                    sendStartTransaction()
+                   // self.performSegue(withIdentifier: self.START_TRANSACTION_SEGUE, sender: self)
+                } else {
+                    emvCardInserted = true
+                }
+            }
+            
+            if counter == 0 {
+                counter += 1
+                return
+            }
+            
+            if !cardData.cardStatus.isCardPresent {
+                print("Testing = No Card Inserted Present")
+               // print.message(log: "Testing = No Card Inserted Present")
+                return
+            }
+            
+            if !cardData.cardStatus.isEMVCompatible {
+                print("Insert error please try again")
+                miura.displayText("Insert error\nTry again".center, completion: nil)
+               // let msg = "Insert error please try again"
+               // cardStatusLabel.text = msg
+                return
+            }
+        }
+    }
+    
+    func miuraManager(_ manager: MiuraManager, barCodeScan scanData: String) {
+        print("Bar code: \(scanData)")
+    }
+    
+    func miuraManager(_ manager: MiuraManager, printerSledStatus printerStatus: PrinterSledStatus) {
+        print("Sled Printer Status: \(printerStatus)")
+    }
+    
+    func miuraManager(_ manager: MiuraManager, usbStatusChange usbStatusChanged: UsbStatus) {
+        print("Usb Status Changed: \(usbStatusChanged)")
+    }
+    
+    func miuraManager(_ manager: MiuraManager, batteryStatusChange: ChargingStatus) {
+        print("Battery Status Changed: \(batteryStatusChange)")
+    }
+    
+    func isPinRequired(_ serviceCode: ServiceCode?) -> Bool {
+        guard let serviceCode = serviceCode else {
+            return false
+        }
+        let pinReqArray = [ServiceCodeThirdDigit.atmOnly_PINRequired, ServiceCodeThirdDigit.noRestrictions_PINRequired, ServiceCodeThirdDigit.goodsAndServicesOnly_NoCash_PINRequired]
+        return pinReqArray.contains(serviceCode.thirdDigit)
+    }
+    
+    func keyInjection() {
+        
+        self.alert = UIAlertController(title: "Key Injection",
+                                       message:"Proccessing..." ,
+                                       preferredStyle: .alert)
+        
+        if device != nil{
+            miura.openSession(withAccessorySerialNumber: device.serialNumber)
+        }
+        
+        self.miura.clearDeviceMemory { (success) in
+            print( self.className,  "Clearing old files: \(success)" as AnyObject)
+            MiuraRKIManager.sharedInstance.injectKeys(self.miura) { (success) -> (Void) in
+                print( self.className, " key injection: \(success)" as AnyObject)
+                if success {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true) {() in }
+                        self.alert = UIAlertController(title: "Success!", message: "Key injected", preferredStyle: .alert)
+                        self.alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                            //refreshes table view
+                            self.checkContactLessCapabilities()
+                            //self.fetchDeviceInfo()
+                        }))
+                        self.present(self.alert, animated: false) { () in }
+                    }
+                }else if !success {
+                    DispatchQueue.main.async {
+                        self.dismiss(animated: true) { () in }
+                        self.miura.displayText("Failed \n Key's Not Injected".center) { (success) in
+                            self.alert = UIAlertController(title: "Failed", message:"Key's Not Injected \n Please try again!", preferredStyle: .alert)
+                            self.alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action: UIAlertAction!) in
+                                self.miura.closeSession() }))
+                            self.present(self.alert, animated: false) { () in }
+                            
+                        }
+                    }
+                }
+            }
+            
+        }
+        
+        alert.addAction(UIAlertAction(title: "Cancel", style: .default, handler: { (action: UIAlertAction!) in
+            print( self.className,  "key injection canceled " as AnyObject)
+            self.miura.closeSession()
+        }))
+        spinner = UIActivityIndicatorView(style: .gray)
+        spinner.center = CGPoint(x: 210, y: 30)
+        spinner.color = UIColor.gray
+        spinner.startAnimating()
+        alert.view!.addSubview(spinner)
+        self.present(alert, animated: false) { () in }
+        
+    }
+    
+    
 }

@@ -14,13 +14,12 @@ class PaymentService: BaseRequest {
     var url: String!
     var params = [String:Any]()
     
-    func makePayment(payment:Payment, cardInfo:Dictionary<String, Any>, customerInfo:Dictionary<String, Any>, emv:Dictionary<String,Any>?, Oncomplete: @escaping(JSON?, Error?) -> Void) {
+    func makePayment(payment:Payment, cardInfo:Dictionary<String, Any>, customerInfo:Dictionary<String, Any>, emv:Dictionary<String,Any>?, device_code:String, Oncomplete: @escaping(JSON?, Error?) -> Void) {
         
         var parameters = [String : Any]()
         let amount = payment.amount
         if(emv != nil) {
-            
-            parameters = ["amount":amount!, "method":"CC", "type":payment.type_code, "nonce":Date().generateCurrentTimeStampAsNonce(), "test":"0", "device_code":"MAGTEK", "market_code":"R", "referrer_url":"onepay.com", "emv":emv!] as [String : Any]
+            parameters = ["amount":amount!, "method":"CC", "type":payment.type_code, "nonce":Date().generateCurrentTimeStampAsNonce(), "test":"0", "device_code":"MAGTEK", "market_code":PaymentSettings.shared.selectedTerminalType() == "MOTO" ? "M":"R", "referrer_url":"onepay.com", "emv":emv!] as [String : Any]
             
         } else {
             var locDic: Dictionary = ["id":"Location", "value":"0;0"]
@@ -30,7 +29,7 @@ class PaymentService: BaseRequest {
             let custom_fields = [payment.customDic]
             let additionalData: [[String:Any]] = [payment.userDic,payment.sourceDic, locDic]
             
-            parameters = ["amount":amount!, "method":"CC", "type":payment.type_code, "nonce":Date().generateCurrentTimeStampAsNonce(), "test":"0", "client_ip":"172.26.15.177","device_code":"", "market_code":"R", "referrer_url":"onepay.com", "notes":"", "card":cardInfo, "customer": customerInfo, "custom_fields": custom_fields, "additional_data":additionalData] as [String : Any]
+            parameters = ["amount":amount!, "method":"CC", "type":payment.type_code, "nonce":Date().generateCurrentTimeStampAsNonce(), "test":"0", "client_ip":"172.26.15.177","device_code":device_code, "market_code":PaymentSettings.shared.selectedTerminalType() == "MOTO" ? "M":"R", "referrer_url":"onepay.com", "notes":"", "card":cardInfo, "customer": customerInfo, "custom_fields": custom_fields, "additional_data":additionalData] as [String : Any]
         }
         print(parameters)
         self.url = APIs().paymentAPI()

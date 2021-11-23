@@ -1,0 +1,683 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0B2693EC1B7C53F000FB0A8B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B2693EB1B7C53F000FB0A8B /* Foundation.framework */; };
+		352442DD22E063CF00C4CCD9 /* MPICommandExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDCE53D1B85AFB20087EA2D /* MPICommandExecutor.m */; };
+		3538656E24129231008A3AAB /* BatteryStatus_Test.m in Sources */ = {isa = PBXBuildFile; fileRef = 3538656D24129230008A3AAB /* BatteryStatus_Test.m */; };
+		355226DF22DF3F0600FC9213 /* libMiuraSdk.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0BD4F20B1B73303000CD3F0A /* libMiuraSdk.a */; };
+		3568454622E078F600C12D0B /* GetMenuOption_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 3568454522E078F600C12D0B /* GetMenuOption_Tests.m */; };
+		52193DC6238FFB44002DA4EA /* UsbStatus_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = 52193DC5238FFB44002DA4EA /* UsbStatus_Tests.m */; };
+		5228EBC52319311900D1B51D /* MPIResponseData.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C8C54E611B7C7D9900893C9A /* MPIResponseData.h */; };
+		52B6F3AB21397E0F00CD4103 /* MPIKernelHashValues.m in Sources */ = {isa = PBXBuildFile; fileRef = 52B6F3AA21397E0F00CD4103 /* MPIKernelHashValues.m */; };
+		52C44F7D239A832000841BB7 /* DisplayMediaData.m in Sources */ = {isa = PBXBuildFile; fileRef = 52C44F7C239A832000841BB7 /* DisplayMediaData.m */; };
+		C81339C01B9E8041002B0B15 /* MPITLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = C81339BF1B9E8041002B0B15 /* MPITLVParser.m */; };
+		C81339C51B9E8055002B0B15 /* MPIBinaryUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C81339C21B9E8055002B0B15 /* MPIBinaryUtil.m */; };
+		C81339C61B9E8055002B0B15 /* MPIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C81339C41B9E8055002B0B15 /* MPIUtil.m */; };
+		C81339C71B9E807D002B0B15 /* MiuraManager.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C8C54E4C1B7C7D9900893C9A /* MiuraManager.h */; };
+		C81339C81B9E807D002B0B15 /* MPICommandExecutor.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0BDCE53C1B85AFB20087EA2D /* MPICommandExecutor.h */; };
+		C81339C91B9E807D002B0B15 /* MPICommandCreator.h in Copy Files */ = {isa = PBXBuildFile; fileRef = 0BD9F31F1B858BB400EC97D7 /* MPICommandCreator.h */; };
+		C81339CA1B9E807D002B0B15 /* MPIDescription.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C8C54E5F1B7C7D9900893C9A /* MPIDescription.h */; };
+		C81339CC1B9E807D002B0B15 /* MPITag.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C8C54E631B7C7D9900893C9A /* MPITag.h */; };
+		C81339CD1B9E807D002B0B15 /* MPITLVObject.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C8C54E651B7C7D9900893C9A /* MPITLVObject.h */; };
+		C81339CE1B9E807D002B0B15 /* MPITLVParser.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C81339BE1B9E8041002B0B15 /* MPITLVParser.h */; };
+		C81339D01B9E807D002B0B15 /* MPIBinaryUtil.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C81339C11B9E8055002B0B15 /* MPIBinaryUtil.h */; };
+		C81339D11B9E807D002B0B15 /* MPIUtil.h in Copy Files */ = {isa = PBXBuildFile; fileRef = C81339C31B9E8055002B0B15 /* MPIUtil.h */; };
+		C81D596C1B9DB47000C9207C /* MiuraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C54E4D1B7C7D9900893C9A /* MiuraManager.m */; };
+		C81D596D1B9DB47000C9207C /* MPICommandExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BDCE53D1B85AFB20087EA2D /* MPICommandExecutor.m */; };
+		C81D596E1B9DB47000C9207C /* MPICommandCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = 0BD9F3201B858BB400EC97D7 /* MPICommandCreator.m */; };
+		C81D59711B9DB47000C9207C /* MPIDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C54E601B7C7D9900893C9A /* MPIDescription.m */; };
+		C81D59721B9DB47000C9207C /* MPIResponseData.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C54E621B7C7D9900893C9A /* MPIResponseData.m */; };
+		C81D59731B9DB47000C9207C /* MPITag.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C54E641B7C7D9900893C9A /* MPITag.m */; };
+		C81D59741B9DB47000C9207C /* MPITLVObject.m in Sources */ = {isa = PBXBuildFile; fileRef = C8C54E661B7C7D9900893C9A /* MPITLVObject.m */; };
+		C86B448A1BB3ADCB005FD8AD /* MPIBase64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = C86B44891BB3ADCB005FD8AD /* MPIBase64Util.m */; };
+		C86B44901BB3B75A005FD8AD /* MPIXMLParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = C86B448F1BB3B75A005FD8AD /* MPIXMLParserUtil.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		355226E022DF3F0600FC9213 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0BD4F2031B73303000CD3F0A /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0BD4F20A1B73303000CD3F0A;
+			remoteInfo = MiuraSdk;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		0BD4F2091B73303000CD3F0A /* Copy Files */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 12;
+			dstPath = include;
+			dstSubfolderSpec = 16;
+			files = (
+				5228EBC52319311900D1B51D /* MPIResponseData.h in Copy Files */,
+				C81339C71B9E807D002B0B15 /* MiuraManager.h in Copy Files */,
+				C81339C81B9E807D002B0B15 /* MPICommandExecutor.h in Copy Files */,
+				C81339C91B9E807D002B0B15 /* MPICommandCreator.h in Copy Files */,
+				C81339CA1B9E807D002B0B15 /* MPIDescription.h in Copy Files */,
+				C81339CC1B9E807D002B0B15 /* MPITag.h in Copy Files */,
+				C81339CD1B9E807D002B0B15 /* MPITLVObject.h in Copy Files */,
+				C81339CE1B9E807D002B0B15 /* MPITLVParser.h in Copy Files */,
+				C81339D01B9E807D002B0B15 /* MPIBinaryUtil.h in Copy Files */,
+				C81339D11B9E807D002B0B15 /* MPIUtil.h in Copy Files */,
+			);
+			name = "Copy Files";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		0B2693EB1B7C53F000FB0A8B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		0B51E8541B7B0AA900F431E3 /* MiuraSdk-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "MiuraSdk-Prefix.pch"; path = "MiuraSdk/MiuraSdk-Prefix.pch"; sourceTree = "<group>"; };
+		0BD4F20B1B73303000CD3F0A /* libMiuraSdk.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libMiuraSdk.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		0BD4F2C41B73514300CD3F0A /* DebugDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugDefine.h; sourceTree = "<group>"; };
+		0BD9F31F1B858BB400EC97D7 /* MPICommandCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPICommandCreator.h; sourceTree = "<group>"; };
+		0BD9F3201B858BB400EC97D7 /* MPICommandCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPICommandCreator.m; sourceTree = "<group>"; };
+		0BDCE53C1B85AFB20087EA2D /* MPICommandExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPICommandExecutor.h; sourceTree = "<group>"; };
+		0BDCE53D1B85AFB20087EA2D /* MPICommandExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPICommandExecutor.m; sourceTree = "<group>"; };
+		3538656D24129230008A3AAB /* BatteryStatus_Test.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BatteryStatus_Test.m; sourceTree = "<group>"; };
+		355226DA22DF3F0600FC9213 /* MiuraSdk_Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MiuraSdk_Tests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		355226DE22DF3F0600FC9213 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3568454522E078F600C12D0B /* GetMenuOption_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = GetMenuOption_Tests.m; sourceTree = "<group>"; };
+		52193DC5238FFB44002DA4EA /* UsbStatus_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UsbStatus_Tests.m; sourceTree = "<group>"; };
+		52B6F3A921397E0F00CD4103 /* MPIKernelHashValues.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MPIKernelHashValues.h; sourceTree = "<group>"; };
+		52B6F3AA21397E0F00CD4103 /* MPIKernelHashValues.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MPIKernelHashValues.m; sourceTree = "<group>"; };
+		52C44F7B239A832000841BB7 /* DisplayMediaData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DisplayMediaData.h; sourceTree = "<group>"; };
+		52C44F7C239A832000841BB7 /* DisplayMediaData.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DisplayMediaData.m; sourceTree = "<group>"; };
+		C81339BE1B9E8041002B0B15 /* MPITLVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITLVParser.h; sourceTree = "<group>"; };
+		C81339BF1B9E8041002B0B15 /* MPITLVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITLVParser.m; sourceTree = "<group>"; };
+		C81339C11B9E8055002B0B15 /* MPIBinaryUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIBinaryUtil.h; sourceTree = "<group>"; };
+		C81339C21B9E8055002B0B15 /* MPIBinaryUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIBinaryUtil.m; sourceTree = "<group>"; };
+		C81339C31B9E8055002B0B15 /* MPIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIUtil.h; sourceTree = "<group>"; };
+		C81339C41B9E8055002B0B15 /* MPIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIUtil.m; sourceTree = "<group>"; };
+		C81D595C1B9DA4FE00C9207C /* StringDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringDefines.h; sourceTree = "<group>"; };
+		C86B44881BB3ADCB005FD8AD /* MPIBase64Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIBase64Util.h; sourceTree = "<group>"; };
+		C86B44891BB3ADCB005FD8AD /* MPIBase64Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIBase64Util.m; sourceTree = "<group>"; };
+		C86B448E1BB3B75A005FD8AD /* MPIXMLParserUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIXMLParserUtil.h; sourceTree = "<group>"; };
+		C86B448F1BB3B75A005FD8AD /* MPIXMLParserUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIXMLParserUtil.m; sourceTree = "<group>"; };
+		C8C54E4C1B7C7D9900893C9A /* MiuraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiuraManager.h; sourceTree = "<group>"; };
+		C8C54E4D1B7C7D9900893C9A /* MiuraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiuraManager.m; sourceTree = "<group>"; };
+		C8C54E5F1B7C7D9900893C9A /* MPIDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIDescription.h; sourceTree = "<group>"; };
+		C8C54E601B7C7D9900893C9A /* MPIDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIDescription.m; sourceTree = "<group>"; };
+		C8C54E611B7C7D9900893C9A /* MPIResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIResponseData.h; sourceTree = "<group>"; };
+		C8C54E621B7C7D9900893C9A /* MPIResponseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIResponseData.m; sourceTree = "<group>"; };
+		C8C54E631B7C7D9900893C9A /* MPITag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITag.h; sourceTree = "<group>"; };
+		C8C54E641B7C7D9900893C9A /* MPITag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITag.m; sourceTree = "<group>"; };
+		C8C54E651B7C7D9900893C9A /* MPITLVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITLVObject.h; sourceTree = "<group>"; };
+		C8C54E661B7C7D9900893C9A /* MPITLVObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITLVObject.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0BD4F2081B73303000CD3F0A /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B2693EC1B7C53F000FB0A8B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		355226D722DF3F0600FC9213 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				355226DF22DF3F0600FC9213 /* libMiuraSdk.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0BD4F2021B73303000CD3F0A = {
+			isa = PBXGroup;
+			children = (
+				0BD4F20D1B73303000CD3F0A /* MiuraSdk */,
+				355226DB22DF3F0600FC9213 /* MiuraSdk_Tests */,
+				C8C54E471B7C7D3300893C9A /* Frameworks */,
+				0BD4F20C1B73303000CD3F0A /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		0BD4F20C1B73303000CD3F0A /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0BD4F20B1B73303000CD3F0A /* libMiuraSdk.a */,
+				355226DA22DF3F0600FC9213 /* MiuraSdk_Tests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		0BD4F20D1B73303000CD3F0A /* MiuraSdk */ = {
+			isa = PBXGroup;
+			children = (
+				0BD4F2C41B73514300CD3F0A /* DebugDefine.h */,
+				C8C54E481B7C7D9900893C9A /* MiuraManager */,
+				C8C54E581B7C7D9900893C9A /* TLVParser */,
+				C8C54E521B7C7D9900893C9A /* Others */,
+				C8C54E461B7C7CBF00893C9A /* Support Files */,
+				C81D595B1B9DA4FE00C9207C /* Resources */,
+			);
+			path = MiuraSdk;
+			sourceTree = "<group>";
+		};
+		352442DF22E06DC500C4CCD9 /* MPICommandExecutor_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				3538656D24129230008A3AAB /* BatteryStatus_Test.m */,
+				3568454522E078F600C12D0B /* GetMenuOption_Tests.m */,
+				52193DC5238FFB44002DA4EA /* UsbStatus_Tests.m */,
+			);
+			path = MPICommandExecutor_Tests;
+			sourceTree = "<group>";
+		};
+		355226DB22DF3F0600FC9213 /* MiuraSdk_Tests */ = {
+			isa = PBXGroup;
+			children = (
+				352442DF22E06DC500C4CCD9 /* MPICommandExecutor_Tests */,
+				355226DE22DF3F0600FC9213 /* Info.plist */,
+			);
+			path = MiuraSdk_Tests;
+			sourceTree = "<group>";
+		};
+		C81D595B1B9DA4FE00C9207C /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				C81D595C1B9DA4FE00C9207C /* StringDefines.h */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		C8C54E461B7C7CBF00893C9A /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				0B51E8541B7B0AA900F431E3 /* MiuraSdk-Prefix.pch */,
+			);
+			name = "Support Files";
+			path = ..;
+			sourceTree = "<group>";
+		};
+		C8C54E471B7C7D3300893C9A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				0B2693EB1B7C53F000FB0A8B /* Foundation.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		C8C54E481B7C7D9900893C9A /* MiuraManager */ = {
+			isa = PBXGroup;
+			children = (
+				C8C54E4C1B7C7D9900893C9A /* MiuraManager.h */,
+				C8C54E4D1B7C7D9900893C9A /* MiuraManager.m */,
+				0BDCE53C1B85AFB20087EA2D /* MPICommandExecutor.h */,
+				0BDCE53D1B85AFB20087EA2D /* MPICommandExecutor.m */,
+				0BD9F31F1B858BB400EC97D7 /* MPICommandCreator.h */,
+				0BD9F3201B858BB400EC97D7 /* MPICommandCreator.m */,
+			);
+			path = MiuraManager;
+			sourceTree = "<group>";
+		};
+		C8C54E521B7C7D9900893C9A /* Others */ = {
+			isa = PBXGroup;
+			children = (
+				C86B44881BB3ADCB005FD8AD /* MPIBase64Util.h */,
+				C86B44891BB3ADCB005FD8AD /* MPIBase64Util.m */,
+				C81339C11B9E8055002B0B15 /* MPIBinaryUtil.h */,
+				C81339C21B9E8055002B0B15 /* MPIBinaryUtil.m */,
+				C81339C31B9E8055002B0B15 /* MPIUtil.h */,
+				C81339C41B9E8055002B0B15 /* MPIUtil.m */,
+				C86B448E1BB3B75A005FD8AD /* MPIXMLParserUtil.h */,
+				C86B448F1BB3B75A005FD8AD /* MPIXMLParserUtil.m */,
+				52B6F3A921397E0F00CD4103 /* MPIKernelHashValues.h */,
+				52B6F3AA21397E0F00CD4103 /* MPIKernelHashValues.m */,
+				52C44F7B239A832000841BB7 /* DisplayMediaData.h */,
+				52C44F7C239A832000841BB7 /* DisplayMediaData.m */,
+			);
+			path = Others;
+			sourceTree = "<group>";
+		};
+		C8C54E581B7C7D9900893C9A /* TLVParser */ = {
+			isa = PBXGroup;
+			children = (
+				C8C54E5C1B7C7D9900893C9A /* Parser */,
+			);
+			path = TLVParser;
+			sourceTree = "<group>";
+		};
+		C8C54E5C1B7C7D9900893C9A /* Parser */ = {
+			isa = PBXGroup;
+			children = (
+				C8C54E5F1B7C7D9900893C9A /* MPIDescription.h */,
+				C8C54E601B7C7D9900893C9A /* MPIDescription.m */,
+				C8C54E611B7C7D9900893C9A /* MPIResponseData.h */,
+				C8C54E621B7C7D9900893C9A /* MPIResponseData.m */,
+				C8C54E631B7C7D9900893C9A /* MPITag.h */,
+				C8C54E641B7C7D9900893C9A /* MPITag.m */,
+				C8C54E651B7C7D9900893C9A /* MPITLVObject.h */,
+				C8C54E661B7C7D9900893C9A /* MPITLVObject.m */,
+				C81339BE1B9E8041002B0B15 /* MPITLVParser.h */,
+				C81339BF1B9E8041002B0B15 /* MPITLVParser.m */,
+			);
+			path = Parser;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0BD4F20A1B73303000CD3F0A /* MiuraSdk */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0BD4F21F1B73303000CD3F0A /* Build configuration list for PBXNativeTarget "MiuraSdk" */;
+			buildPhases = (
+				0BD4F2071B73303000CD3F0A /* Sources */,
+				0BD4F2081B73303000CD3F0A /* Frameworks */,
+				0BD4F2091B73303000CD3F0A /* Copy Files */,
+				C8C54E351B7C745200893C9A /* Run Script */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MiuraSdk;
+			productName = MiuraSdk;
+			productReference = 0BD4F20B1B73303000CD3F0A /* libMiuraSdk.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		355226D922DF3F0600FC9213 /* MiuraSdk_Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 355226E422DF3F0600FC9213 /* Build configuration list for PBXNativeTarget "MiuraSdk_Tests" */;
+			buildPhases = (
+				355226D622DF3F0600FC9213 /* Sources */,
+				355226D722DF3F0600FC9213 /* Frameworks */,
+				355226D822DF3F0600FC9213 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				355226E122DF3F0600FC9213 /* PBXTargetDependency */,
+			);
+			name = MiuraSdk_Tests;
+			productName = MiuraSdk_Tests;
+			productReference = 355226DA22DF3F0600FC9213 /* MiuraSdk_Tests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		0BD4F2031B73303000CD3F0A /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				DefaultBuildSystemTypeForWorkspace = Original;
+				LastSwiftUpdateCheck = 1100;
+				LastUpgradeCheck = 1120;
+				ORGANIZATIONNAME = "Miura Systems Ltd.";
+				TargetAttributes = {
+					0BD4F20A1B73303000CD3F0A = {
+						CreatedOnToolsVersion = 6.4;
+					};
+					355226D922DF3F0600FC9213 = {
+						CreatedOnToolsVersion = 10.2.1;
+						DevelopmentTeam = 34Q6EA33YZ;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 0BD4F2061B73303000CD3F0A /* Build configuration list for PBXProject "MiuraSdk" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 0BD4F2021B73303000CD3F0A;
+			productRefGroup = 0BD4F20C1B73303000CD3F0A /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				0BD4F20A1B73303000CD3F0A /* MiuraSdk */,
+				355226D922DF3F0600FC9213 /* MiuraSdk_Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		355226D822DF3F0600FC9213 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C8C54E351B7C745200893C9A /* Run Script */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 12;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Run Script";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "set -e\nset -o pipefail\n\nif [ \"true\" == ${ALREADYINVOKED:-false} ] \nthen\necho \"RECURSION: Detected, stopping\"\nelse\nexport ALREADYINVOKED=\"true\"\n\nOBJROOT=\"${OBJROOT}/DependentBuilds\"\nPROJECT_PATH=\"${SRCROOT}/${PROJECT_NAME}.xcodeproj\"\nWORKING_ROOT_PATH=\"${SRCROOT}/Output\"\nRELEASE_PATH=\"${WORKING_ROOT_PATH}/${TARGET_NAME}\"\nBUILD_PATH=\"${WORKING_ROOT_PATH}/Build\"\nBUILD_PATH_IOS=\"${BUILD_PATH}/iOS\"\nBUILD_PATH_SIM=\"${BUILD_PATH}/Sim\"\n\nSDK_VERSION=$(echo ${SDK_NAME} | grep -o '.\\{4\\}$')\nSDK_IOS=\"iphoneos${SDK_VERSION}\"\nSDK_SIM=\"iphonesimulator${SDK_VERSION}\"\n\nARCHS_IOS=\"arm64 armv7 armv7s\"\nARCHS_SIM=\"i386 x86_64\"\n\nrm -rf \"${BUILD_DIR}/${CONFIGURATION}-${PLATFORM_NAME}/include\"\nrm -rf \"${WORKING_ROOT_PATH}\"\n\nmkdir -m 777 -p \"${WORKING_ROOT_PATH}\"\nmkdir -m 777 -p \"${BUILD_PATH_IOS}\"\nmkdir -m 777 -p \"${BUILD_PATH_SIM}\"\nmkdir -m 777 -p \"${RELEASE_PATH}\"\n\nxcodebuild -project \"${PROJECT_NAME}.xcodeproj\" -UseModernBuildSystem=NO OTHER_CFLAGS=\"-fembed-bitcode\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk \"${SDK_IOS}\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO ARCHS=\"${ARCHS_IOS}\" ONLY_ACTIVE_ARCH=NO clean build TARGET_BUILD_DIR=\"${BUILD_PATH_IOS}\" SYMROOT=\"${SYMROOT}\" \n\nxcodebuild -project \"${PROJECT_NAME}.xcodeproj\" -UseModernBuildSystem=NO OTHER_CFLAGS=\"-fembed-bitcode\" -target \"${TARGET_NAME}\" -configuration \"${CONFIGURATION}\" -sdk \"${SDK_SIM}\" ${ACTION} RUN_CLANG_STATIC_ANALYZER=NO ARCHS=\"${ARCHS_SIM}\" ONLY_ACTIVE_ARCH=NO clean build TARGET_BUILD_DIR=\"${BUILD_PATH_SIM}\" SYMROOT=\"${SYMROOT}\"\n\nACTION=\"build\"\n\nlipo -create -output \"${RELEASE_PATH}/${EXECUTABLE_NAME}\" \"${BUILD_PATH_IOS}/${EXECUTABLE_NAME}\" \"${BUILD_PATH_SIM}/${EXECUTABLE_NAME}\"\n\nif [ -e \"${BUILD_DIR}/${CONFIGURATION}-${PLATFORM_NAME}/include\" ]; then\ncp -R \"${BUILD_DIR}/${CONFIGURATION}-${PLATFORM_NAME}/include\" \"${RELEASE_PATH}/\"\nfi\n\n#if [ -d ${SRCROOT}/../Mobile-Demo-App-iOS ]; then\n#echo \"*** Update Demo App with latest SDK ***\"\n#echo ${RELEASE_PATH}\n#mkdir -p \"${SRCROOT}/../Mobile-Demo-App-iOS/MiuraSDK Payment Sample/Libraries\"\n#cp -va ${RELEASE_PATH} \"${SRCROOT}/../Mobile-Demo-App-iOS/MiuraSDK Payment Sample/Libraries/\"\n#fi\n\nrm -rf \"${BUILD_PATH}\"\nrm -rf \"${SRCROOT}/build\"\n\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0BD4F2071B73303000CD3F0A /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C81D596C1B9DB47000C9207C /* MiuraManager.m in Sources */,
+				C81339C61B9E8055002B0B15 /* MPIUtil.m in Sources */,
+				C81D596D1B9DB47000C9207C /* MPICommandExecutor.m in Sources */,
+				C81D596E1B9DB47000C9207C /* MPICommandCreator.m in Sources */,
+				C81D59711B9DB47000C9207C /* MPIDescription.m in Sources */,
+				52C44F7D239A832000841BB7 /* DisplayMediaData.m in Sources */,
+				C86B448A1BB3ADCB005FD8AD /* MPIBase64Util.m in Sources */,
+				C81D59721B9DB47000C9207C /* MPIResponseData.m in Sources */,
+				C81D59731B9DB47000C9207C /* MPITag.m in Sources */,
+				C86B44901BB3B75A005FD8AD /* MPIXMLParserUtil.m in Sources */,
+				C81D59741B9DB47000C9207C /* MPITLVObject.m in Sources */,
+				C81339C51B9E8055002B0B15 /* MPIBinaryUtil.m in Sources */,
+				52B6F3AB21397E0F00CD4103 /* MPIKernelHashValues.m in Sources */,
+				C81339C01B9E8041002B0B15 /* MPITLVParser.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		355226D622DF3F0600FC9213 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3568454622E078F600C12D0B /* GetMenuOption_Tests.m in Sources */,
+				3538656E24129231008A3AAB /* BatteryStatus_Test.m in Sources */,
+				52193DC6238FFB44002DA4EA /* UsbStatus_Tests.m in Sources */,
+				352442DD22E063CF00C4CCD9 /* MPICommandExecutor.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		355226E122DF3F0600FC9213 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0BD4F20A1B73303000CD3F0A /* MiuraSdk */;
+			targetProxy = 355226E022DF3F0600FC9213 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		0BD4F21D1B73303000CD3F0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0.6b;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+				VERSIONING_SYSTEM = "";
+				VERSION_INFO_PREFIX = "M000-IOSSDK";
+			};
+			name = Debug;
+		};
+		0BD4F21E1B73303000CD3F0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0.6b;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+				VERSIONING_SYSTEM = "";
+				VERSION_INFO_PREFIX = "M000-IOSSDK";
+			};
+			name = Release;
+		};
+		0BD4F2201B73303000CD3F0A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 0.6b;
+				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MiuraSdk/MiuraSdk-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					/Applications/Xcode/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(OBJROOT)/UninstalledProducts/include",
+					"$(TARGET_BUILD_DIR)/usr/local/lib/include",
+				);
+				INSTALL_PATH = "";
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 7.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OBJROOT = build;
+				ONLY_ACTIVE_ARCH = NO;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = MiuraSdk;
+				SKIP_INSTALL = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = build;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+			};
+			name = Debug;
+		};
+		0BD4F2211B73303000CD3F0A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CONFIGURATION_BUILD_DIR = "$(BUILD_DIR)/$(CONFIGURATION)$(EFFECTIVE_PLATFORM_NAME)";
+				COPY_PHASE_STRIP = YES;
+				CURRENT_PROJECT_VERSION = 0.6b;
+				DSTROOT = "/tmp/$(PROJECT_NAME).dst";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "MiuraSdk/MiuraSdk-Prefix.pch";
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(BUILT_PRODUCTS_DIR)",
+					/Applications/Xcode/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(OBJROOT)/UninstalledProducts/include",
+					"$(TARGET_BUILD_DIR)/usr/local/lib/include",
+				);
+				INSTALL_PATH = "";
+				"IPHONEOS_DEPLOYMENT_TARGET[arch=arm64]" = 7.0;
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
+				OBJROOT = build;
+				OTHER_LDFLAGS = (
+					"-ObjC",
+					"-all_load",
+				);
+				PRODUCT_NAME = MiuraSdk;
+				SKIP_INSTALL = NO;
+				STRIP_INSTALLED_PRODUCT = NO;
+				SYMROOT = build;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "i386 x86_64 armv7 armv7s arm64";
+			};
+			name = Release;
+		};
+		355226E222DF3F0600FC9213 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 34Q6EA33YZ;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MiuraSdk_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Output/MiuraSdk";
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "Miura.MiuraSdk-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		355226E322DF3F0600FC9213 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 34Q6EA33YZ;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = MiuraSdk_Tests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(PROJECT_DIR)/Output/MiuraSdk";
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "Miura.MiuraSdk-Tests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0BD4F2061B73303000CD3F0A /* Build configuration list for PBXProject "MiuraSdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BD4F21D1B73303000CD3F0A /* Debug */,
+				0BD4F21E1B73303000CD3F0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		0BD4F21F1B73303000CD3F0A /* Build configuration list for PBXNativeTarget "MiuraSdk" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0BD4F2201B73303000CD3F0A /* Debug */,
+				0BD4F2211B73303000CD3F0A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		355226E422DF3F0600FC9213 /* Build configuration list for PBXNativeTarget "MiuraSdk_Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				355226E222DF3F0600FC9213 /* Debug */,
+				355226E322DF3F0600FC9213 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 0BD4F2031B73303000CD3F0A /* Project object */;
+}

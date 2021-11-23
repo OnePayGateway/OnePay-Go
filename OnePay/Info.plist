@@ -75,11 +75,13 @@
 	<key>UIRequiresFullScreen</key>
 	<true/>
 	<key>UIStatusBarHidden</key>
-	<true/>
+	<false/>
 	<key>UISupportedExternalAccessoryProtocols</key>
 	<array>
 		<string>com.magtek.idynamo</string>
 		<string>com.magtek.sdynamo</string>
+		<string>com.miura.shuttle</string>
+		<string>com.miura.rpi</string>
 	</array>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>

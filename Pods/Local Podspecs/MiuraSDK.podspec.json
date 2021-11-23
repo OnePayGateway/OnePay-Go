@@ -1,0 +1,22 @@
+{
+  "name": "MiuraSDK",
+  "version": "0.1.0",
+  "summary": "Library usd for communication with Miura products.",
+  "description": "The library is used to convert the protocol commands to a Miura device into meaningfull functions for the iOS platform.",
+  "homepage": "http://www.miurasystems.com",
+  "license": {
+    "type": "Proprietary",
+    "file": "LICENSE"
+  },
+  "authors": {
+    "Miura Systems": "info@miurasystems.com"
+  },
+  "source": {
+    "git": "../MiuraSDK.git",
+    "tag": "0.1.0"
+  },
+  "platforms": {
+    "ios": "13.0"
+  },
+  "source_files": "MiuraSDK/**/*"
+}

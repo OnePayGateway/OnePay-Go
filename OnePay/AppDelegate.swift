@@ -14,12 +14,14 @@ import AppCenter
 import AppCenterAnalytics
 import AppCenterCrashes
 
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var notReachableView: UIView!
     var animationLogoView = LogoAnimationView()
+    var miura: MiuraManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
@@ -42,6 +44,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         startNetworkNotifier()
         self.setupAppCenter()
+        
+        miura = MiuraManager.sharedInstance()
+        if miura == nil {
+            print("ERROR: MiuraManager cannot be nil!")
+        }
+    
         return true
     }
     

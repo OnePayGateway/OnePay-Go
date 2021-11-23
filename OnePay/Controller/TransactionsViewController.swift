@@ -135,7 +135,7 @@ extension TransactionsViewController {
         case "Amex":
             return STPPaymentCardTextField.brandImage(for: .amex)!
         case "Master Card":
-            return STPPaymentCardTextField.brandImage(for: .mastercard)!
+            return STPPaymentCardTextField.brandImage(for: .masterCard)!
         case "Discover":
             return STPPaymentCardTextField.brandImage(for: .discover)!
         case "JCB":
