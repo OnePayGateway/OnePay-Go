@@ -12,7 +12,7 @@ struct Payment {
     var amount: String!
     let type_code = "2"
     let customDic:Dictionary = ["id":"1", "value":"ONEPAY GO TEST"]
-    let userDic: Dictionary = ["id":"USER", "value":Session.shared.userName()!]
+    let userDic: Dictionary = ["id":"USER", "value":Session.shared.userName()]
     let sourceDic: Dictionary = ["id":"SOURCE", "value":"ONEPAYGO"]
     //let ldic: Dictionary = ["id":"L2L3", "value":"L2"]
     //let lCountdic: Dictionary = ["id":"L3COUNT", "value":"0"]

@@ -137,6 +137,8 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     var ctlsCancelledCardInsert = false
     var emvCardInserted = false
     var track2Data: Track2Data!
+    var SREDData: String?
+    var SREDKSN: String?
     var miuraKSN : String?
     var device_code = ""
 
@@ -2165,6 +2167,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
             Session.shared.defaultPOS = device.serialNumber
         }
         miura.targetDevice = self.device.deviceType
+        self.track2Data = nil
         self.checkContactLessCapabilities()
        // self.keyInjection()
     }
@@ -2174,6 +2177,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
             miura.closeSession()
             if !self.miura.openSession(withAccessorySerialNumber: device.serialNumber) {
                 print(className,"FetchDeviceInfo - Open Session failed!" as AnyObject)
+                device = nil
             }
         }
         self.miura.getDeviceCapabilities { (capabilities) in
@@ -2292,6 +2296,24 @@ extension CheckoutViewController: MiuraManagerDelegate {
         self.present(self.alert, animated: true, completion: nil)
     }
     
+    
+    func ARQCFor(_ data: Data!) {
+       let dataString = data.hexadecimalString;
+          let emvBytes  = HexUtil.getBytesFromHexString(dataString)
+       let tlv = (emvBytes)!.parseTLVData();
+       
+       DispatchQueue.main.async{
+           print("\n[ARQC Received]\n\(dataString)")
+           
+           if tlv != nil {
+               var snStr = ""
+               if let tempTLVObj = tlv?["DFAE02"] as? MTTLV {
+                   print(tempTLVObj.value)
+               }
+           }
+       }
+    }
+    
     func sendContinueTransaction() {
         //
         // Note:
@@ -2311,38 +2333,27 @@ extension CheckoutViewController: MiuraManagerDelegate {
             if response.isSuccess() {
                 
                 print("continueTransactionResponse \(((response.tlv[0] as AnyObject)))")
+                
                 print("signature is required")
-
-                if let tlvObj = response.tlv[0] as? MPITLVObject {
-                    
-                    switch tlvObj.tag.tagDescription.tag {
-                    case .TLVTag_Transaction_Approved:
-                        print("Approved")
-                    default:
-                        print("Failed")
-                    }
-
-                    if let trackData = MPIUtil.tlvObject(from: response.tlv, tag: .TLVTag_ICC_Masked_Track_2)?.data,
-                    let sredKSN = MPIUtil.tlvObject(from: response.tlv, tag: .TLVTag_SRED_KSN).data,
-                       let maskedPan = MPIUtil.tlvObject(from: response.tlv, tag: .TLVTag_Masked_PAN).data {
-                        
-                       DispatchQueue.main.async {
-                            AudioServicesPlaySystemSound(1200);
-                            self.cardInfo.updateValue(trackData, forKey: "track_data")
-                            self.cardInfo.updateValue(sredKSN, forKey: "ksn")
-                            self.cardInfo.updateValue("02", forKey: "entry_mode")
-                            self.device_code = "41"
-                           self.connectBtn.setTitle(maskedPan as String, for: .normal)
-                            self.confirmBtn.isEnabled = true
-                            self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
-                            self.emv = nil
-                            if(self.plsSwipeView != nil) {
-                              self.plsSwipeView.removeFromSuperview()
-                            }
-                            self.confirmBtn.alpha = 1.0
-                       }
-                  }
+                if let data = response.tlv[0] as? MPITLVObject {
+                    self.ARQCFor(data.rawData as Data?)
                 }
+
+//                   DispatchQueue.main.async {
+//                        AudioServicesPlaySystemSound(1200);
+//                       self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
+//                       self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
+//                        self.cardInfo.updateValue("02", forKey: "entry_mode")
+//                        self.device_code = "41"
+//                        self.connectBtn.setTitle(self.track2Data?.pan, for: .normal)
+//                        self.confirmBtn.isEnabled = true
+//                        self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+//                        self.emv = nil
+//                        if(self.plsSwipeView != nil) {
+//                          self.plsSwipeView.removeFromSuperview()
+//                        }
+//                        self.confirmBtn.alpha = 1.0
+//                   }
                 
             } else if !response.isSuccess() {
                 
@@ -2421,7 +2432,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
             self.miura.startContactlessTransaction(with: .purchase, amount: amountUInt, currencyCode: CurrencyCode.usd.rawValue) {
                 (manager, response) in
                 if response.isSuccess() {
-                    print("ContactlessTransaction \((response.tlv[0] as AnyObject).description)")
+                    print("ContactlessTransaction \(String(describing: (response.tlv[0] as AnyObject).description))")
                     self.sendContinueTransaction()
                    // self.performSegue(withIdentifier: self.START_TRANSACTION_RESULT_SEGUE, sender: self)
                     
@@ -2577,18 +2588,21 @@ extension CheckoutViewController: MiuraManagerDelegate {
         if (trackData != nil) {
         
             self.track2Data = trackData
-            self.miuraKSN = cardData.sredKSN
+            self.SREDKSN = cardData.sredKSN
+            self.SREDData = cardData.sredData
             self.miura.displayText("Processing Card.\nPlease wait...".center, completion: nil)
+            
+            
             if isPinRequired(trackData?.serviceCode) {
                 print("pin is required")
-              //  performSegue(withIdentifier: ONLINE_PIN_SEGUE, sender: self)
+                sendOnlinePin()
             } else {
                 print("signature is required")
                 DispatchQueue.main.async {
                     AudioServicesPlaySystemSound(1200);
                     
-                    self.cardInfo.updateValue(cardData.sredData?.uppercased() ?? "", forKey: "track_data")
-                    self.cardInfo.updateValue(cardData.sredKSN?.uppercased() ?? "", forKey: "ksn")
+                    self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
+                    self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "41"
                     self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
@@ -2600,7 +2614,6 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     }
                     self.confirmBtn.alpha = 1.0
                 }
-             //   performSegue(withIdentifier: SIGNATURE_SEGUE, sender: self)
             }
             
             if (trackData == nil) {
@@ -2666,6 +2679,47 @@ extension CheckoutViewController: MiuraManagerDelegate {
         }
         let pinReqArray = [ServiceCodeThirdDigit.atmOnly_PINRequired, ServiceCodeThirdDigit.noRestrictions_PINRequired, ServiceCodeThirdDigit.goodsAndServicesOnly_NoCash_PINRequired]
         return pinReqArray.contains(serviceCode.thirdDigit)
+    }
+    
+    func sendOnlinePin() {
+        print("Sending onlinePin...")
+        
+        guard let isamount = checkout?.enteredAmount else {
+            return
+        }
+        let amountDesi = NSDecimalNumber(string: isamount)
+        let amountUInt = amountDesi.uintValue
+        print(amountDesi)
+        print(amountUInt)
+        
+        miura.onlinePin(withAmount: amountUInt, currencyCode: CurrencyCode.gbp.rawValue, track2Data: track2Data.data!, labelText: "Visa Test") { (pinResponse) in
+            print("onlinePin")
+            if let pinResponse = pinResponse {
+                print(pinResponse)
+                DispatchQueue.main.async {
+                    AudioServicesPlaySystemSound(1200);
+                    
+                    self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
+                    self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
+                    self.cardInfo.updateValue("01", forKey: "entry_mode")
+                    self.device_code = "41"
+                    self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
+                    self.confirmBtn.isEnabled = true
+                    self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                    self.emv = nil
+                    if(self.plsSwipeView != nil) {
+                      self.plsSwipeView.removeFromSuperview()
+                    }
+                    self.confirmBtn.alpha = 1.0
+                }
+            }
+            let msg = (pinResponse != nil) ? "Online PIN\n\nSUCCESS" : "Online PIN\n\nERROR"
+            self.miura.displayText(msg.center, completion: nil)
+            if pinResponse == nil {
+                self.abortTransactionAlert(title: "Online PIN", message: "Error")
+            }
+            
+        }
     }
     
     func keyInjection() {
