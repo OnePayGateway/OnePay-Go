@@ -10,7 +10,6 @@ target 'OnePay' do
     pod 'IQKeyboardManagerSwift'
     pod 'SideMenuSwift'
     pod 'SwiftyJSON', '~> 4.0'
-    pod 'Stripe'
     pod 'ReachabilitySwift'
     pod "ApplicationInsights", '1.0-beta.8'
     pod 'AppCenter'

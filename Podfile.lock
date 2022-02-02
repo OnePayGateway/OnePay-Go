@@ -12,7 +12,6 @@ PODS:
   - ReachabilitySwift (5.0.0)
   - SideMenuSwift (2.0.7)
   - SkyFloatingLabelTextField (3.8.0)
-  - Stripe (17.0.4)
   - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
@@ -22,7 +21,6 @@ DEPENDENCIES:
   - ReachabilitySwift
   - SideMenuSwift
   - SkyFloatingLabelTextField (~> 3.0)
-  - Stripe
   - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
@@ -33,7 +31,6 @@ SPEC REPOS:
     - ReachabilitySwift
     - SideMenuSwift
     - SkyFloatingLabelTextField
-    - Stripe
     - SwiftyJSON
 
 SPEC CHECKSUMS:
@@ -43,9 +40,8 @@ SPEC CHECKSUMS:
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SideMenuSwift: ffbbc88d23741932177ad1320df837cedfb3bc5e
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
-  Stripe: 54de24c0039e9fe6ad6217325db81350552df6a9
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 860a7b15b62c1912db92a6e9d1ef557903a13a35
+PODFILE CHECKSUM: 7be3ce3d3edab0cc1c74275506d356ef52d42d10
 
-COCOAPODS: 1.10.1
+COCOAPODS: 1.11.2

@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Stripe
 
 class TransactionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, voidDelegate {
 
@@ -128,24 +127,23 @@ extension TransactionsViewController {
         return cell
     }
     
+
     func imageFor(cardType:String) -> UIImage {
         switch cardType {
         case "Visa":
-            return STPPaymentCardTextField.brandImage(for: .visa)!
+            return #imageLiteral(resourceName: "credit_cards_visa")
         case "Amex":
-            return STPPaymentCardTextField.brandImage(for: .amex)!
+            return #imageLiteral(resourceName: "credit_cards_americanexpress")
         case "Master Card":
-            return STPPaymentCardTextField.brandImage(for: .masterCard)!
+            return #imageLiteral(resourceName: "credit_cards_mastercard")
         case "Discover":
-            return STPPaymentCardTextField.brandImage(for: .discover)!
+            return #imageLiteral(resourceName: "credit_cards_discover")
         case "JCB":
-            return STPPaymentCardTextField.brandImage(for: .JCB)!
+            return #imageLiteral(resourceName: "credit_cards_jcb")
         case "Diners":
-            return STPPaymentCardTextField.brandImage(for: .dinersClub)!
-        case "Union Pay":
-            return STPPaymentCardTextField.brandImage(for: .unionPay)!
+            return #imageLiteral(resourceName: "credit_cards_diners")
         default:
-            return STPPaymentCardTextField.brandImage(for: .unknown)!
+            return #imageLiteral(resourceName: "credit_cards_invalid")
         }
     }
     

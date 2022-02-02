@@ -20,6 +20,7 @@
 		E317CC16229D641F00480CD5 /* libMTSCRA.a in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC15229D641F00480CD5 /* libMTSCRA.a */; };
 		E317CC18229D649800480CD5 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */; };
 		E317CC1A229D64CA00480CD5 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC19229D64CA00480CD5 /* libstdc++.dylib */; };
+		E31D07C727AAC98700903E94 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31D07C627AAC98700903E94 /* CardView.swift */; };
 		E3259E3F22DC96DB000FD252 /* ApiKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */; };
 		E3259E4122DCD22A000FD252 /* TransactionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */; };
 		E329ADA82385468F004BA12E /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = E329ADA72385468F004BA12E /* Application.swift */; };
@@ -155,6 +156,7 @@
 		E317CC15229D641F00480CD5 /* libMTSCRA.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libMTSCRA.a; path = "OnePay/Lib/Release-iphoneos/libMTSCRA.a"; sourceTree = "<group>"; };
 		E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "Lib/iPhoneOS/libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		E317CC19229D64CA00480CD5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Lib/iPhoneSimulator/libstdc++.dylib"; sourceTree = "<group>"; };
+		E31D07C627AAC98700903E94 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyService.swift; sourceTree = "<group>"; };
 		E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryService.swift; sourceTree = "<group>"; };
 		E329ADA72385468F004BA12E /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
@@ -436,6 +438,7 @@
 				E316843622AFC6B800A824E9 /* ReceiptView.swift */,
 				E30A92FF22981ED700A0434F /* YPDrawSignatureView.swift */,
 				E3A094E122C4B7A500489480 /* LogoAnimationView.swift */,
+				E31D07C627AAC98700903E94 /* CardView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -766,7 +769,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1300;
 				ORGANIZATIONNAME = "Certify Global";
 				TargetAttributes = {
 					E390E807228D5E1F0069004A = {
@@ -1004,6 +1007,7 @@
 				E3B734CE26BAD0FB006AA7AE /* MiuraManager.m in Sources */,
 				E30A930022981ED800A0434F /* YPDrawSignatureView.swift in Sources */,
 				E36C1060228EA51A00147F67 /* Login.swift in Sources */,
+				E31D07C727AAC98700903E94 /* CardView.swift in Sources */,
 				E39A5A672330EB1400AD4CC6 /* CardParser.swift in Sources */,
 				E388F95722AA9F85005CA2EB /* ReceiptViewController.swift in Sources */,
 				E38AB5B022CE0BBA00999CF6 /* AppSettingsTableViewController.swift in Sources */,
@@ -1095,6 +1099,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1120,7 +1125,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1156,6 +1161,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -1175,7 +1181,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1193,8 +1199,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = 25NMC73834;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift/Reachability.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SideMenuSwift/SideMenuSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+				);
 				INFOPLIST_FILE = OnePay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1217,8 +1231,6 @@
 					"-framework",
 					"\"SkyFloatingLabelTextField\"",
 					"-framework",
-					"\"Stripe\"",
-					"-framework",
 					"\"SwiftyJSON\"",
 					"-lstdc++",
 				);
@@ -1239,8 +1251,16 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1.8;
 				DEVELOPMENT_TEAM = 25NMC73834;
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/ReachabilitySwift/Reachability.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SideMenuSwift/SideMenuSwift.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework/Headers\"",
+					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
+				);
 				INFOPLIST_FILE = OnePay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1262,8 +1282,6 @@
 					"\"SideMenuSwift\"",
 					"-framework",
 					"\"SkyFloatingLabelTextField\"",
-					"-framework",
-					"\"Stripe\"",
 					"-framework",
 					"\"SwiftyJSON\"",
 					"-lstdc++",

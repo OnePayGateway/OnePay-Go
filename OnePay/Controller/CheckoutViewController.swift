@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Stripe
 import SwiftyJSON
 import CoreLocation
 import SkyFloatingLabelTextField
@@ -20,7 +19,7 @@ let modeViewHeight:Float = 70.0
 let modeExpandedHeight:Float = 140.0
 
 
-class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate, BBDeviceControllerDelegate, CLLocationManagerDelegate, settingDelegate, UITextFieldDelegate,UIActionSheetDelegate, MTSCRAEventDelegate, BLEScanListEvent {
+class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, CardViewDelegate, CLLocationManagerDelegate, settingDelegate, UITextFieldDelegate,UIActionSheetDelegate, MTSCRAEventDelegate, BLEScanListEvent {
     
     var lib: MTSCRA!;
     var devicePaired : Bool?
@@ -47,7 +46,8 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     @IBOutlet weak var checkOutView: CheckoutView!
     @IBOutlet weak var paymentModeView: PaymentModeView!
     @IBOutlet weak var numberBoardView: UIView!
-    var paymentTextField = STPPaymentCardTextField()
+  //  var paymentTextField = STPPaymentCardTextField()
+    var cardView = CardView()
     var plsSwipeView: UIView!
     
     @IBOutlet weak var instructionLbl: UILabel!
@@ -314,7 +314,8 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             self.connectBtn.setTitle("CONNECT", for: .normal)
             self.confirmBtn.isEnabled = false
             self.confirmBtn.alpha = 0.5
-            self.paymentTextField.clear()
+            //self.paymentTextField.clear()
+            self.cardView.clear()
             self.cardInfo = [:]
             self.emv = nil
             self.stopLocationFetching()
@@ -1284,7 +1285,10 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             
         }, completion: nil)
         
-        self.paymentTextField.frame = CGRect(x: 16, y: 61, width: self.manualEntryView.frame.width-32, height: 50)
+       // self.paymentTextField.frame = CGRect(x: 16, y: 61, width: self.manualEntryView.frame.width-32, height: 50)
+        self.cardView.frame = CGRect(x: 16, y: 61, width: self.manualEntryView.frame.width-32, height: 50)
+        self.cardView.isHidden = false
+
 //        self.plsSwipeView.removeFromSuperview()
 //        self.creditcardSwipeLbl.text = "Credit Card Swipe"
     }
@@ -1405,10 +1409,12 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         pvIsUp = false
         modeViewUpdatedHeight = 140
         
-        paymentTextField.delegate = self
-        paymentTextField.font = UIFont.systemFont(ofSize: 17, weight: .light)
-        self.manualEntryView.addSubview(paymentTextField)
-        
+//        paymentTextField.delegate = self
+//        paymentTextField.font = UIFont.systemFont(ofSize: 17, weight: .light)
+//        self.manualEntryView.addSubview(paymentTextField)
+        self.cardView.isHidden = true
+        self.cardView.cardViewDelegate = self
+        self.manualEntryView.addSubview(cardView)
         
         let numberToolbar: UIToolbar = UIToolbar()
         numberToolbar.barStyle = UIBarStyle.default
@@ -1432,7 +1438,7 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
             rightButtonItem
         ]
         numberToolbar.sizeToFit()
-        paymentTextField.inputAccessoryView = numberToolbar
+       // paymentTextField.inputAccessoryView = numberToolbar
         invoiceNumberField.inputAccessoryView = numberToolbar
         
         addSwipe()
@@ -1459,7 +1465,8 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     }
     
     @objc func doneClicked () {
-        paymentTextField.resignFirstResponder()
+        //paymentTextField.resignFirstResponder()
+        cardView.resignResponder()
         self.view.endEditing(true)
     }
     
@@ -1797,7 +1804,8 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        paymentTextField.clear()
+       // paymentTextField.clear()
+        cardView.clear()
         removeFromDefaults()
         fetchAccessoryList()
     }
@@ -1817,43 +1825,33 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         cardSwipeView.addSubview(imgView)
     }
     
-    
     func cardImage(forState cardState:CardState) -> UIImage? {
         switch cardState {
         case .identified(let cardType):
             switch cardType{
-            case .visa:
-                return STPPaymentCardTextField.brandImage(for: .visa)
-            case .masterCard:
-                return STPPaymentCardTextField.brandImage(for: .masterCard)
-            case .amex:
-                return STPPaymentCardTextField.brandImage(for: .amex)
-            case .diners:
-                return STPPaymentCardTextField.brandImage(for: .dinersClub)
-            case .discover:
-                return STPPaymentCardTextField.brandImage(for: .discover)
-            case .jcb:
-                return STPPaymentCardTextField.brandImage(for: .JCB)
+            case .visa:         return #imageLiteral(resourceName: "credit_cards_visa")
+            case .masterCard:   return #imageLiteral(resourceName: "credit_cards_mastercard")
+            case .amex:         return #imageLiteral(resourceName: "credit_cards_americanexpress")
+            case .diners:       return #imageLiteral(resourceName: "credit_cards_diners")
+            case .discover:     return #imageLiteral(resourceName: "credit_cards_discover")
+            case .jcb:          return #imageLiteral(resourceName: "credit_cards_jcb")
             }
-        case .indeterminate:
-            return STPPaymentCardTextField.brandImage(for: .unknown)
-        case .invalid:
-            return STPPaymentCardTextField.brandImage(for: .unknown)
+        case .indeterminate: return #imageLiteral(resourceName: "credit_cards_generic")
+        case .invalid:      return #imageLiteral(resourceName: "credit_cards_invalid")
         }
     }
-
     
-    func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
+    func CardViewTextFieldDidChange() {
         DispatchQueue.main.async {
-            if(textField.isValid) {
-                self.cardInfo.updateValue(textField.cardNumber!, forKey: "number")
-                self.cardInfo.updateValue(NSString(format: "%02ld%02ld", textField.expirationMonth, textField.expirationYear) as String, forKey: "expiration_date")
+            if self.cardView.isValid() {
+                self.cardInfo.updateValue(self.cardView.cardNumber!, forKey: "number")
+                let expirationDate = self.cardView.expiryDate?.replacingOccurrences(of: "/", with: "")
+                self.cardInfo.updateValue(expirationDate!, forKey: "expiration_date")
+//                if textField.expirationMonth == 0 {
+//                    self.cardInfo.updateValue("", forKey: "expiration_date")
+//                }
                 
-                if textField.expirationMonth == 0 {
-                    self.cardInfo.updateValue("", forKey: "expiration_date")
-                }
-                
-                self.cardInfo.updateValue(textField.cvc ?? "", forKey: "code")
+                self.cardInfo.updateValue(self.cardView.cvc!, forKey: "code")
                 
                 self.cardInfo.updateValue("Amex", forKey: "type")
                 self.cardInfo.updateValue("", forKey: "track_data")
@@ -1871,9 +1869,34 @@ class CheckoutViewController: UIViewController, STPPaymentCardTextFieldDelegate,
         
     }
     
-    func paymentCardTextFieldDidEndEditing(_ textField: STPPaymentCardTextField) {
-        self.view.endEditing(true)
-    }
+//    func paymentCardTextFieldDidChange(_ textField: STPPaymentCardTextField) {
+//        DispatchQueue.main.async {
+//            if(textField.isValid) {
+//                self.cardInfo.updateValue(textField.cardNumber!, forKey: "number")
+//                self.cardInfo.updateValue(NSString(format: "%02ld%02ld", textField.expirationMonth, textField.expirationYear) as String, forKey: "expiration_date")
+//
+//                if textField.expirationMonth == 0 {
+//                    self.cardInfo.updateValue("", forKey: "expiration_date")
+//                }
+//
+//                self.cardInfo.updateValue(textField.cvc ?? "", forKey: "code")
+//
+//                self.cardInfo.updateValue("Amex", forKey: "type")
+//                self.cardInfo.updateValue("", forKey: "track_data")
+//                self.cardInfo.updateValue("", forKey: "ksn")
+//                self.device_code = ""
+//                self.confirmBtn.isEnabled = true
+//                self.confirmBtn.alpha = 1.0
+//
+//            } else {
+//                print("need to give all")
+//                self.confirmBtn.isEnabled = false
+//                self.confirmBtn.alpha = 0.5
+//            }
+//        }
+//
+//    }
+    
     
     @IBAction func menuPressed(_ sender: Any) {
         sideMenuController?.revealMenu()
