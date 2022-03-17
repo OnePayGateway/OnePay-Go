@@ -131,19 +131,19 @@ extension TransactionsViewController {
     func imageFor(cardType:String) -> UIImage {
         switch cardType {
         case "Visa":
-            return #imageLiteral(resourceName: "credit_cards_visa")
+            return #imageLiteral(resourceName: "visa")
         case "Amex":
-            return #imageLiteral(resourceName: "credit_cards_americanexpress")
+            return #imageLiteral(resourceName: "amex")
         case "Master Card":
-            return #imageLiteral(resourceName: "credit_cards_mastercard")
+            return #imageLiteral(resourceName: "mastercard-credit-card")
         case "Discover":
-            return #imageLiteral(resourceName: "credit_cards_discover")
+            return #imageLiteral(resourceName: "discover")
         case "JCB":
-            return #imageLiteral(resourceName: "credit_cards_jcb")
+            return #imageLiteral(resourceName: "jcb")
         case "Diners":
-            return #imageLiteral(resourceName: "credit_cards_diners")
+            return #imageLiteral(resourceName: "diners-club")
         default:
-            return #imageLiteral(resourceName: "credit_cards_invalid")
+            return #imageLiteral(resourceName: "only-cash")
         }
     }
     

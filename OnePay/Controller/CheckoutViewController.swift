@@ -1829,15 +1829,15 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         switch cardState {
         case .identified(let cardType):
             switch cardType{
-            case .visa:         return #imageLiteral(resourceName: "credit_cards_visa")
-            case .masterCard:   return #imageLiteral(resourceName: "credit_cards_mastercard")
-            case .amex:         return #imageLiteral(resourceName: "credit_cards_americanexpress")
-            case .diners:       return #imageLiteral(resourceName: "credit_cards_diners")
-            case .discover:     return #imageLiteral(resourceName: "credit_cards_discover")
-            case .jcb:          return #imageLiteral(resourceName: "credit_cards_jcb")
+            case .visa:         return #imageLiteral(resourceName: "visa")
+            case .masterCard:   return #imageLiteral(resourceName: "mastercard-credit-card")
+            case .amex:         return #imageLiteral(resourceName: "amex")
+            case .diners:       return #imageLiteral(resourceName: "diners-club")
+            case .discover:     return #imageLiteral(resourceName: "discover")
+            case .jcb:          return #imageLiteral(resourceName: "jcb")
             }
-        case .indeterminate: return #imageLiteral(resourceName: "credit_cards_generic")
-        case .invalid:      return #imageLiteral(resourceName: "credit_cards_invalid")
+        case .indeterminate: return #imageLiteral(resourceName: "bank-card-back-side")
+        case .invalid:      return #imageLiteral(resourceName: "only-cash")
         }
     }
     
