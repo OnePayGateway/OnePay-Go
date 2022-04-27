@@ -32,14 +32,14 @@ struct APIs {
     let forgotPasswordRelativeUrl = "/forgot-password"
     
     func appBaseAPI()-> String {
-        if Session.shared.apiZone() == 1 {
-            return appDemoBaseURL
-        } else if Session.shared.apiZone() == 2 {
-            return appTestBaseURL
-        } else if Session.shared.apiZone() == 3 {
-            return appDevBaseURL
-        }
-        return appProdBaseURL
+//        if Session.shared.apiZone() == 1 {
+//            return appDemoBaseURL
+//        } else if Session.shared.apiZone() == 2 {
+//            return appTestBaseURL
+//        } else if Session.shared.apiZone() == 3 {
+//            return appDevBaseURL
+//        }
+        return appDemoBaseURL
     }
     
     func loginAPI() -> String {
@@ -67,14 +67,14 @@ struct APIs {
     }
     
     func gatewayBaseAPI()-> String {
-        if Session.shared.apiZone() == 1 {
-            return gatewayDemoBaseURL
-        } else if Session.shared.apiZone() == 2 {
-            return gatewayTestBaseURL
-        } else if Session.shared.apiZone() == 3 {
-            return gatewayDevBaseURL
-        }
-        return gatewayProdBaseURL
+//        if Session.shared.apiZone() == 1 {
+//            return gatewayDemoBaseURL
+//        } else if Session.shared.apiZone() == 2 {
+//            return gatewayTestBaseURL
+//        } else if Session.shared.apiZone() == 3 {
+//            return gatewayDevBaseURL
+//        }
+        return gatewayDemoBaseURL
     }
     
     func paymentAPI() -> String {

@@ -237,14 +237,8 @@ class AppSettingsTableViewController: UITableViewController, MTSCRAEventDelegate
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             return 2
-        }
-//        else if section == 1 {
-//            return 4
-//        }
-        else if section == 1 {
+        } else if section == 1 {
             return PaymentSettings.shared.activeTerminalIds()!.count
-        } else if(section == 2) {
-            return 4
         }
         return 1
     }
@@ -292,13 +286,15 @@ class AppSettingsTableViewController: UITableViewController, MTSCRAEventDelegate
             } else {
                 imageView?.image = nil
             }
-        } else if indexPath.section == 2 {
-            if(indexPath.row == Session.shared.apiZone()) {
-                imageView?.image = UIImage(named: "check.png")
-            } else {
-                imageView?.image = nil
-            }
         }
+        
+//        else if indexPath.section == 2 {
+//            if(indexPath.row == Session.shared.apiZone()) {
+//                imageView?.image = UIImage(named: "check.png")
+//            } else {
+//                imageView?.image = nil
+//            }
+//        }
 //        else if indexPath.section == 0, indexPath.row == 2, paymentOptionsSelected == true {
 //            let imageView = cell.viewWithTag(10) as? UIImageView
 //            imageView?.image = UIImage(named: "uparrow.png")
@@ -310,7 +306,7 @@ class AppSettingsTableViewController: UITableViewController, MTSCRAEventDelegate
             imageView?.image = nil
         }
         
-        if indexPath.section == 4 {
+        if indexPath.section == 3 {
             if let version = Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String {
                 cell.textLabel?.text = "OnePay Go Version \(version)"
             }
@@ -328,11 +324,12 @@ class AppSettingsTableViewController: UITableViewController, MTSCRAEventDelegate
             PaymentSettings.shared.setSelectedTerminal(Id: PaymentSettings.shared.activeTerminalIds()![indexPath.row])
             PaymentSettings.shared.setSelectedTerminal(Type: PaymentSettings.shared.activeTerminalTypes()![indexPath.row])
             self.tableView.reloadData()
-        } else if indexPath.section == 2 {
-            selectedZone = indexPath.row
-            logOutWith(msg: "API Zone will get changed")
         }
-        else if(indexPath.section == 3 && indexPath.row == 0) {
+//        else if indexPath.section == 2 {
+//            selectedZone = indexPath.row
+//            logOutWith(msg: "API Zone will get changed")
+//        }
+        else if(indexPath.section == 2 && indexPath.row == 0) {
             logOutWith(msg: "")
         }
     }
