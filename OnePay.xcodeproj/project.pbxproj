@@ -21,6 +21,12 @@
 		E317CC18229D649800480CD5 /* libstdc++.6.0.9.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */; };
 		E317CC1A229D64CA00480CD5 /* libstdc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E317CC19229D64CA00480CD5 /* libstdc++.dylib */; };
 		E31D07C727AAC98700903E94 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31D07C627AAC98700903E94 /* CardView.swift */; };
+		E31D297428586ECE00565E3C /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E31D297228586BC600565E3C /* Poppins-Bold.ttf */; };
+		E31D297528586ED100565E3C /* Poppins-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E31D297028586BC600565E3C /* Poppins-Light.ttf */; };
+		E31D297628586ED300565E3C /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E31D296F28586BC600565E3C /* Poppins-Medium.ttf */; };
+		E31D297728586ED600565E3C /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E31D297128586BC600565E3C /* Poppins-Regular.ttf */; };
+		E31D297828586ED800565E3C /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E31D297328586BC600565E3C /* Poppins-SemiBold.ttf */; };
+		E31D297A285892D600565E3C /* textField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E31D2979285892D600565E3C /* textField.swift */; };
 		E3259E3F22DC96DB000FD252 /* ApiKeyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */; };
 		E3259E4122DCD22A000FD252 /* TransactionHistoryService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */; };
 		E329ADA82385468F004BA12E /* Application.swift in Sources */ = {isa = PBXBuildFile; fileRef = E329ADA72385468F004BA12E /* Application.swift */; };
@@ -110,6 +116,7 @@
 		E3C788FF22DF168D00FABBCE /* TransactionDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C788FE22DF168D00FABBCE /* TransactionDetail.swift */; };
 		E3C7890122DF35E700FABBCE /* VoidTransactionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3C7890022DF35E700FABBCE /* VoidTransactionService.swift */; };
 		E3CB3CCD231D12B40070D676 /* FullTransnDetailTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CB3CCC231D12B40070D676 /* FullTransnDetailTableViewController.swift */; };
+		E3CE81BB285B632400613FD9 /* StatusViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3CE81BA285B632400613FD9 /* StatusViewController.swift */; };
 		E3E2EE7322DDE07E00C8C4BC /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */; };
 		E3E2EE7522DE178400C8C4BC /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7422DE178400C8C4BC /* Date.swift */; };
 		E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7622DE1F5700C8C4BC /* Image.swift */; };
@@ -157,6 +164,12 @@
 		E317CC17229D649800480CD5 /* libstdc++.6.0.9.tbd */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = "libstdc++.6.0.9.tbd"; path = "Lib/iPhoneOS/libstdc++.6.0.9.tbd"; sourceTree = "<group>"; };
 		E317CC19229D64CA00480CD5 /* libstdc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libstdc++.dylib"; path = "Lib/iPhoneSimulator/libstdc++.dylib"; sourceTree = "<group>"; };
 		E31D07C627AAC98700903E94 /* CardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		E31D296F28586BC600565E3C /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		E31D297028586BC600565E3C /* Poppins-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Light.ttf"; sourceTree = "<group>"; };
+		E31D297128586BC600565E3C /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		E31D297228586BC600565E3C /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		E31D297328586BC600565E3C /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		E31D2979285892D600565E3C /* textField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = textField.swift; sourceTree = "<group>"; };
 		E3259E3E22DC96DB000FD252 /* ApiKeyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ApiKeyService.swift; sourceTree = "<group>"; };
 		E3259E4022DCD22A000FD252 /* TransactionHistoryService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistoryService.swift; sourceTree = "<group>"; };
 		E329ADA72385468F004BA12E /* Application.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Application.swift; sourceTree = "<group>"; };
@@ -273,6 +286,7 @@
 		E3C788FE22DF168D00FABBCE /* TransactionDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionDetail.swift; sourceTree = "<group>"; };
 		E3C7890022DF35E700FABBCE /* VoidTransactionService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VoidTransactionService.swift; sourceTree = "<group>"; };
 		E3CB3CCC231D12B40070D676 /* FullTransnDetailTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullTransnDetailTableViewController.swift; sourceTree = "<group>"; };
+		E3CE81BA285B632400613FD9 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
 		E3E2EE7422DE178400C8C4BC /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E3E2EE7622DE1F5700C8C4BC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
@@ -374,6 +388,11 @@
 			isa = PBXGroup;
 			children = (
 				E30FCA5122CA0C7200891B48 /* abeatbyKaiRegular.otf */,
+				E31D297228586BC600565E3C /* Poppins-Bold.ttf */,
+				E31D297028586BC600565E3C /* Poppins-Light.ttf */,
+				E31D296F28586BC600565E3C /* Poppins-Medium.ttf */,
+				E31D297128586BC600565E3C /* Poppins-Regular.ttf */,
+				E31D297328586BC600565E3C /* Poppins-SemiBold.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -449,6 +468,7 @@
 				E390E80D228D5E1F0069004A /* LoginViewController.swift */,
 				E36C1066228EE9AC00147F67 /* CheckoutViewController.swift */,
 				E30A92FD2297D3C500A0434F /* SignatureViewController.swift */,
+				E3CE81BA285B632400613FD9 /* StatusViewController.swift */,
 				E388F95622AA9F85005CA2EB /* ReceiptViewController.swift */,
 				E3B9A8BC2292A86C00B01A28 /* TransactionsViewController.swift */,
 				E38AB5AD22CDDE7900999CF6 /* TransactionInfoViewController.swift */,
@@ -477,6 +497,7 @@
 				E329ADA72385468F004BA12E /* Application.swift */,
 				E36A923D26BD91A200547259 /* eAaccessory.swift */,
 				E3AC481226C2B11300405712 /* string.swift */,
+				E31D2979285892D600565E3C /* textField.swift */,
 			);
 			path = Extention;
 			sourceTree = "<group>";
@@ -815,9 +836,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E31D297528586ED100565E3C /* Poppins-Light.ttf in Resources */,
 				E3ACAA7222C617D800CBEAA1 /* onepay-logo-animation.gif in Resources */,
+				E31D297428586ECE00565E3C /* Poppins-Bold.ttf in Resources */,
+				E31D297728586ED600565E3C /* Poppins-Regular.ttf in Resources */,
 				E390E816228D5E200069004A /* LaunchScreen.storyboard in Resources */,
+				E31D297828586ED800565E3C /* Poppins-SemiBold.ttf in Resources */,
 				E390E813228D5E200069004A /* Assets.xcassets in Resources */,
+				E31D297628586ED300565E3C /* Poppins-Medium.ttf in Resources */,
 				E390E811228D5E1F0069004A /* Main.storyboard in Resources */,
 				E30FCA5222CA0C7200891B48 /* abeatbyKaiRegular.otf in Resources */,
 			);
@@ -985,11 +1011,13 @@
 				E3B734CD26BAD0FB006AA7AE /* MPICommandExecutor.m in Sources */,
 				E3C73E9622BBCD14007DB7FB /* View.swift in Sources */,
 				E3B734C826BAD0FB006AA7AE /* MPIKernelHashValues.m in Sources */,
+				E3CE81BB285B632400613FD9 /* StatusViewController.swift in Sources */,
 				E3B9A8C32292DA4C00B01A28 /* ReportsViewController.swift in Sources */,
 				E36C1059228EA2C800147F67 /* LoginService.swift in Sources */,
 				E3A094E722C4D43100489480 /* Utils.swift in Sources */,
 				E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */,
 				E3B734C926BAD0FB006AA7AE /* MPIXMLParserUtil.m in Sources */,
+				E31D297A285892D600565E3C /* textField.swift in Sources */,
 				E3B9A8BD2292A86C00B01A28 /* TransactionsViewController.swift in Sources */,
 				E3B9A8C92292E54F00B01A28 /* CheckoutView.swift in Sources */,
 				E316843722AFC6B800A824E9 /* ReceiptView.swift in Sources */,

@@ -9,6 +9,6 @@
 import Foundation
 
 struct Menu {
-    let options = ["Sale","Settings","Transactions"]
-    let imageNames = ["home","settings","transactions"]
+    let options = ["Sale","Reporting","Support", "Help", "Privacy and Terms of Use", "Settings"]
+    let imageNames = ["charge-icon","get-money","support", "info", "privacy", "settings"]
 }

@@ -9,5 +9,8 @@
 import UIKit
 
 class MenuListView: UITableView {
-
+    @IBOutlet weak var nameLbl: UILabel!
+    @IBOutlet weak var emailLbl: UILabel!
+    @IBOutlet weak var terminalLbl: UILabel!
 }
+

@@ -24,9 +24,7 @@ class ReceiptViewController: UIViewController,UITextFieldDelegate {
         
         receiptView.emailField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
      //   receiptView.phoneNumberField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        UIViewController.attemptRotationToDeviceOrientation()
+        
         
         let numberToolbar: UIToolbar = UIToolbar()
         numberToolbar.barStyle = UIBarStyle.default
@@ -65,14 +63,6 @@ class ReceiptViewController: UIViewController,UITextFieldDelegate {
 //        return .lightContent
 //    }
     
-    
-    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-        return .portrait
-    }
-    
-    override var shouldAutorotate: Bool {
-        return true
-    }
     
     func showReceiptAlertWith(title: String, btnName: String, success:Bool) {
         
@@ -171,6 +161,7 @@ class ReceiptViewController: UIViewController,UITextFieldDelegate {
     @IBAction func cancelClicked(_ sender: Any) {
         self.navigationController?.popToRootViewController(animated: true)
     }
+    
     @IBAction func backBtnClicked(_ sender: Any) {
         self.navigationController?.popViewController(animated: true)
     }

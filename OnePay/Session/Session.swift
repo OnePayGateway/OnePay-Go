@@ -15,6 +15,7 @@ class Session : NSObject {
     private let ZONE_API: String = "ZONE_API"
     private let LOGGED_IN: String = "LOGGED_IN"
     private let USER_NAME: String = "USER_NAME"
+    private let USER_EMAIL: String = "USER_EMAIL"
     private let USER_ID: String = "USER_ID"
     private let USER_TYPE: String = "USER_TYPE"
     private let EMAIL_CONFIRMED: String = "EMAIL_CONFIRMED"
@@ -64,6 +65,15 @@ class Session : NSObject {
     }
     func userName() -> String? {
         return defaults.value(forKey: USER_NAME) as? String
+    }
+    
+    func setUser(email:String) {
+        if(!email.isEmpty) {
+            defaults.setValue(email, forKey: USER_EMAIL)
+        }
+    }
+    func userEmail() -> String? {
+        return defaults.value(forKey: USER_EMAIL) as? String
     }
     
     func setUser(id:String) {
@@ -176,6 +186,7 @@ class Session : NSObject {
         
         defaults.removeObject(forKey: LOGGED_IN)
         defaults.removeObject(forKey: USER_NAME)
+        defaults.removeObject(forKey: USER_EMAIL)
         defaults.removeObject(forKey: USER_ID)
         defaults.removeObject(forKey: USER_TYPE)
         defaults.removeObject(forKey: EMAIL_CONFIRMED)

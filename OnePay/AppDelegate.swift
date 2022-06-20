@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
     var notReachableView: UIView!
-    var animationLogoView = LogoAnimationView()
+   // var animationLogoView = LogoAnimationView()
     var miura: MiuraManager!
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -39,9 +39,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
            // application.statusBarUIView?.backgroundColor = UIColor.black
             let sideMenuVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateViewController(withIdentifier: "sideMenuVc")
             self.window?.rootViewController = sideMenuVc
-        } else {
-            showLogoAnimation()
         }
+        
+//        else {
+//            showLogoAnimation()
+//        }
+        
         startNetworkNotifier()
         self.setupAppCenter()
         
@@ -116,13 +119,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
     }
     
-    func showLogoAnimation() {
-        self.window?.rootViewController?.view.addSubview(animationLogoView)
-        animationLogoView.pinEdgesToSuperView()
-        delay(2.00) {
-            self.animationLogoView.removeFromSuperview()
-        }
-    }
+//    func showLogoAnimation() {
+//        self.window?.rootViewController?.view.addSubview(animationLogoView)
+//        animationLogoView.pinEdgesToSuperView()
+//        delay(2.00) {
+//            self.animationLogoView.removeFromSuperview()
+//        }
+//    }
     
     func application(_ application: UIApplication, supportedInterfaceOrientationsFor window: UIWindow?) -> UIInterfaceOrientationMask {
         if let rootViewController = self.topViewControllerWithRootViewController(rootViewController: window?.rootViewController) {

@@ -10,6 +10,6 @@ import UIKit
 
 class PaymentModeView: UIView {
     
-    @IBOutlet weak var amountLbl: UILabel!
+   // @IBOutlet weak var amountLbl: UILabel!
     
 }

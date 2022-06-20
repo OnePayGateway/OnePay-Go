@@ -11,7 +11,7 @@ import SkyFloatingLabelTextField
 
 class CheckoutView: UIView {
     @IBOutlet weak var curentSaleLbl: UILabel!
-    @IBOutlet weak var chargeBtn: UIButton!
+    @IBOutlet weak var proceedBtn: UIButton!
     @IBOutlet weak var amountLbl: UILabel!
    // @IBOutlet weak var itemNameField: SkyFloatingLabelTextFieldWithIcon!
     

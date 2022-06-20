@@ -86,36 +86,36 @@ class CardView: UIView {
         
         let padding = 10
         let totalWidth = UIScreen.main.bounds.width-94
-        let cardFieldWidth = Int(totalWidth*60)/100
-        let expirationFieldWidth = Int(totalWidth*20)/100
-        let cvcFieldWidth = Int(totalWidth*20)/100
+        let cardFieldWidth = Int(totalWidth*100)/100
+        let expirationFieldWidth = Int((Int(totalWidth)-padding)*50)/100
+        let cvcFieldWidth = Int((Int(totalWidth) - padding)*50)/100
 
         let cardFieldX = 0
-        let expirationFieldX = cardFieldX+cardFieldWidth+padding
+        let expirationFieldX = 0
         let cvcFieldX = expirationFieldX+expirationFieldWidth+padding
 
         cardNumberField = UITextField(frame: CGRect(x: cardFieldX, y: 0, width: cardFieldWidth, height: 50))
         cardNumberField.keyboardType = .numberPad
         cardNumberField.placeholder = "Card Number"
-        cardNumberField.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        cardNumberField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         cardNumberField.borderStyle = .roundedRect
         cardNumberField.textAlignment = .center
         cardNumberField.delegate = self
         cardNumberField.tag = 11
         
-        expirationDateField = UITextField(frame: CGRect(x: expirationFieldX, y: 0, width: expirationFieldWidth, height: 50))
-        expirationDateField.font = UIFont.systemFont(ofSize: 15, weight: .light)
+        expirationDateField = UITextField(frame: CGRect(x: 0, y: 60, width: expirationFieldWidth, height: 50))
+        expirationDateField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         expirationDateField.borderStyle = .roundedRect
-        expirationDateField.placeholder = "01/22"
+        expirationDateField.placeholder = "MM/YY"
         expirationDateField.keyboardType = .numberPad
         expirationDateField.textAlignment = .center
         expirationDateField.delegate = self
         expirationDateField.tag = 12
 
-        cvcField = UITextField(frame: CGRect(x: cvcFieldX, y: 0, width: cvcFieldWidth, height: 50))
+        cvcField = UITextField(frame: CGRect(x: cvcFieldX, y: 60, width: cvcFieldWidth, height: 50))
         cvcField.keyboardType = .numberPad
         cvcField.placeholder = "CVC"
-        cvcField.font = UIFont.systemFont(ofSize: 16, weight: .light)
+        cvcField.font = UIFont.systemFont(ofSize: 17, weight: .regular)
         cvcField.borderStyle = .roundedRect
         cvcField.textAlignment = .center
         cvcField.delegate = self

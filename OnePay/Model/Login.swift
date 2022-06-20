@@ -13,6 +13,7 @@ class Login : NSObject {
     var userName: String
     var userId: String
     var userType: String
+    var userEmail: String
     var emailConfirmed: Bool
     var gatewayId: String
     var accessToken: String
@@ -22,10 +23,11 @@ class Login : NSObject {
     var terminalId: String
     
     
-    init(msg: String, username:String, userid:String, usertype:String, emailconfirmed: Bool, gatewayid:String, accesstoken: String, tokentype: String, refreshtoken: String, terminalid: String) {
+    init(msg: String, username:String, userid:String, usertype:String, email:String, emailconfirmed: Bool, gatewayid:String, accesstoken: String, tokentype: String, refreshtoken: String, terminalid: String) {
         self.userName = username
         self.userId = userid
         self.userType = usertype
+        self.userEmail = email
         self.emailConfirmed = emailconfirmed
         self.gatewayId = gatewayid
         self.accessToken = accesstoken

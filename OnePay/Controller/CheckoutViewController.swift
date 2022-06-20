@@ -8,7 +8,6 @@
 
 import UIKit
 import SwiftyJSON
-import CoreLocation
 import SkyFloatingLabelTextField
 import ApplicationInsights
 
@@ -19,7 +18,7 @@ let modeViewHeight:Float = 70.0
 let modeExpandedHeight:Float = 140.0
 
 
-class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, CardViewDelegate, CLLocationManagerDelegate, settingDelegate, UITextFieldDelegate,UIActionSheetDelegate, MTSCRAEventDelegate, BLEScanListEvent {
+class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, CardViewDelegate, settingDelegate, UITextFieldDelegate,UIActionSheetDelegate, MTSCRAEventDelegate, BLEScanListEvent {
     
     var lib: MTSCRA!;
     var devicePaired : Bool?
@@ -39,9 +38,6 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
      
      typealias commandCompletion = (String?) -> Void
 
-    var locationManager: CLLocationManager!
-    let geoCoder = CLGeocoder()
-
     @IBOutlet weak var grayBgView: UIView!
     @IBOutlet weak var checkOutView: CheckoutView!
     @IBOutlet weak var paymentModeView: PaymentModeView!
@@ -56,8 +52,11 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     
     @IBOutlet weak var manualEntryView: UIView!
     @IBOutlet weak var cardSwipeView: UIView!
+    
+    @IBOutlet weak var paymentModeViewHeight: NSLayoutConstraint!
     @IBOutlet weak var manualEntryViewHeight: NSLayoutConstraint!
     @IBOutlet weak var cardSwipeViewHeight: NSLayoutConstraint!
+    
     @IBOutlet weak var optionalFieldsTableView: UITableView!
     @IBOutlet weak var optionalFieldsViewHeight: NSLayoutConstraint!
     
@@ -83,9 +82,8 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     var customerInfo = Dictionary<String, Any>()
     var cardInfo = Dictionary<String, Any>()
     var emv:Dictionary<String, Any>? = nil
-    let paymentService = PaymentService()
+
     var payment = Payment()
-    var ref_tran_id: String!
     var flashing = false
 
 
@@ -95,9 +93,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                 return
             }
             if(checkout.enteredAmount.count > 2) {
-                checkOutView.chargeBtn.blink()
+                checkOutView.proceedBtn.isHidden = false
             } else {
-                checkOutView.chargeBtn.blink(enabled: false)
+                checkOutView.proceedBtn.isHidden = true
             }
             let amount = Double(checkout.enteredAmount)
             let amountWithDecimal:Double = amount!/100
@@ -105,7 +103,6 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             payment = Payment(amount: finalAmount)
             let finalStr = String(format: "$%.2f", amountWithDecimal)
             checkOutView.amountLbl.text = finalStr
-            checkOutView.chargeBtn.setTitle("Charge \(finalStr)", for: .normal)
         }
     }
     
@@ -143,9 +140,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     var device_code = ""
 
 
-    @IBAction func chargeBtnClicked(_ sender: Any) {
+    @IBAction func proceedBtnClicked(_ sender: Any) {
         if(checkout != nil) {
-            startLocationFetching()
+           // startLocationFetching()
             pullUpPaymentModeView()
         } else {
             self.displayAlert(title: "Please enter amount", message: "")
@@ -169,7 +166,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     
     @IBAction func confirmBtnClicked(_ sender: Any) {
         
-        showSpinner(onView: self.view)
+       // showSpinner(onView: self.view)
         
         if let fname = self.firstNameField.text?.trimmingCharacters(in: CharacterSet.whitespaces), !fname.isEmpty {
             customerInfo["first_name"] = self.firstNameField.text
@@ -198,101 +195,11 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         }
         
         self.resetPaymentModeView()
-        createApiKey()
-    }
-    
-    func createApiKey() {
-        ApiKeyService().getApiKeyFromServer(success: { (key, er) in
-            DispatchQueue.main.async {
-            guard er == nil else {
-                self.hideSpinner()
-                self.displayAlert(title: "Something went wrong", message: er!.localizedDescription)
-                return
-            }
-            
-            print("api key is\(key!)")
-            Session.shared.setApi(Key: key!)
-            self.makeTransaction()
-            }
-        })
-    }
-    
-    func makeTransaction() {
-        self.paymentService.makePayment(payment:payment, cardInfo: self.cardInfo, customerInfo: self.customerInfo, emv: emv, device_code: self.device_code) { (jsonValue, err) in
-            DispatchQueue.main.async {
-                self.removeDisplayedBrandImage()
-                self.connectBtn.setTitle("CONNECT", for: .normal)
-                guard err == nil else {
-                    self.hideSpinner()
-                    self.resetPaymentInfo()
-                    self.displayAlert(title: err!.localizedDescription, message: "")
-                    return
-                }
-                guard let json = jsonValue else {
-                    self.hideSpinner()
-                    self.resetPaymentInfo()
-                    self.displayAlert(title: "Something went wrong", message: "")
-                    return
-                }
-                print(json)
-                self.hideSpinner()
-                let response = json["transaction_response"].dictionaryValue
-                print(response)
-                if let code = response["result_code"]?.intValue, code == 1, let trsn_id = response["transaction_id"]?.stringValue, let amount = response["amount"]?.stringValue, let authcode = response["auth_code"]?.stringValue {
-                    print("payment success with\(trsn_id)")
-                    self.ref_tran_id = trsn_id
-                    self.confirmBtn.isEnabled = false
-                    self.confirmBtn.alpha = 0.5
-                    self.stopLocationFetching()
-                    self.miura.displayText("Transaction Approved\n Thank you.".center, completion: nil)
-                    self.showPaymentAlertWith(title: "Approved", btnName: "Continue", amount: amount, authCode: authcode, success: true)
-                } else if let status = response["result_text"]?.stringValue {
-                    print(status)
-                    self.resetPaymentInfo()
-                    self.miura.displayText("Transaction Declined\n Try again.".center, completion: nil)
-                    self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
-                }
-            }
-        }
-    }
-    
-    
-    func showPaymentAlertWith(title: String, btnName: String, amount:String, authCode:String, success:Bool) {
-        
-        let showAlert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
-       
-        let imageView = UIImageView(frame: CGRect(x: 110, y: 70, width: 50, height: 50))
-        imageView.image = success == true ? UIImage(named:"approved") : UIImage(named:"declined")
-        showAlert.view.addSubview(imageView)
-        
-        if(success) {
-            let amountLbl = UILabel(frame: CGRect(x: 10, y: 130, width: 250, height: 20))
-            amountLbl.text = "Amount: $\(amount)"
-            amountLbl.textAlignment = .center
-            amountLbl.font = .boldSystemFont(ofSize: 16)
-            showAlert.view.addSubview(amountLbl)
-            
-            let authLbl = UILabel(frame: CGRect(x: 10, y: 160, width: 250, height: 20))
-            authLbl.text = "Auth Code: \(authCode)"
-            authLbl.textAlignment = .center
-            authLbl.font = .boldSystemFont(ofSize: 16)
-            showAlert.view.addSubview(authLbl)
-        }
-        
-        let height = NSLayoutConstraint(item: showAlert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: success ? 260 : 200)
-        
-        let width = NSLayoutConstraint(item: showAlert.view as Any, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
-        
-        showAlert.view.addConstraint(height)
-        showAlert.view.addConstraint(width)
-        
-        showAlert.addAction(UIAlertAction(title: btnName, style: .default, handler: { action in
-            self.miura.closeSession()
-            if(success) {
-                self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
-            }
-        }))
-        self.present(showAlert, animated: true, completion: nil)
+        self.removeDisplayedBrandImage()
+        self.connectBtn.setTitle("CONNECT", for: .normal)
+        self.resetPaymentInfo()
+        miura.closeSession()
+        self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
     }
     
     
@@ -309,7 +216,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             if(self.plsSwipeView != nil) {
                 self.plsSwipeView.removeFromSuperview()
             }
-            self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+            self.creditcardSwipeLbl.text = "Credit Card Swipe"
             self.removeDisplayedBrandImage()
             self.connectBtn.setTitle("CONNECT", for: .normal)
             self.confirmBtn.isEnabled = false
@@ -318,7 +225,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             self.cardView.clear()
             self.cardInfo = [:]
             self.emv = nil
-            self.stopLocationFetching()
+           // self.stopLocationFetching()
         }
     }
     
@@ -483,7 +390,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     
     @IBAction func connectClicked(_ sender: Any) {
         DispatchQueue.main.async {
-           if(PaymentSettings.shared.paymentDeviceId() == 3) {
+           if(PaymentSettings.shared.paymentDeviceId() == 1) {
 //               print(BBDeviceController.shared()?.getState() as Any)
 //               print(BBDeviceController.shared()?.getConnectionMode() as Any)
 //              if BBDeviceController.shared()?.getConnectionMode() == BBDeviceConnectionMode.bluetooth ,BBDeviceController.shared()?.getState() == BBDeviceControllerState.idle {
@@ -509,7 +416,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                 }
                
              } else if self.lib.isDeviceOpened() {
-                self.startLocationFetching()
+               // self.startLocationFetching()
                 self.connectBtn.setTitle("CONNECTED", for: .normal)
                 self.designPleaseSwipeView()
                 self.startEMV()
@@ -671,7 +578,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                                // self.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "MSR On", style: .plain, target: self, action: #selector(self.turnMSROn))
                             }
                             
-                            self.startLocationFetching()
+                           // self.startLocationFetching()
                             self.connectBtn.setTitle("CONNECTED", for: .normal)
                             self.designPleaseSwipeView()
                             self.perform(#selector(startEMV), with: nil, afterDelay: 3)
@@ -681,10 +588,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                     {
                         self.devicePaired = true
                         self.setText(text: "Disconnected")
-                        PaymentSettings.shared.setPaymentDevice(id: 0)
                         self.removeDisplayedBrandImage()
                         self.connectBtn.setTitle("CONNECT", for: .normal)
-                        self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                        self.creditcardSwipeLbl.text = "Credit Card Swipe"
                         if(self.plsSwipeView != nil) {
                         self.plsSwipeView.removeFromSuperview()
                         }
@@ -696,10 +602,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                 {
                     self.devicePaired = true
                     self.setText(text: "Disconnected")
-                    PaymentSettings.shared.setPaymentDevice(id: 0)
                     self.removeDisplayedBrandImage()
                     self.connectBtn.setTitle("CONNECT", for: .normal)
-                    self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                    self.creditcardSwipeLbl.text = "Credit Card Swipe"
                     if(self.plsSwipeView != nil) {
                     self.plsSwipeView.removeFromSuperview()
                     }
@@ -831,7 +736,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             self.device_code = ""
             self.connectBtn.setTitle("************\(cardDataObj.cardLast4!)", for: .normal)
             self.confirmBtn.isEnabled = true
-            self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+            self.creditcardSwipeLbl.text = "Credit Card Swipe"
             self.emv = nil
             if(self.plsSwipeView != nil) {
             self.plsSwipeView.removeFromSuperview()
@@ -864,7 +769,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             DispatchQueue.main.async
                 {
                     print("\n[Display Message Request]\n" +  (dataString as String).stringFromHexString);
-                    self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                    self.creditcardSwipeLbl.text = "Credit Card Swipe"
                     if(self.plsSwipeView != nil) {
                      self.plsSwipeView.removeFromSuperview()
                     }
@@ -1263,11 +1168,11 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             
             if(self.manualEntryViewHeight.constant == 60) {
-                self.manualEntryViewHeight.constant = 120
-                self.manualEntryView.frame.size.height = 120
+                self.manualEntryViewHeight.constant = 190
+                self.manualEntryView.frame.size.height = 190
                 self.cardSwipeViewHeight.constant = 60
                 self.cardSwipeView.frame.size.height = 60
-                self.modeViewHeight.constant = 200
+                self.modeViewHeight.constant = 270
                 self.optionalFieldsViewHeight.constant = 37
                 self.optionalFieldsTableView.frame.size.height = 37
 
@@ -1296,14 +1201,15 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     func pullUpPaymentModeView() {
 
         let screenHeight = self.view.frame.height
-        self.paymentModeView.amountLbl.text = "$\(payment.amount!)"
+       // self.paymentModeView.amountLbl.text = "$\(payment.amount!)"
         self.connectBtn.isEnabled = true
-        self.grayBgView.isHidden = false
-        self.paymentModeView.frame.origin.y = screenHeight
-        
+       // self.grayBgView.isHidden = false
+        self.paymentModeViewHeight.constant = 0
+
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.paymentModeView.alpha = 1.0
-            self.paymentModeView.frame.origin.y = 190
+            self.paymentModeViewHeight.constant = 470
+            self.checkOutView.proceedBtn.isHidden = true
         }, completion: nil)
         
     }
@@ -1319,7 +1225,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.pvIsUp = true
             self.paymentModeView.frame.origin.y = 20
-            self.paymentModeView.frame.size.height = screenHeight
+            self.paymentModeViewHeight.constant = screenHeight
             self.modeViewHeight.constant = 0
             self.modeView.frame.size.height = 0
             
@@ -1342,7 +1248,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             if(self.pvIsUp) {
                 
-                self.paymentModeView.frame.origin.y = 190
+                self.paymentModeViewHeight.constant = 470
               //  self.paymentModeView.frame.size.height = CGFloat(actualViewHeight)
                 self.modeViewHeight.constant = self.modeViewUpdatedHeight
                 self.modeView.frame.size.height = self.modeViewUpdatedHeight
@@ -1357,8 +1263,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
 
             } else {
                 self.paymentModeView.alpha = 0.0
-                self.paymentModeView.frame.origin.y = screenHeight
-                self.grayBgView.isHidden = true
+                self.paymentModeViewHeight.constant = 0
+                self.checkOutView.proceedBtn.isHidden = false
+              //  self.grayBgView.isHidden = true
             }
            
         }, completion: nil)
@@ -1388,7 +1295,6 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        PaymentSettings.shared.setPaymentDevice(id: 0)
         devicePaired = true
 
         self.lib = MTSCRA();
@@ -1497,21 +1403,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         }
     }
     
-    func startLocationFetching() {
-        locationManager = CLLocationManager()
-        locationManager.requestWhenInUseAuthorization()
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest
-        locationManager.delegate = self
-        locationManager.startUpdatingLocation()
-    }
-    
-    func stopLocationFetching() {
-        if(locationManager != nil) {
-            locationManager.stopUpdatingLocation()
-            locationManager = nil
-        }
-    }
-    
+   
 //    override func viewDidAppear(_ animated: Bool) {
 //        navigationController?.navigationBar.barStyle = .black
 //    }
@@ -1646,7 +1538,6 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     }
     
     func onBTDisconnected() {
-        PaymentSettings.shared.setPaymentDevice(id: 0)
         connectBtn.setTitle("CONNECT", for: .normal)
     }
     
@@ -1726,7 +1617,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
              if(self.plsSwipeView != nil) {
              self.plsSwipeView.removeFromSuperview()
              }
-             self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+             self.creditcardSwipeLbl.text = "Credit Card Swipe"
         default: returnString = "\(transactionResult.rawValue)"
         }
         return returnString;
@@ -1795,10 +1686,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             if(self.plsSwipeView != nil) {
             self.plsSwipeView.removeFromSuperview()
             }
-            self.creditcardSwipeLbl.text = "Credit Card Swipe or Insert"
+            self.creditcardSwipeLbl.text = "Credit Card Swipe"
             self.emv = nil
             self.confirmBtn.alpha = 1.0
-            
         }
     }
     
@@ -1809,7 +1699,6 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         removeFromDefaults()
         fetchAccessoryList()
     }
-
     
     func removeDisplayedBrandImage() {
         if let imageView = cardSwipeView.viewWithTag(111) as? UIImageView {
@@ -1969,57 +1858,19 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
         let signVc = segue.destination as? SignatureViewController
-        signVc?.reference_transaction_id = ref_tran_id
+        signVc?.payment = self.payment
+        signVc?.cardDic = self.cardInfo
+        signVc?.customerDic = self.customerInfo
+        signVc?.emv = emv
+        signVc?.deviceCode = device_code
         checkout = Checkout(amount: "0")
         checkout = nil
     }
 }
 
 
-extension CheckoutViewController {
-    
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        
-        guard let location = locations.first else {
-            return
-        }
-        
-        self.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
-            if let place = placemarks?.first {
-                // let description = "\(place)"
-                let geoLocStr = String(format: "%0.6f;%0.6f", place.location?.coordinate.latitude ?? "", place.location?.coordinate.longitude ?? "")
-                Session.shared.setUser(Loc: geoLocStr)
-                // self.newVisitReceived(visit, description: description)
-            }
-        }
-    }
-    
-    /*
-    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
-        // create CLLocation from the coordinates of CLVisit
-        let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
-        
-        // Get location description
-        self.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
-            if let place = placemarks?.first {
-               // let description = "\(place)"
-                let geoLocStr = String(format: "%0.6f;%0.6f", place.location?.coordinate.longitude ?? "", place.location?.coordinate.latitude ?? "")
-                Session.shared.setUser(Loc: geoLocStr)
-               // self.newVisitReceived(visit, description: description)
-            }
-        }
-        
-    }
- 
-    func newVisitReceived(_ visit: CLVisit, description: String) {
-        // let location = Location(visit: visit, descriptionString: description)
-        print(visit)
-        // Save location to disk
-    }
- */
-}
+
  
 extension CheckoutViewController: MiuraManagerDelegate {
     
@@ -2165,17 +2016,15 @@ extension CheckoutViewController: MiuraManagerDelegate {
     
     @objc func accessoryDidConnect(name : Notification.Name) {
         print("Connected to device")
-        PaymentSettings.shared.setPaymentDevice(id: 3)
       //  self.dismiss(animated: true) { () in }
        // fetchDeviceInfo()
     }
     
     @objc func accessoryDidDisconnect(name : Notification.Name) {
         print("Device disconnected")
-        PaymentSettings.shared.setPaymentDevice(id: 0)
         removeFromDefaults()
         self.connectBtn.setTitle("CONNECT", for: .normal)
-        self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+        self.creditcardSwipeLbl.text = "Credit Card Swipe"
         if(self.plsSwipeView != nil) {
         self.plsSwipeView.removeFromSuperview()
         }
@@ -2211,7 +2060,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                 } else {
                     self.armCardReader()
                 }
-                self.startLocationFetching()
+               // self.startLocationFetching()
                 self.connectBtn.setTitle("CONNECTED", for: .normal)
                 self.designPleaseSwipeView()
             } else {
@@ -2370,7 +2219,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
 //                        self.device_code = "41"
 //                        self.connectBtn.setTitle(self.track2Data?.pan, for: .normal)
 //                        self.confirmBtn.isEnabled = true
-//                        self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+//                        self.creditcardSwipeLbl.text = "Credit Card Swipe"
 //                        self.emv = nil
 //                        if(self.plsSwipeView != nil) {
 //                          self.plsSwipeView.removeFromSuperview()
@@ -2630,7 +2479,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.device_code = "41"
                     self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
                     self.confirmBtn.isEnabled = true
-                    self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                    self.creditcardSwipeLbl.text = "Credit Card Swipe"
                     self.emv = nil
                     if(self.plsSwipeView != nil) {
                       self.plsSwipeView.removeFromSuperview()
@@ -2728,7 +2577,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.device_code = "41"
                     self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
                     self.confirmBtn.isEnabled = true
-                    self.creditcardSwipeLbl.text = "Credit Card Swipe/Insert"
+                    self.creditcardSwipeLbl.text = "Credit Card Swipe"
                     self.emv = nil
                     if(self.plsSwipeView != nil) {
                       self.plsSwipeView.removeFromSuperview()

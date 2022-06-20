@@ -53,6 +53,7 @@ class LoginService: BaseRequest {
                     let userName = dict["userName"].stringValue
                     let userId = dict["UserId"].stringValue
                     let userType = dict["UserType"].stringValue
+                    let userEmail = dict["email"].stringValue
                     let emailConfirmed = dict["emailConfirmed"].boolValue
                     let gatewayId = dict["GatewayId"].stringValue
                     let accessToken = dict["access_token"].stringValue
@@ -60,12 +61,12 @@ class LoginService: BaseRequest {
                     let refreshToken = dict["refresh_token"].stringValue
                     let terminalId = dict["terminalId"].stringValue
                     
-                    let login = Login(msg: "SUCCESS", username: userName, userid: userId, usertype: userType, emailconfirmed: emailConfirmed, gatewayid: gatewayId, accesstoken: accessToken, tokentype: tokenType, refreshtoken: refreshToken, terminalid: terminalId)
+                    let login = Login(msg: "SUCCESS", username: userName, userid: userId, usertype: userType, email: userEmail, emailconfirmed: emailConfirmed, gatewayid: gatewayId, accesstoken: accessToken, tokentype: tokenType, refreshtoken: refreshToken, terminalid: terminalId)
                     onComplete(login,nil)
                     
                 } else {
                     let message = dict["Response"].stringValue
-                    let login = Login(msg: message, username: "", userid: "", usertype: "", emailconfirmed: false, gatewayid: "", accesstoken: "", tokentype: "", refreshtoken: "", terminalid: "")
+                    let login = Login(msg: message, username: "", userid: "", usertype: "", email: "", emailconfirmed: false, gatewayid: "", accesstoken: "", tokentype: "", refreshtoken: "", terminalid: "")
                     
                     let event = AppCenterTrack(api: self.url, parameters: ["request":self.params as AnyObject], response: message, type: .normal)
                                    event.sendLogToAppCenter()

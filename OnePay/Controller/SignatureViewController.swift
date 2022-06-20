@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreLocation
 
 class SignatureViewController: UIViewController,YPSignatureDelegate {
     @IBOutlet weak var amountLbl: UILabel!
@@ -15,6 +16,18 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
     let signatureService = SignatureService()
     let requiredHeight:CGFloat = 50.0
     var signature = Signature()
+    
+    
+    let paymentService = PaymentService()
+    var payment: Payment!
+    var cardDic = Dictionary<String, Any>()
+    var customerDic = Dictionary<String, Any>()
+    var emv: Dictionary<String, Any>?
+    var deviceCode: String!
+    
+    
+    var locationManager: CLLocationManager!
+    let geoCoder = CLGeocoder()
 
     @IBOutlet weak var signatureView: YPDrawSignatureView!
     
@@ -24,7 +37,6 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        signature.setTransaction(Id: reference_transaction_id)
       //  let finalAmount = String(format: "$%@", amount)
        // self.amountLbl.text = finalAmount
         // Do any additional setup after loading the view, typically from a nib.
@@ -36,6 +48,23 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
         UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
     }
+    
+    
+    func startLocationFetching() {
+        locationManager = CLLocationManager()
+        locationManager.requestWhenInUseAuthorization()
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.delegate = self
+        locationManager.startUpdatingLocation()
+    }
+    
+    func stopLocationFetching() {
+        if(locationManager != nil) {
+            locationManager.stopUpdatingLocation()
+            locationManager = nil
+        }
+    }
+    
     
 //    override var preferredStatusBarStyle: UIStatusBarStyle {
 //        return .lightContent
@@ -55,6 +84,8 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
         if (self.isMovingFromParent) {
             UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
         }
+        startLocationFetching()
+
     }
     
     @objc func canRotate() -> Void {}
@@ -70,8 +101,106 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
         self.signatureView.clear()
     }
     
-    func makeTransactionWith() {
+    
+    func createApiKey() {
         showSpinner(onView: self.view)
+        ApiKeyService().getApiKeyFromServer(success: { (key, er) in
+            DispatchQueue.main.async {
+            guard er == nil else {
+                self.hideSpinner()
+                self.displayAlert(title: "Something went wrong", message: er!.localizedDescription)
+                return
+            }
+            
+            print("api key is\(key!)")
+            Session.shared.setApi(Key: key!)
+            self.makeTransaction()
+            }
+        })
+    }
+    
+    func makeTransaction() {
+        self.paymentService.makePayment(payment:payment, cardInfo: self.cardDic, customerInfo: self.customerDic, emv: emv, device_code: self.deviceCode) { (jsonValue, err) in
+            DispatchQueue.main.async {
+               
+                guard err == nil else {
+                    self.hideSpinner()
+                  //  self.resetPaymentInfo()
+                    self.displayAlert(title: err!.localizedDescription, message: "")
+                    return
+                }
+                guard let json = jsonValue else {
+                    self.hideSpinner()
+                   // self.resetPaymentInfo()
+                    self.displayAlert(title: "Something went wrong", message: "")
+                    return
+                }
+                print(json)
+              //  self.hideSpinner()
+                let response = json["transaction_response"].dictionaryValue
+                print(response)
+                if let code = response["result_code"]?.intValue, code == 1, let trsn_id = response["transaction_id"]?.stringValue, let amount = response["amount"]?.stringValue, let authcode = response["auth_code"]?.stringValue {
+                    print("payment success with\(trsn_id)")
+                    self.signature.setTransaction(Id: trsn_id)
+                    self.reference_transaction_id = trsn_id
+//                    self.confirmBtn.isEnabled = false
+//                    self.confirmBtn.alpha = 0.5
+                    self.stopLocationFetching()
+                   // self.miura.displayText("Transaction Approved\n Thank you.".center, completion: nil)
+                    self.makeTransactionWith()
+                  //  self.showPaymentAlertWith(title: "Approved", btnName: "Continue", amount: amount, authCode: authcode, success: true)
+                } else if let status = response["result_text"]?.stringValue {
+                    print(status)
+                   // self.miura.displayText("Transaction Declined\n Try again.".center, completion: nil)
+                  //  self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
+                }
+            }
+        }
+    }
+    
+    /*
+    func showPaymentAlertWith(title: String, btnName: String, amount:String, authCode:String, success:Bool) {
+        
+        let showAlert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+       
+        let imageView = UIImageView(frame: CGRect(x: 110, y: 70, width: 50, height: 50))
+        imageView.image = success == true ? UIImage(named:"approved") : UIImage(named:"declined")
+        showAlert.view.addSubview(imageView)
+        
+        if(success) {
+            let amountLbl = UILabel(frame: CGRect(x: 10, y: 130, width: 250, height: 20))
+            amountLbl.text = "Amount: $\(amount)"
+            amountLbl.textAlignment = .center
+            amountLbl.font = .boldSystemFont(ofSize: 16)
+            showAlert.view.addSubview(amountLbl)
+            
+            let authLbl = UILabel(frame: CGRect(x: 10, y: 160, width: 250, height: 20))
+            authLbl.text = "Auth Code: \(authCode)"
+            authLbl.textAlignment = .center
+            authLbl.font = .boldSystemFont(ofSize: 16)
+            showAlert.view.addSubview(authLbl)
+        }
+        
+        let height = NSLayoutConstraint(item: showAlert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: success ? 260 : 200)
+        
+        let width = NSLayoutConstraint(item: showAlert.view as Any, attribute: .width, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 250)
+        
+        showAlert.view.addConstraint(height)
+        showAlert.view.addConstraint(width)
+        
+        showAlert.addAction(UIAlertAction(title: btnName, style: .default, handler: { action in
+            self.miura.closeSession()
+            if(success) {
+                self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
+            }
+        }))
+        self.present(showAlert, animated: true, completion: nil)
+    }
+    
+    */
+    
+    func makeTransactionWith() {
+       // showSpinner(onView: self.view)
         self.signatureService.sendSignature(signature:signature) { (jsonValue, err) in
             DispatchQueue.main.async {
                 guard err == nil else {
@@ -89,7 +218,7 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
                 let response = json["transaction_response"].dictionaryValue
                 if let code = response["result_code"]?.intValue, code == 1 {
                     print("payment success")
-                    self.performSegue(withIdentifier: "SignToReceipt", sender: nil)
+                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
                 } else if let status = response["result_text"]?.stringValue {
                     print(status)
                 }
@@ -143,7 +272,7 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
             let base64Str = resizedImage.toBase64(.low)!
            // print(base64Str)
             signature.setSignature(base64Str: base64Str)
-            makeTransactionWith()
+            createApiKey()
             
         } else {
             signatureView.viewBorderColor = .red
@@ -176,8 +305,52 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
      override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
-        let receiptVc = segue.destination as? ReceiptViewController
-        receiptVc?.reference_transaction_id = reference_transaction_id
+        let statusVc = segue.destination as? StatusViewController
+        statusVc?.reference_transaction_id = reference_transaction_id
      }
     
+}
+
+
+extension SignatureViewController: CLLocationManagerDelegate {
+    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        
+        guard let location = locations.first else {
+            return
+        }
+        
+        self.geoCoder.reverseGeocodeLocation(location) { placemarks, _ in
+            if let place = placemarks?.first {
+                // let description = "\(place)"
+                let geoLocStr = String(format: "%0.6f;%0.6f", place.location?.coordinate.latitude ?? "", place.location?.coordinate.longitude ?? "")
+                Session.shared.setUser(Loc: geoLocStr)
+                // self.newVisitReceived(visit, description: description)
+            }
+        }
+    }
+    
+    /*
+    func locationManager(_ manager: CLLocationManager, didVisit visit: CLVisit) {
+        // create CLLocation from the coordinates of CLVisit
+        let clLocation = CLLocation(latitude: visit.coordinate.latitude, longitude: visit.coordinate.longitude)
+        
+        // Get location description
+        self.geoCoder.reverseGeocodeLocation(clLocation) { placemarks, _ in
+            if let place = placemarks?.first {
+               // let description = "\(place)"
+                let geoLocStr = String(format: "%0.6f;%0.6f", place.location?.coordinate.longitude ?? "", place.location?.coordinate.latitude ?? "")
+                Session.shared.setUser(Loc: geoLocStr)
+               // self.newVisitReceived(visit, description: description)
+            }
+        }
+        
+    }
+ 
+    func newVisitReceived(_ visit: CLVisit, description: String) {
+        // let location = Location(visit: visit, descriptionString: description)
+        print(visit)
+        // Save location to disk
+    }
+ */
 }

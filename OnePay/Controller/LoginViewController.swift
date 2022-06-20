@@ -12,10 +12,10 @@ import SideMenuSwift
 
 class LoginViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var unHeight: NSLayoutConstraint!
-    @IBOutlet weak var psHeight: NSLayoutConstraint!
-    @IBOutlet weak var psFieldTop: NSLayoutConstraint!
-    @IBOutlet weak var unFieldTop: NSLayoutConstraint!
+//    @IBOutlet weak var unHeight: NSLayoutConstraint!
+//    @IBOutlet weak var psHeight: NSLayoutConstraint!
+//    @IBOutlet weak var psFieldTop: NSLayoutConstraint!
+//    @IBOutlet weak var unFieldTop: NSLayoutConstraint!
     @IBOutlet weak var loginView: LoginView!
     let loginService = LoginService()
 
@@ -27,6 +27,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 Session.shared.setUser(name: loggedIn.userName)
                 Session.shared.setUser(id: loggedIn.userId)
                 Session.shared.setUser(type: loggedIn.userType)
+                Session.shared.setUser(email: loggedIn.userEmail)
                 Session.shared.setEmailConfirmed(status: loggedIn.emailConfirmed)
                 Session.shared.setGateway(id: loggedIn.gatewayId)
                 Session.shared.setAccess(token: loggedIn.accessToken)
@@ -37,7 +38,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
             } else {
                 self.hideSpinner()
-                self.displayAlert(title: loggedIn.message, message: "Please enter your credential correctly.")
+                self.loginView.msgLbl.text = loggedIn.message
+                self.loginView.usernameField.layer.borderColor = UIColor.red.cgColor
+                self.loginView.passwordField.layer.borderColor = UIColor.red.cgColor
             }
         }
     }
@@ -45,37 +48,27 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         loginView.usernameField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        loginView.usernameField.setLeftPaddingPoints(10)
+        loginView.usernameField.setRightPaddingPoints(10)
         loginView.passwordField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        loginView.passwordField.setLeftPaddingPoints(10)
+        loginView.passwordField.setRightPaddingPoints(10)
         // Do any additional setup after loading the view.
     }
     
     
     @objc func textFieldDidChange(_ textfield: UITextField) {
         if let text = textfield.text {
-            if let floatingLabelTextField = textfield as? SkyFloatingLabelTextField {
-                DispatchQueue.main.async {
-                    
-                    if floatingLabelTextField == self.loginView.usernameField {
-                    if(text.count == 0) {
-                        self.unFieldTop.constant = -6
-                        self.unHeight.constant = 60
-                    }
-                    else {
-                        self.unFieldTop.constant = 12
-                        self.unHeight.constant = 40
-                    }
-                } else {
-                    if(text.count == 0) {
-                        self.psFieldTop.constant = -8
-                        self.psHeight.constant = 60
-                    }
-                    else {
-                        self.psFieldTop.constant = 12
-                        self.psHeight.constant = 40
-                    }
-                }
-             }
-          }
+            self.loginView.msgLbl.text = ""
+            if #available(iOS 13.0, *) {
+                self.loginView.usernameField.layer.borderColor = UIColor.systemGray4.cgColor
+                self.loginView.passwordField.layer.borderColor = UIColor.systemGray4.cgColor
+
+            } else {
+                self.loginView.usernameField.layer.borderColor = UIColor.lightGray.cgColor
+                self.loginView.passwordField.layer.borderColor = UIColor.lightGray.cgColor
+                // Fallback on earlier versions
+            }
         }
     }
     
@@ -86,11 +79,13 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func signInClicked(_ sender: Any) {
 
         guard let emailText = loginView.usernameField.text?.trimmingCharacters(in: CharacterSet.whitespaces), !emailText.isEmpty else {
-            self.displayAlert(title: "Missing Field", message: "Please enter username.")
+            self.loginView.msgLbl.text = "Please enter username"
+            self.loginView.usernameField.layer.borderColor = UIColor.red.cgColor
             return
         }
         guard let password = loginView.passwordField.text, !password.isEmpty else {
-            self.displayAlert(title: "Missing Field", message: "Please enter password.")
+            self.loginView.msgLbl.text = "Please enter password"
+            self.loginView.passwordField.layer.borderColor = UIColor.red.cgColor
             return
         }
 
@@ -99,12 +94,23 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             DispatchQueue.main.async {
                 if(err != nil) {
                     print("error is\(err!.localizedDescription)")
-                    self.displayAlert(title: "Error", message: (err?.localizedDescription)!)
+                    self.loginView.msgLbl.text = err?.localizedDescription
                     self.hideSpinner()
                 } else {
                     self.login = login
                 }
             }
+        }
+    }
+    
+    @IBAction func viewPaswdClicked(_ sender: Any) {
+        if let btn = sender as? UIButton {
+            if btn.isSelected {
+                self.loginView.passwordField.isSecureTextEntry = true
+            } else {
+                self.loginView.passwordField.isSecureTextEntry = false
+            }
+            btn.isSelected = !btn.isSelected
         }
     }
     
@@ -114,7 +120,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
             guard err == nil else {
                 self.hideSpinner()
-                self.displayAlert(title: "Something went wrong", message: err!.localizedDescription)
+                self.loginView.msgLbl.text = err?.localizedDescription
                 return
             }
             
@@ -163,12 +169,12 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                         
                     } else {
                         Session.shared.logOut()
-                        self.displayAlert(title: "No active terminal id available", message: "")
+                        self.loginView.msgLbl.text = "No active terminal id available"
                         self.hideSpinner()
                     }
             } else {
                 Session.shared.logOut()
-                self.displayAlert(title: "No terminal id available", message: "")
+                self.loginView.msgLbl.text = "No terminal id available"
                 self.hideSpinner()
             }
           }

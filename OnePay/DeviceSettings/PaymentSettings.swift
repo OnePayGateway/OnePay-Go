@@ -12,8 +12,11 @@ import UIKit
 class PaymentSettings: NSObject {
     
     private let PAYMENT_DEVICE_ID:String = "PAYMENT_DEVICE_ID"
+    
     private let SELECTED_TERMINAL_ID:String = "SELECTED_TERMINAL_ID"
     private let SELECTED_TERMINAL_TYPE:String = "SELECTED_TERMINAL_TYPE"
+    private let SELECTED_TERMINAL_NAME:String = "SELECTED_TERMINAL_NAME"
+
     private let ACTIVE_TERMINAL_IDS: String = "ACTIVE_TERMINAL_IDS"
     private let ACTIVE_TERMINAL_TYPES: String = "ACTIVE_TERMINAL_TYPES"
     private let ACTIVE_TERMINAL_NAMES: String = "ACTIVE_TERMINAL_NAMES"
@@ -54,6 +57,14 @@ class PaymentSettings: NSObject {
     
     func selectedTerminalType()-> String? {
         return defaults.value(forKey: SELECTED_TERMINAL_TYPE) as? String
+    }
+    
+    func setSelectedTerminal(Name:String) {
+        defaults.set(Name, forKey: SELECTED_TERMINAL_NAME)
+    }
+    
+    func selectedTerminalName()-> String? {
+        return defaults.value(forKey: SELECTED_TERMINAL_NAME) as? String
     }
     
     func setActiveTerminal(Ids:Array<String>) {

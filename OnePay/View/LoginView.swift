@@ -10,8 +10,10 @@ import UIKit
 import SkyFloatingLabelTextField
 
 class LoginView: UIView {
-    @IBOutlet weak var usernameField: SkyFloatingLabelTextField!
-    @IBOutlet weak var passwordField: SkyFloatingLabelTextField!
+    @IBOutlet weak var usernameField: UITextField!
+    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var msgLbl: UILabel!
+
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

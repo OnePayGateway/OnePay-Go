@@ -10,25 +10,31 @@ import UIKit
 
 class MenuListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
-    @IBOutlet weak var bgImageView: UIImageView!
     @IBOutlet weak var menuView: MenuListView!
     var menu = Menu()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.menuView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-        addInBlurEffect()
+     
+        self.menuView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         // Do any additional setup after loading the view.
     }
     
-    func addInBlurEffect() {
-        let blurEffect = UIBlurEffect(style: .dark)
-        let visualEffect = UIVisualEffectView(effect: blurEffect)
-        visualEffect.frame = self.view.bounds
-        visualEffect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        visualEffect.alpha = 0.3
-        self.bgImageView.addSubview(visualEffect)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.menuView.nameLbl.text = Session.shared.userName()
+        self.menuView.emailLbl.text = Session.shared.userEmail()
+        self.menuView.terminalLbl.text = PaymentSettings.shared.selectedTerminalName()
     }
+//
+//    func addInBlurEffect() {
+//        let blurEffect = UIBlurEffect(style: .dark)
+//        let visualEffect = UIVisualEffectView(effect: blurEffect)
+//        visualEffect.frame = self.view.bounds
+//        visualEffect.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//        visualEffect.alpha = 0.3
+//        self.bgImageView.addSubview(visualEffect)
+//    }
 
     /*
     // MARK: - Navigation
@@ -54,8 +60,10 @@ extension MenuListViewController {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "menuCell", for: indexPath)
         cell.textLabel?.text = menu.options[indexPath.row]
-        cell.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .light)
+        cell.textLabel?.font = UIFont(name: "poppins-regular", size: 15)
         cell.imageView?.image = UIImage(named: menu.imageNames[indexPath.row])
+        cell.imageView?.image?.withAlignmentRectInsets(UIEdgeInsets(top: 0, left: -55, bottom: 0,
+                                                             right: 0))
         return cell
     }
     
