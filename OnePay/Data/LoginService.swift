@@ -138,6 +138,40 @@ class LoginService: BaseRequest {
             onComplete(false)
         }
     }
+    
+    func getProfileData(success: @escaping (_ json:JSON?, Error?) -> Void) {
+        guard let userid = Session.shared.userId() else {
+            return
+        }
+        self.url = String(format: "%@%@", APIs().getProfileAPI(), userid)
+        let request = makeRequestWith(urlString: self.url, method: "GET", params: nil)
+        let session = URLSession.shared
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            guard let data = data, let _ = response, error == nil else {
+                let event = AppCenterTrack(api: self.url, parameters: nil, response: error.debugDescription, type: .normal)
+                event.sendLogToAppCenter()
+                success(nil, error)
+                return
+            }
+            self.parseProfile(data: data, onComplete: { (json, err)  in
+                success(json, err)
+            })
+        }
+        
+        task.resume()
+    }
+    
+    func parseProfile(data: Data, onComplete:@escaping(_ json:JSON?, Error?) -> Void) {
+        do {
+            let json = try JSON(data: data)
+            onComplete(json, nil)
+        } catch let myJSONError {
+            print(myJSONError)
+            let event = AppCenterTrack(api: self.url, parameters: nil, response: myJSONError.localizedDescription, type: .normal)
+            event.sendLogToAppCenter()
+            onComplete(nil, myJSONError)
+        }
+    }
 
     
 }

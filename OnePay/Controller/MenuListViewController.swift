@@ -26,6 +26,14 @@ class MenuListViewController: UIViewController, UITableViewDataSource, UITableVi
         self.menuView.emailLbl.text = Session.shared.userEmail()
         self.menuView.terminalLbl.text = PaymentSettings.shared.selectedTerminalName()
     }
+    
+    @IBAction func profilePressed(_ sender: Any) {
+        let selectedVc = self.storyboard?.instantiateViewController(withIdentifier: "profileController")
+        sideMenuController?.setContentViewController(to: selectedVc!)
+        sideMenuController?.hideMenu()
+    }
+
+    
 //
 //    func addInBlurEffect() {
 //        let blurEffect = UIBlurEffect(style: .dark)
@@ -73,14 +81,33 @@ extension MenuListViewController {
         case 0:
             controllerName = "checkoutController"
         case 1:
-            controllerName = "settingsController"
-        case 2:
             controllerName = "transactionsController"
+        case 2:
+            controllerName = "webViewVc"
+        case 3:
+            controllerName = "webViewVc"
+        case 4:
+            controllerName = "webViewVc"
+        case 5:
+            controllerName = "settingsController"
         default:
             controllerName = "checkoutController"
         }
         let selectedVc = self.storyboard?.instantiateViewController(withIdentifier: controllerName)
-        sideMenuController?.setContentViewController(to: selectedVc!)
-        sideMenuController?.hideMenu()
+        if let webVC = selectedVc as? PortalWebviewViewController {
+            if indexPath.row == 2 {
+                webVC.urlString = APIs().supportUrl
+            } else if indexPath.row == 3 {
+                webVC.urlString = APIs().helpUrl
+            } else {
+                webVC.urlString = APIs().privacyUrl
+            }
+            sideMenuController?.setContentViewController(to: webVC)
+            sideMenuController?.hideMenu()
+        } else {
+            sideMenuController?.setContentViewController(to: selectedVc!)
+            sideMenuController?.hideMenu()
+        }
+        
     }
 }

@@ -11,20 +11,14 @@ import UIKit
 class TransactionsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, voidDelegate {
 
     @IBOutlet weak var transactionTableView: UITableView!
-    let imageView = UIImageView()
-    @IBOutlet weak var topView: UIView!
     var transactionHistroy: TransactionHistory!
+    @IBOutlet weak var dateTimeView: DateTimeSelectionView!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        dateTimeView.loadUI()
        // transactionTableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-        
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
-        imageView.image = UIImage.init(named: "CheckoutBg")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        topView.addSubview(imageView)
         showSpinner(onView: self.view)
         getTransactionsList()
         // Do any additional setup after loading the view.
@@ -124,6 +118,14 @@ extension TransactionsViewController {
             imageView?.image = imageFor(cardType: cardtype)
         }
         
+        cell.layer.cornerRadius = 10
+        cell.clipsToBounds = false
+        cell.layer.masksToBounds = false
+        cell.layer.shadowColor = UIColor.lightGray.cgColor
+        cell.layer.shadowOffset = CGSize(width: 0, height: 0)
+        cell.layer.shadowRadius = 5.0
+        cell.layer.shadowOpacity = 0.5
+        
         return cell
     }
     
@@ -156,12 +158,6 @@ extension TransactionsViewController {
             detailVc?.cardBrandImage = imageFor(cardType: cardtype)
         }
         self.navigationController?.pushViewController(detailVc!, animated: true)
-    }
-    
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let y = 105 - (scrollView.contentOffset.y + 105)
-        let height = min(max(y, 105), 400)
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: height)
     }
     
 }

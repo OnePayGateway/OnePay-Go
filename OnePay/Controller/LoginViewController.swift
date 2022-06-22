@@ -186,7 +186,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         let portalVc = segue.destination as? PortalWebviewViewController
-        portalVc?.newUser = segue.identifier == "Register" ? true : false
+        portalVc?.urlString = segue.identifier == "Register" ? APIs().appBaseAPI() : APIs().forgotPasswordAPI()
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

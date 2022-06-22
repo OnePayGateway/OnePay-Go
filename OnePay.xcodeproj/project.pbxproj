@@ -122,6 +122,15 @@
 		E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7622DE1F5700C8C4BC /* Image.swift */; };
 		E3EA7FC524487CF700F09C67 /* AppCenterTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */; };
 		E3EC7C7422A93A9300F43456 /* BLEScannerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */; };
+		E3F214E42861EE0A00144581 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F214E32861EE0A00144581 /* ProfileTableViewController.swift */; };
+		E3F214EC2862191C00144581 /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F214EB2862191C00144581 /* ProfileTableViewCell.swift */; };
+		E3F3BE4928634D44007508AF /* DateTimeSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4828634D44007508AF /* DateTimeSelectionView.swift */; };
+		E3F3BE5128634D73007508AF /* CalenderStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4B28634D73007508AF /* CalenderStyle.swift */; };
+		E3F3BE5228634D73007508AF /* CalenderHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4C28634D73007508AF /* CalenderHeaderCell.swift */; };
+		E3F3BE5328634D73007508AF /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4D28634D73007508AF /* Day.swift */; };
+		E3F3BE5428634D73007508AF /* CalenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4E28634D73007508AF /* CalenderCell.swift */; };
+		E3F3BE5528634D73007508AF /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4F28634D73007508AF /* CalenderView.swift */; };
+		E3F3BE5628634D73007508AF /* Date+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE5028634D73007508AF /* Date+Exts.swift */; };
 		F3AB1B0361D8EC40DDFC5763 /* Pods_OnePay_OnePayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E05AB0E370EEABF85E841AC /* Pods_OnePay_OnePayUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -292,6 +301,15 @@
 		E3E2EE7622DE1F5700C8C4BC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCenterTrack.swift; sourceTree = "<group>"; };
 		E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEScannerList.swift; sourceTree = "<group>"; };
+		E3F214E32861EE0A00144581 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
+		E3F214EB2862191C00144581 /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
+		E3F3BE4828634D44007508AF /* DateTimeSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateTimeSelectionView.swift; sourceTree = "<group>"; };
+		E3F3BE4B28634D73007508AF /* CalenderStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderStyle.swift; sourceTree = "<group>"; };
+		E3F3BE4C28634D73007508AF /* CalenderHeaderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderHeaderCell.swift; sourceTree = "<group>"; };
+		E3F3BE4D28634D73007508AF /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
+		E3F3BE4E28634D73007508AF /* CalenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderCell.swift; sourceTree = "<group>"; };
+		E3F3BE4F28634D73007508AF /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
+		E3F3BE5028634D73007508AF /* Date+Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Exts.swift"; sourceTree = "<group>"; };
 		F226F6B4CDC84B6DE8EEF6B1 /* Pods_OnePay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -458,6 +476,8 @@
 				E30A92FF22981ED700A0434F /* YPDrawSignatureView.swift */,
 				E3A094E122C4B7A500489480 /* LogoAnimationView.swift */,
 				E31D07C627AAC98700903E94 /* CardView.swift */,
+				E3F214EB2862191C00144581 /* ProfileTableViewCell.swift */,
+				E3F3BE4828634D44007508AF /* DateTimeSelectionView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -479,6 +499,7 @@
 				E3B9A8C22292DA4C00B01A28 /* ReportsViewController.swift */,
 				E36C1064228EE99E00147F67 /* MenuListViewController.swift */,
 				E3B64BC924C58F22004B0FC2 /* MTDataViewerViewController.swift */,
+				E3F214E32861EE0A00144581 /* ProfileTableViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -569,6 +590,7 @@
 				E36C1052228E9A2700147F67 /* Controller */,
 				E36C1051228E9A2100147F67 /* View */,
 				E36C1050228E9A1A00147F67 /* Model */,
+				E3F3BE4A28634D72007508AF /* CalenderView */,
 				E36C104F228E9A1000147F67 /* Data */,
 				E390E80B228D5E1F0069004A /* AppDelegate.swift */,
 				E390E80F228D5E1F0069004A /* Main.storyboard */,
@@ -720,6 +742,19 @@
 			);
 			name = magTekClass;
 			path = Controller/magTekClass;
+			sourceTree = "<group>";
+		};
+		E3F3BE4A28634D72007508AF /* CalenderView */ = {
+			isa = PBXGroup;
+			children = (
+				E3F3BE4B28634D73007508AF /* CalenderStyle.swift */,
+				E3F3BE4C28634D73007508AF /* CalenderHeaderCell.swift */,
+				E3F3BE4D28634D73007508AF /* Day.swift */,
+				E3F3BE4E28634D73007508AF /* CalenderCell.swift */,
+				E3F3BE4F28634D73007508AF /* CalenderView.swift */,
+				E3F3BE5028634D73007508AF /* Date+Exts.swift */,
+			);
+			path = CalenderView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -972,6 +1007,7 @@
 				E355EB7C22FD66A0000271CF /* Receipt.swift in Sources */,
 				E36A923E26BD91A200547259 /* eAaccessory.swift in Sources */,
 				E38AB5AE22CDDE7900999CF6 /* TransactionInfoViewController.swift in Sources */,
+				E3F3BE5528634D73007508AF /* CalenderView.swift in Sources */,
 				E3B64BCA24C58F23004B0FC2 /* MTDataViewerViewController.swift in Sources */,
 				E355EB7E22FD66BD000271CF /* SignatureService.swift in Sources */,
 				E38D323722CF702A00D71150 /* PaymentSettings.swift in Sources */,
@@ -979,6 +1015,7 @@
 				E3ACAA7422C622A500CBEAA1 /* PortalWebviewViewController.swift in Sources */,
 				E311680026C566AF006CE2BA /* RkiImportStatus+description.swift in Sources */,
 				E3B734CB26BAD0FB006AA7AE /* MPIBinaryUtil.m in Sources */,
+				E3F3BE5228634D73007508AF /* CalenderHeaderCell.swift in Sources */,
 				E35D49CC22D36E8A00171E30 /* DevicesListTableViewController.swift in Sources */,
 				E3C788FD22DF167C00FABBCE /* TransactionDetailService.swift in Sources */,
 				E3EA7FC524487CF700F09C67 /* AppCenterTrack.swift in Sources */,
@@ -990,13 +1027,17 @@
 				E3B734D326BAD0FB006AA7AE /* MPITLVObject.m in Sources */,
 				E3616DFB2293F37900728C3C /* Checkout.swift in Sources */,
 				E3B734D126BAD0FB006AA7AE /* MPITag.m in Sources */,
+				E3F214EC2862191C00144581 /* ProfileTableViewCell.swift in Sources */,
 				E332A2512296E6AC00F4D383 /* PaymentService.swift in Sources */,
 				E3C788FF22DF168D00FABBCE /* TransactionDetail.swift in Sources */,
+				E3F3BE5128634D73007508AF /* CalenderStyle.swift in Sources */,
 				E3259E4122DCD22A000FD252 /* TransactionHistoryService.swift in Sources */,
 				E311680126C566AF006CE2BA /* MiuraRKI.swift in Sources */,
+				E3F3BE5628634D73007508AF /* Date+Exts.swift in Sources */,
 				E3259E3F22DC96DB000FD252 /* ApiKeyService.swift in Sources */,
 				E36C1054228E9BCA00147F67 /* LoginView.swift in Sources */,
 				E3B734CF26BAD0FB006AA7AE /* MPIDescription.m in Sources */,
+				E3F3BE5428634D73007508AF /* CalenderCell.swift in Sources */,
 				E3CB3CCD231D12B40070D676 /* FullTransnDetailTableViewController.swift in Sources */,
 				E3B9A8BF2292C7FB00B01A28 /* Menu.swift in Sources */,
 				E36AF5AD2317F228004D3D63 /* Button.swift in Sources */,
@@ -1004,6 +1045,7 @@
 				E311680226C566AF006CE2BA /* RestRKIManager.swift in Sources */,
 				E3B734C726BAD0FB006AA7AE /* MPIUtil.m in Sources */,
 				E38EC4E122B24DB600277ECA /* BorderedButton.swift in Sources */,
+				E3F3BE4928634D44007508AF /* DateTimeSelectionView.swift in Sources */,
 				E36C105C228EA45A00147F67 /* BaseRequest.swift in Sources */,
 				E3B734CC26BAD0FB006AA7AE /* MPICommandCreator.m in Sources */,
 				E3E2EE7522DE178400C8C4BC /* Date.swift in Sources */,
@@ -1012,6 +1054,7 @@
 				E3C73E9622BBCD14007DB7FB /* View.swift in Sources */,
 				E3B734C826BAD0FB006AA7AE /* MPIKernelHashValues.m in Sources */,
 				E3CE81BB285B632400613FD9 /* StatusViewController.swift in Sources */,
+				E3F3BE5328634D73007508AF /* Day.swift in Sources */,
 				E3B9A8C32292DA4C00B01A28 /* ReportsViewController.swift in Sources */,
 				E36C1059228EA2C800147F67 /* LoginService.swift in Sources */,
 				E3A094E722C4D43100489480 /* Utils.swift in Sources */,
@@ -1034,6 +1077,7 @@
 				E3B734C626BAD0FB006AA7AE /* DisplayMediaData.m in Sources */,
 				E3B734CE26BAD0FB006AA7AE /* MiuraManager.m in Sources */,
 				E30A930022981ED800A0434F /* YPDrawSignatureView.swift in Sources */,
+				E3F214E42861EE0A00144581 /* ProfileTableViewController.swift in Sources */,
 				E36C1060228EA51A00147F67 /* Login.swift in Sources */,
 				E31D07C727AAC98700903E94 /* CardView.swift in Sources */,
 				E39A5A672330EB1400AD4CC6 /* CardParser.swift in Sources */,
@@ -1153,7 +1197,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1209,7 +1253,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -1236,7 +1280,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
 				);
 				INFOPLIST_FILE = OnePay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1288,7 +1332,7 @@
 					"\"${PODS_CONFIGURATION_BUILD_DIR}/SwiftyJSON/SwiftyJSON.framework/Headers\"",
 				);
 				INFOPLIST_FILE = OnePay/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

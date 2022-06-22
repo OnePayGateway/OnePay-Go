@@ -30,6 +30,12 @@ struct APIs {
     let getTerminalIdsURL = "/EP/api/Merchant/GetTerminalAccessList"
     let paymentRelativeURL = "/Transaction"
     let forgotPasswordRelativeUrl = "/forgot-password"
+    let getProfileUrl = "/EP/api/Users/Get/"
+
+    
+    let helpUrl = "https://help.onepay.com/"
+    let supportUrl = "https://onepay.com/contact-support/"
+    let privacyUrl = "https://onepay.com/legal/"
     
     func appBaseAPI()-> String {
 //        if Session.shared.apiZone() == 1 {
@@ -48,6 +54,10 @@ struct APIs {
     
     func getTerminalIdsAPI() -> String {
         return self.appBaseAPI() + self.getTerminalIdsURL
+    }
+    
+    func getProfileAPI() -> String {
+        return self.appBaseAPI() + self.getProfileUrl
     }
     
     func getApiKeyAPI() -> String {

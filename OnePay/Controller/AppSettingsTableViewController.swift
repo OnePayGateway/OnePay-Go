@@ -18,8 +18,6 @@ class AppSettingsTableViewController: UITableViewController, UIPopoverPresentati
     var cbManager: CBCentralManager!
     var locationManager: CLLocationManager!
     
-    let imageView = UIImageView()
-    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var menuBtn: UIButton!
     var cameFromCheckOut = false
     var settDelegate: settingDelegate!
@@ -29,14 +27,7 @@ class AppSettingsTableViewController: UITableViewController, UIPopoverPresentati
         cbManager = CBCentralManager(delegate: self, queue: nil, options: [CBCentralManagerOptionShowPowerAlertKey:true])
         locationManager = CLLocationManager()
         locationManager.delegate = self
-       // self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
-        imageView.image = UIImage.init(named: "CheckoutBg")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        topView.addSubview(imageView)
-            
+       // self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)            
     }
     
     override func viewWillAppear(_ animated: Bool) {
