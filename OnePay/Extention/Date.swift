@@ -28,8 +28,12 @@ extension Date {
     
     func generateCurrentTime () -> String {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd"
+        formatter.dateFormat = "MM/dd/yyyy"
         return (formatter.string(from: self) as NSString) as String
+    }
+    
+    func days(from date: Date) -> Int {
+        return Calendar.current.dateComponents([.day], from: date, to: self).day ?? 0
     }
     
 }

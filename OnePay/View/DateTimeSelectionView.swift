@@ -17,6 +17,8 @@ class DateTimeSelectionView: UIView {
     
     var apptDate:Date?
     
+    var cancelClicked:(()->())?
+    var doneClicked:(()->())?
     
     func loadUI() {
         calenderView = CalendarView()
@@ -54,6 +56,14 @@ class DateTimeSelectionView: UIView {
             mainStack.topAnchor.constraint(equalTo: calenderContainer.topAnchor),
             mainStack.bottomAnchor.constraint(equalTo: calenderContainer.bottomAnchor),
         ])
+    }
+    
+    @IBAction func cancelClicked(_ sender: Any) {
+        cancelClicked?()
+    }
+    
+    @IBAction func doneClicked(_ sender: Any) {
+       doneClicked?()
     }
     
 }

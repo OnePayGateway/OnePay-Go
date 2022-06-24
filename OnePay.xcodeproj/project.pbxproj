@@ -120,6 +120,7 @@
 		E3E2EE7322DDE07E00C8C4BC /* TransactionHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */; };
 		E3E2EE7522DE178400C8C4BC /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7422DE178400C8C4BC /* Date.swift */; };
 		E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E2EE7622DE1F5700C8C4BC /* Image.swift */; };
+		E3E8746828649B790078B963 /* FilterTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3E8746728649B790078B963 /* FilterTableView.swift */; };
 		E3EA7FC524487CF700F09C67 /* AppCenterTrack.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */; };
 		E3EC7C7422A93A9300F43456 /* BLEScannerList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */; };
 		E3F214E42861EE0A00144581 /* ProfileTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F214E32861EE0A00144581 /* ProfileTableViewController.swift */; };
@@ -299,6 +300,7 @@
 		E3E2EE7222DDE07E00C8C4BC /* TransactionHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionHistory.swift; sourceTree = "<group>"; };
 		E3E2EE7422DE178400C8C4BC /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		E3E2EE7622DE1F5700C8C4BC /* Image.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		E3E8746728649B790078B963 /* FilterTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableView.swift; sourceTree = "<group>"; };
 		E3EA7FC424487CF700F09C67 /* AppCenterTrack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppCenterTrack.swift; sourceTree = "<group>"; };
 		E3EC7C6D22A93A9300F43456 /* BLEScannerList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BLEScannerList.swift; sourceTree = "<group>"; };
 		E3F214E32861EE0A00144581 /* ProfileTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewController.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				E31D07C627AAC98700903E94 /* CardView.swift */,
 				E3F214EB2862191C00144581 /* ProfileTableViewCell.swift */,
 				E3F3BE4828634D44007508AF /* DateTimeSelectionView.swift */,
+				E3E8746728649B790078B963 /* FilterTableView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1013,6 +1016,7 @@
 				E38D323722CF702A00D71150 /* PaymentSettings.swift in Sources */,
 				E3A094E422C4CE8B00489480 /* iOSDevCenters+GIF.swift in Sources */,
 				E3ACAA7422C622A500CBEAA1 /* PortalWebviewViewController.swift in Sources */,
+				E3E8746828649B790078B963 /* FilterTableView.swift in Sources */,
 				E311680026C566AF006CE2BA /* RkiImportStatus+description.swift in Sources */,
 				E3B734CB26BAD0FB006AA7AE /* MPIBinaryUtil.m in Sources */,
 				E3F3BE5228634D73007508AF /* CalenderHeaderCell.swift in Sources */,
