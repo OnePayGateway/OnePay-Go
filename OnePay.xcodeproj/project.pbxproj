@@ -132,6 +132,7 @@
 		E3F3BE5428634D73007508AF /* CalenderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4E28634D73007508AF /* CalenderCell.swift */; };
 		E3F3BE5528634D73007508AF /* CalenderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE4F28634D73007508AF /* CalenderView.swift */; };
 		E3F3BE5628634D73007508AF /* Date+Exts.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F3BE5028634D73007508AF /* Date+Exts.swift */; };
+		E3F81AE72869820300621A29 /* PaymentStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3F81AE62869820300621A29 /* PaymentStatusView.swift */; };
 		F3AB1B0361D8EC40DDFC5763 /* Pods_OnePay_OnePayUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E05AB0E370EEABF85E841AC /* Pods_OnePay_OnePayUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -312,6 +313,7 @@
 		E3F3BE4E28634D73007508AF /* CalenderCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderCell.swift; sourceTree = "<group>"; };
 		E3F3BE4F28634D73007508AF /* CalenderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalenderView.swift; sourceTree = "<group>"; };
 		E3F3BE5028634D73007508AF /* Date+Exts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date+Exts.swift"; sourceTree = "<group>"; };
+		E3F81AE62869820300621A29 /* PaymentStatusView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaymentStatusView.swift; sourceTree = "<group>"; };
 		F226F6B4CDC84B6DE8EEF6B1 /* Pods_OnePay.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_OnePay.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -481,6 +483,7 @@
 				E3F214EB2862191C00144581 /* ProfileTableViewCell.swift */,
 				E3F3BE4828634D44007508AF /* DateTimeSelectionView.swift */,
 				E3E8746728649B790078B963 /* FilterTableView.swift */,
+				E3F81AE62869820300621A29 /* PaymentStatusView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1078,6 +1081,7 @@
 				E355EB8022FD66C9000271CF /* ReceiptService.swift in Sources */,
 				E3616E012295463B00728C3C /* Payment.swift in Sources */,
 				E3616DFF22953DEF00728C3C /* PaymentModeView.swift in Sources */,
+				E3F81AE72869820300621A29 /* PaymentStatusView.swift in Sources */,
 				E3B734C626BAD0FB006AA7AE /* DisplayMediaData.m in Sources */,
 				E3B734CE26BAD0FB006AA7AE /* MiuraManager.m in Sources */,
 				E30A930022981ED800A0434F /* YPDrawSignatureView.swift in Sources */,

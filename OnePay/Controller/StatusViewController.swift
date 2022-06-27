@@ -11,12 +11,21 @@ import UIKit
 class StatusViewController: UIViewController {
 
     var reference_transaction_id: String!
+    @IBOutlet weak var statuView: PaymentStatusView!
 
+    var status: String!
+    var transactionId: String?
+    var amount: String!
+    var customer: String?
+    var transactionDate: String!
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
+        statuView.loadUI(with: amount, transId: transactionId, status: status, name: customer ?? "", date: transactionDate)
         // Do any additional setup after loading the view.
     }
     

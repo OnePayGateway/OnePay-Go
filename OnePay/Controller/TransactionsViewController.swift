@@ -36,7 +36,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         super.viewDidLoad()
         dateTimeView.loadUI()
         self.addDateTimeViewObserver()
-        self.dateLbl.text = Date().generateCurrentTime()
+        self.dateLbl.text = Date().generateCurrentDateString()
        // transactionTableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
         showSpinner(onView: self.view)
         getTransactionsList()
@@ -57,7 +57,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                 return
             }
             self.dateTimeView.isHidden = true
-            self.dateLbl.text = selectedDate.generateCurrentTime()
+            self.dateLbl.text = selectedDate.generateCurrentDateString()
             
             if let valueType = self.selectedFilterValue {
                 self.filterTransactions(for: valueType)
@@ -73,7 +73,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     
     func getTransactionsList() {
         let fromDate = Date.changeDaysBy(days: -7)
-        let toDate = Date().generateCurrentTime()
+        let toDate = Date().generateCurrentDateString()
         TransactionHistoryService().retrieveTransactions(from: fromDate, to: toDate) { (json, err) in
             DispatchQueue.main.async {
             if(err == nil) {
@@ -93,7 +93,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                 }
                 print(json)
                 self.transactionHistroy = TransactionHistory(transactionsList: json!.arrayValue)
-                if let currentDate = Date().generateCurrentTime().convertToDate(with: "MM/dd/yyyy") {
+                if let currentDate = Date().generateCurrentDateString().convertToDate(with: "MM/dd/yyyy") {
                     self.showTransactions(for: currentDate)
                 }
                 self.hideSpinner()
@@ -140,7 +140,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     func showTransactions(for selectedDay: Date) {
         var transactionsList = [JSON]()
         for (index, transaction) in self.transactionHistroy.transactionsList.enumerated() {
-            if let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), selectedDay.days(from: tranDate) == 0 {
+            if let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), selectedDay.days(from: tranDate) == 0 {
                 transactionsList.append(transaction)
             }
         }
@@ -162,63 +162,63 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
               case "Transaction ID":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
         
-                      if transactionHistroy.transactionId(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0 {
+                      if transactionHistroy.transactionId(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0 {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Customer ID":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.customerId(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.customerId(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "First Name":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.firstName(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.firstName(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Last Name":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.lastName(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.lastName(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Email":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.email(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.email(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Phone":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.phone(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.phone(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Transaction Amount":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if String(format: "$%0.2f", transactionHistroy.amount(forIndex: index)!)  == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if String(format: "$%0.2f", transactionHistroy.amount(forIndex: index)!)  == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Card Last 4 Digits":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.lastFourDigit(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.lastFourDigit(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Source Application":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.sourceApplication(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentTime().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.sourceApplication(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), let selectedDate = self.dateTimeView.apptDate, selectedDate.days(from: tranDate) == 0  {
                           transactionsList.append(transaction)
                       }
                   }
@@ -362,7 +362,7 @@ extension TransactionsViewController {
                 case "All":
                     if let selectedDate = self.dateTimeView.apptDate  {
                         self.showTransactions(for: selectedDate)
-                    } else if let currentDate = Date().generateCurrentTime().convertToDate(with: "MM/dd/yyyy") {
+                    } else if let currentDate = Date().generateCurrentDateString().convertToDate(with: "MM/dd/yyyy") {
                         self.showTransactions(for: currentDate)
                     }
                     break
@@ -443,11 +443,19 @@ extension TransactionsViewController {
                 self.filterTransactions(for: valueType)
             }
         } else {
+            
             let detailVc = self.storyboard?.instantiateViewController(withIdentifier: "transactionDetail") as? TransactionInfoViewController
-            detailVc?.transactionId = transactionHistroy.transactionId(forIndex: indexPath.row)
-            detailVc?.transactionStatus = transactionHistroy.status(forIndex: indexPath.row)
+            var transactions:TransactionHistory!
+            if self.filteredHistory != nil {
+                transactions = self.filteredHistory
+            } else {
+                transactions = self.transactionHistroy
+            }
+            
+            detailVc?.transactionId = transactions.transactionId(forIndex: indexPath.row)
+            detailVc?.transactionStatus = transactions.status(forIndex: indexPath.row)
             detailVc?.vDelegate = self
-            if let cardtype = transactionHistroy.cardType(forIndex: indexPath.row) {
+            if let cardtype = transactions.cardType(forIndex: indexPath.row) {
                 detailVc?.cardBrandImage = imageFor(cardType: cardtype)
             }
             self.navigationController?.pushViewController(detailVc!, animated: true)

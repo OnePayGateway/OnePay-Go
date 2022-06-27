@@ -26,9 +26,15 @@ extension Date {
         return (formatter.string(from: self) as NSString) as String
     }
     
-    func generateCurrentTime () -> String {
+    func generateCurrentDateString () -> String {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
+        return (formatter.string(from: self) as NSString) as String
+    }
+    
+    func generateCurrentDateTime () -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "dd MMM yyyy, hh:mm a"
         return (formatter.string(from: self) as NSString) as String
     }
     

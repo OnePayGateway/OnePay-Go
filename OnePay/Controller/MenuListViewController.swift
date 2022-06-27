@@ -32,7 +32,29 @@ class MenuListViewController: UIViewController, UITableViewDataSource, UITableVi
         sideMenuController?.setContentViewController(to: selectedVc!)
         sideMenuController?.hideMenu()
     }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        self.logOutWith(msg: "")
+    }
 
+    func logOutWith(msg:String) {
+        
+        let alertControler = UIAlertController(title: "Are you sure to logout?", message: msg, preferredStyle: .alert)
+        let yesAction = UIAlertAction(title: "Confirm", style: .default) { (action) in
+          //  UIApplication.shared.statusBarUIView?.backgroundColor = UIColor.white
+            Session.shared.logOut()
+            PaymentSettings.shared.removeAll()
+            let loginVc = UIStoryboard(name: "Main", bundle: Bundle.main).instantiateInitialViewController()
+            self.view.window?.rootViewController = loginVc
+        }
+        let noAction = UIAlertAction(title: "Cancel", style: .destructive, handler: nil)
+        alertControler.addAction(yesAction)
+        alertControler.addAction(noAction)
+        alertControler.preferredAction = noAction
+        self.present(alertControler, animated: true, completion: nil)
+        
+    }
+    
     
 //
 //    func addInBlurEffect() {

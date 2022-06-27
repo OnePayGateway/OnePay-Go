@@ -16,6 +16,12 @@ class TransactionDetail : NSObject {
     var cardType: String?
     var lastFourDigits: String?
     var receiptNumber: String?
+    
+    var paymentStatus: String?
+    var date: String?
+    var time: String?
+    var settlementStatus: String?
+
 
     init(itemname: String?, itemamount:Float?, totalamount:Float?, cardtype:String?, lastfour: String?, receiptnum: String?) {
         self.itemName = itemname

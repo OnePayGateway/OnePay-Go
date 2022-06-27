@@ -307,6 +307,13 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
      // Pass the selected object to the new view controller.
         let statusVc = segue.destination as? StatusViewController
         statusVc?.reference_transaction_id = reference_transaction_id
+         statusVc?.amount = payment.amount
+         if let fn = customerDic["first_name"] as? String, let ln = customerDic["last_name"] as? String {
+             statusVc?.customer = String(format: "%@ %@", fn, ln)
+         }
+         statusVc?.transactionId = reference_transaction_id
+         statusVc?.transactionDate = Date().generateCurrentDateTime()
+         statusVc?.status = "Successful"
      }
     
 }

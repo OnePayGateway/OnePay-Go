@@ -180,10 +180,10 @@ class ReceiptViewController: UIViewController,UITextFieldDelegate {
 //                    } else {
                         if(text.count == 0) {
                             floatingLabelTextField.errorMessage = ""
-                            self.emailFieldTop.constant = 15
+                           // self.emailFieldTop.constant = 15
                         }
                         else {
-                            self.emailFieldTop.constant = 23
+                           // self.emailFieldTop.constant = 23
                             floatingLabelTextField.errorMessage = ""
                         }
                  //  }

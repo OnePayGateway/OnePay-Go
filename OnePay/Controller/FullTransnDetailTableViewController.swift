@@ -11,7 +11,6 @@ import SwiftyJSON
 
 class FullTransnDetailTableViewController: UITableViewController {
 
-    @IBOutlet weak var topView: UIView!
     var transactionInfo: JSON = [:]
     var keysArr = Array<String>()
     var titlesArr = Array<String>()
@@ -34,13 +33,6 @@ class FullTransnDetailTableViewController: UITableViewController {
 //          //  }
 //        }
         
-        
-        let imageView = UIImageView()
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
-        imageView.image = UIImage.init(named: "CheckoutBg")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        self.topView.addSubview(imageView)
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false

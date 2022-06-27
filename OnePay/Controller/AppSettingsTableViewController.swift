@@ -124,7 +124,7 @@ class AppSettingsTableViewController: UITableViewController, UIPopoverPresentati
         }
         self.tableView.reloadData()
     }
-    
+  /*
     func logOutWith(msg:String) {
         
         let alertControler = UIAlertController(title: "Are you sure to logout?", message: msg, preferredStyle: .alert)
@@ -142,7 +142,7 @@ class AppSettingsTableViewController: UITableViewController, UIPopoverPresentati
         self.present(alertControler, animated: true, completion: nil)
         
     }
-    
+    */
     
     @IBAction func menuClicked(_ sender: Any) {
         if(self.cameFromCheckOut) {
@@ -221,7 +221,7 @@ class AppSettingsTableViewController: UITableViewController, UIPopoverPresentati
             PaymentSettings.shared.setSelectedTerminal(Name: PaymentSettings.shared.activeTerminalNames()![indexPath.row])
             self.tableView.reloadData()
         } else if(indexPath.section == 3 && indexPath.row == 0) {
-            logOutWith(msg: "")
+          //  logOutWith(msg: "")
         }
     }
 

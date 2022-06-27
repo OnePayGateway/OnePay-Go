@@ -15,28 +15,23 @@ protocol voidDelegate {
 
 class TransactionInfoViewController: UITableViewController {
     
-    let imageView = UIImageView()
-    @IBOutlet weak var topView: UIView!
     var transactionId: String!
     var transactionStatus: String!
     var cardBrandImage: UIImage!
     var transactionInfo: JSON = [:]
 
-    @IBOutlet weak var totalPriceIconImageView: UIImageView!
-    @IBOutlet weak var itemIconImageView: UIImageView!
-    @IBOutlet weak var receiptIconImageView: UIImageView!
     @IBOutlet weak var cardBrandImageView: UIImageView!
-    
-    @IBOutlet weak var topAmountLbl: UILabel!
+    @IBOutlet weak var amountLbl: UILabel!
+    @IBOutlet weak var statusLbl: UILabel!
+    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var timeLbl: UILabel!
+
     @IBOutlet weak var transactionIdLbl: UILabel!
-   
-    @IBOutlet weak var itemNameLbl: UILabel!
-    @IBOutlet weak var itemAmountLbl: UILabel!
-    @IBOutlet weak var totalAmountLbl: UILabel!
-    
-    @IBOutlet weak var voidBtn: BorderedButton!
     @IBOutlet weak var cardInfoLbl: UILabel!
-    @IBOutlet weak var receiptInfoLbl: UILabel!
+    @IBOutlet weak var settleStatusLbl: UILabel!
+
+    @IBOutlet weak var voidBtn: BorderedButton!
+    
     var vDelegate: voidDelegate!
     
     var transactionDetail: TransactionDetail? {
@@ -45,27 +40,19 @@ class TransactionInfoViewController: UITableViewController {
                 return
             }
             DispatchQueue.main.async {
+                self.statusLbl.text = detail.paymentStatus
+                self.amountLbl.text = String(format: "$%0.2f", detail.totalAmount!)
+                self.dateLbl.text = detail.date
+                self.timeLbl.text = detail.time
                 self.transactionIdLbl.text = "ID:\(self.transactionId!)"
-                self.topAmountLbl.text = String(format: "$%0.2f", detail.totalAmount!)
-                self.itemNameLbl.text = detail.itemName
-                self.itemAmountLbl.text = String(format: "$%0.2f", detail.itemAmount!)
-                self.totalAmountLbl.text = String(format: "$%0.2f", detail.totalAmount!)
                 self.cardInfoLbl.text = "\(detail.cardType!)***\(detail.lastFourDigits!)"
-                self.receiptInfoLbl.text = "Receipt #\(detail.receiptNumber!)"
+                self.settleStatusLbl.text = detail.settlementStatus
             }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-       // self.tableView.contentInset = UIEdgeInsets(top: 120, left: 0, bottom: 0, right: 0)
-
-        imageView.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: 105)
-        imageView.image = UIImage.init(named: "CheckoutBg")
-        imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
-        self.topView.addSubview(imageView)
         
         cardBrandImageView.image = cardBrandImage
         if(transactionStatus == "Void" || transactionStatus == "Declined") {
@@ -106,9 +93,19 @@ class TransactionInfoViewController: UITableViewController {
                 let lastFour = transaction?["AccountNumberLast4"]?.stringValue
                 let receiptNum = transaction?["InvoiceNumber"]?.stringValue
                 
-                let detail = TransactionDetail(itemname: itemName, itemamount: itemAmount, totalamount: totalAmount, cardtype: cardType, lastfour: lastFour, receiptnum: receiptNum)
-                self.transactionDetail = detail
+                let settleStatus = transaction?["SettledStatus"]?.intValue
+                let paymentStatus = transaction?["ResultText"]?.stringValue
+                let dateTime = json?["DateTime"].stringValue.convertToDate(with: "MM/dd/yy hh:mm a")?.generateCurrentDateTime()
                 
+                let detail = TransactionDetail(itemname: itemName, itemamount: itemAmount, totalamount: totalAmount, cardtype: cardType, lastfour: lastFour, receiptnum: receiptNum)
+                detail.settlementStatus = settleStatus == 1 ? "Settled" : "Unsettled"
+                detail.paymentStatus = paymentStatus
+                if let dateTimeArr = dateTime?.components(separatedBy: ","), dateTimeArr.count > 1 {
+                    detail.date = dateTimeArr[0]
+                    detail.time = dateTimeArr[1]
+                }
+                self.transactionDetail = detail
+            
                 self.hideSpinner()
                 
             } else {

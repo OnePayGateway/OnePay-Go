@@ -335,13 +335,13 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         
         let alert = UIAlertController(title: "Payment Device Type", message: "Which device are you connecting to", preferredStyle: .alert)
         
-        let eDynamo = UIAlertAction(title: "eDynamo", style: .default, handler: { action in
-            DispatchQueue.main.async(execute: {
-                self.lib.setDeviceType(UInt32(MAGTEKEDYNAMO))
-                self.scanForBLE()
-            })
-            
-        })
+//        let eDynamo = UIAlertAction(title: "eDynamo", style: .default, handler: { action in
+//            DispatchQueue.main.async(execute: {
+//                self.lib.setDeviceType(UInt32(MAGTEKEDYNAMO))
+//                self.scanForBLE()
+//            })
+//
+//        })
         let tDynamo = UIAlertAction(title: "tDynamo", style: .default, handler: { action in
             DispatchQueue.main.async(execute: {
                 self.lib.setDeviceType(UInt32(MAGTEKTDYNAMO))
@@ -349,13 +349,13 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             })
         })
         
-        let kDynamo = UIAlertAction(title: "kDynamo", style: .default, handler: { action in
-            DispatchQueue.main.async(execute: {
-                self.lib.setDeviceType(UInt32(MAGTEKKDYNAMO));
-                self.lib.setDeviceProtocolString("com.magtek.idynamo")
-                self.lib.openDevice()
-            })
-        })
+//        let kDynamo = UIAlertAction(title: "kDynamo", style: .default, handler: { action in
+//            DispatchQueue.main.async(execute: {
+//                self.lib.setDeviceType(UInt32(MAGTEKKDYNAMO));
+//                self.lib.setDeviceProtocolString("com.magtek.idynamo")
+//                self.lib.openDevice()
+//            })
+//        })
         
         let miUra = UIAlertAction(title: "Miura", style: .default, handler: { action in
             DispatchQueue.main.async(execute: {
@@ -378,9 +378,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         let btnCancel = UIAlertAction(title: "Cancel", style: .cancel, handler: { action in
             
         })
-        alert.addAction(eDynamo)
+      //  alert.addAction(eDynamo)
         alert.addAction(tDynamo)
-        alert.addAction(kDynamo)
+       // alert.addAction(kDynamo)
         alert.addAction(miUra)
         alert.addAction(btnCancel)
         present(alert, animated: true)
