@@ -177,6 +177,9 @@ class CalendarView: UIView {
     
     @objc
     private func handleTapPlus(sender: UIBarButtonItem) {
+        guard self.currentMonthIndex < 0 else {
+            return
+        }
         self.currentMonthIndex += 1
         self.selectedDate = nil
     }
@@ -219,6 +222,11 @@ extension CalendarView: UICollectionViewDataSource {
             withReuseIdentifier: CalenderCell.reuseIdentifier,
             for: indexPath) as! CalenderCell
         let day = days[indexPath.row]
+        if day.date > Date() {
+            cell.isUserInteractionEnabled = false
+        } else {
+            cell.isUserInteractionEnabled = true
+        }
         cell.configureCell(day: day, isSelected: day == selectedDate, style: style)
         return cell
     }

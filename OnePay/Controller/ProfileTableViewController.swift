@@ -29,7 +29,7 @@ class ProfileTableViewController: UITableViewController {
     }
     
     func getProfileDataForUser() {
-        
+        showSpinner(onView: self.view)
         LoginService().getProfileData(success:  { (json, err)  in
             DispatchQueue.main.async {
             guard err == nil else {
@@ -52,6 +52,7 @@ class ProfileTableViewController: UITableViewController {
                 return
             }
              print(json)
+                self.hideSpinner()
                 if let un = Session.shared.userName() {
                     self.unValueLbl.text = un
                 }

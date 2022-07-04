@@ -11,7 +11,9 @@ import CoreLocation
 
 class SignatureViewController: UIViewController,YPSignatureDelegate {
     @IBOutlet weak var amountLbl: UILabel!
-    
+    @IBOutlet weak var checkMarkImageView: UIImageView!
+    @IBOutlet weak var doneBtn: UIButton!
+
     var reference_transaction_id: String!
     let signatureService = SignatureService()
     let requiredHeight:CGFloat = 50.0
@@ -24,8 +26,7 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
     var customerDic = Dictionary<String, Any>()
     var emv: Dictionary<String, Any>?
     var deviceCode: String!
-    
-    
+        
     var locationManager: CLLocationManager!
     let geoCoder = CLGeocoder()
 
@@ -37,8 +38,8 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      //  let finalAmount = String(format: "$%@", amount)
-       // self.amountLbl.text = finalAmount
+        let finalAmount = String(format: "$%@", payment.amount)
+        self.amountLbl.text = finalAmount
         // Do any additional setup after loading the view, typically from a nib.
         
         // Setting this view controller as the signature view delegate, so the didStart(_ view: YPDrawSignatureView) and
@@ -101,6 +102,19 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
         self.signatureView.clear()
     }
     
+    @IBAction func checkmarkClicked(_ sender: UIButton) {
+        sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            self.checkMarkImageView.image = UIImage(systemName: "checkmark")
+            self.doneBtn.isEnabled = true
+            self.doneBtn.alpha = 1.0
+        } else {
+            self.checkMarkImageView.image = nil
+            self.doneBtn.isEnabled = false
+            self.doneBtn.alpha = 0.5
+        }
+    }
+    
     
     func createApiKey() {
         showSpinner(onView: self.view)
@@ -136,7 +150,6 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
                     return
                 }
                 print(json)
-              //  self.hideSpinner()
                 let response = json["transaction_response"].dictionaryValue
                 print(response)
                 if let code = response["result_code"]?.intValue, code == 1, let trsn_id = response["transaction_id"]?.stringValue, let amount = response["amount"]?.stringValue, let authcode = response["auth_code"]?.stringValue {
@@ -147,18 +160,20 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
 //                    self.confirmBtn.alpha = 0.5
                     self.stopLocationFetching()
                    // self.miura.displayText("Transaction Approved\n Thank you.".center, completion: nil)
-                    self.makeTransactionWith()
+                    self.perform(#selector(self.makeTransactionWith), with: nil, afterDelay: 1.0)
+                   // self.makeTransactionWith()
                   //  self.showPaymentAlertWith(title: "Approved", btnName: "Continue", amount: amount, authCode: authcode, success: true)
                 } else if let status = response["result_text"]?.stringValue {
                     print(status)
+                    self.hideSpinner()
                    // self.miura.displayText("Transaction Declined\n Try again.".center, completion: nil)
-                  //  self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
+                    self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
                 }
             }
         }
     }
     
-    /*
+    
     func showPaymentAlertWith(title: String, btnName: String, amount:String, authCode:String, success:Bool) {
         
         let showAlert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
@@ -189,17 +204,18 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
         showAlert.view.addConstraint(width)
         
         showAlert.addAction(UIAlertAction(title: btnName, style: .default, handler: { action in
-            self.miura.closeSession()
-            if(success) {
-                self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
-            }
+//            self.miura.closeSession()
+//            if(success) {
+//                self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
+//            }
+            self.makeTransaction()
         }))
         self.present(showAlert, animated: true, completion: nil)
     }
     
-    */
     
-    func makeTransactionWith() {
+    
+    @objc func makeTransactionWith() {
        // showSpinner(onView: self.view)
         self.signatureService.sendSignature(signature:signature) { (jsonValue, err) in
             DispatchQueue.main.async {

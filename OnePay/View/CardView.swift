@@ -170,7 +170,6 @@ extension CardView : UITextFieldDelegate {
             return true
         }
         let updatedText = oldText.replacingCharacters(in: r, with: string)
-
         switch field {
         case .cardNo:
                cardNumber = nil
@@ -184,7 +183,7 @@ extension CardView : UITextFieldDelegate {
                         print("invalid card and not exceeded max length")
                         if card.isValid(oldText), !string.isEmpty {
                             cardNumber = oldText
-                            expirationDateField.becomeFirstResponder()
+//                            expirationDateField.becomeFirstResponder()
                             return false
                         }
                         return true
@@ -206,7 +205,7 @@ extension CardView : UITextFieldDelegate {
                if string == "" {
                     if updatedText.count == 0 {
                         expirationDateField.text = ""
-                        cardNumberField.becomeFirstResponder()
+                       // cardNumberField.becomeFirstResponder()
                         return false
                     }
                     if updatedText.count == 2 {
@@ -232,7 +231,7 @@ extension CardView : UITextFieldDelegate {
                     return true
                 } else if updatedText.count > 5 {
                     expiryDate = oldText
-                    cvcField.becomeFirstResponder()
+                   // cvcField.becomeFirstResponder()
                     return false
                 }
             
@@ -243,7 +242,7 @@ extension CardView : UITextFieldDelegate {
             if string == "" {
                  if updatedText.count == 0 {
                      cvcField.text = ""
-                     expirationDateField.becomeFirstResponder()
+                    // expirationDateField.becomeFirstResponder()
                      return false
                  }
             }
@@ -312,7 +311,7 @@ extension CardView {
                 if card.isValid(text) {
                     print("move to expirationDateField")
                     cardNumber = text
-                    expirationDateField.becomeFirstResponder()
+                  //  expirationDateField.becomeFirstResponder()
                 }
             case .indeterminate(let possibleCards):
                 print("\(possibleCards)")
@@ -326,7 +325,7 @@ extension CardView {
             print(text)
             if isExpDateValid(dateStr: text) {
                 expiryDate = text
-                cvcField.becomeFirstResponder()
+               // cvcField.becomeFirstResponder()
             } else {
                 expiryDate = nil
             }
@@ -338,10 +337,10 @@ extension CardView {
 
             if CardState(fromNumber: cardNumber) == .identified(.amex), text.count == 4 {
                 cvc = text
-                cvcField.resignFirstResponder()
+               // cvcField.resignFirstResponder()
             } else if text.count == 3 {
                 cvc = text
-                cvcField.resignFirstResponder()
+              //  cvcField.resignFirstResponder()
             } else {
                 cvc = nil
             }

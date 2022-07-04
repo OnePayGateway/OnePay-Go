@@ -21,6 +21,7 @@ class TransactionInfoViewController: UITableViewController {
     var transactionInfo: JSON = [:]
 
     @IBOutlet weak var cardBrandImageView: UIImageView!
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var amountLbl: UILabel!
     @IBOutlet weak var statusLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
@@ -31,7 +32,9 @@ class TransactionInfoViewController: UITableViewController {
     @IBOutlet weak var settleStatusLbl: UILabel!
 
     @IBOutlet weak var voidBtn: BorderedButton!
-    
+    @IBOutlet weak var receiptBtn: UIButton!
+    @IBOutlet weak var moreBtn: UIButton!
+
     var vDelegate: voidDelegate!
     
     var transactionDetail: TransactionDetail? {
@@ -40,7 +43,7 @@ class TransactionInfoViewController: UITableViewController {
                 return
             }
             DispatchQueue.main.async {
-                self.statusLbl.text = detail.paymentStatus
+                self.statusLbl.text = self.transactionStatus
                 self.amountLbl.text = String(format: "$%0.2f", detail.totalAmount!)
                 self.dateLbl.text = detail.date
                 self.timeLbl.text = detail.time
@@ -59,6 +62,15 @@ class TransactionInfoViewController: UITableViewController {
             self.voidBtn.alpha = 0.3
             self.voidBtn.isUserInteractionEnabled = false
         }
+        
+        if transactionStatus.lowercased() == "approved" {
+            topView.backgroundColor = UIColor(named: "successColor")
+        } else if transactionStatus.lowercased() == "declined" {
+            topView.backgroundColor = UIColor(named: "failureColor")
+        } else {
+            topView.backgroundColor = .orange
+        }
+        
         retreiveDetails()
         // Do any additional setup after loading the view.
     }

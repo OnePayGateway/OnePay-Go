@@ -302,7 +302,16 @@ extension TransactionsViewController {
         nameLbl?.text = transactions.name(forIndex: indexPath.row)
         
         let statusLbl = cell.viewWithTag(11) as? UILabel
-        statusLbl?.text = transactions.status(forIndex: indexPath.row)
+        if let status = transactions.status(forIndex: indexPath.row) {
+            statusLbl?.text = status
+            if status.lowercased() == "approved" {
+                statusLbl?.textColor = UIColor(named: "successColor")
+            } else if status.lowercased() == "declined" {
+                statusLbl?.textColor = UIColor(named: "failureColor")
+            } else {
+                statusLbl?.textColor = .orange
+            }
+        }
         
         let amountLbl = cell.viewWithTag(100) as? UILabel
         amountLbl?.text = String(format: "$%0.2f", transactions.amount(forIndex: indexPath.row)!)

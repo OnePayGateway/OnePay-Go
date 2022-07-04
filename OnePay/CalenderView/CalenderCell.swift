@@ -45,6 +45,9 @@ class CalenderCell: UICollectionViewCell {
                 if self.day.date.shortDateFormat == Date().shortDateFormat {
                     self.label.textColor = self.style.activeDate.backgroundColor
                 }
+                if self.day.date > Date() {
+                    self.label.textColor = self.style.outOfRangeDate
+                }
             }
         }
     }

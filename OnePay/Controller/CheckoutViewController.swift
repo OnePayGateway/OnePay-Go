@@ -92,13 +92,18 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             guard let checkout = checkout else {
                 return
             }
-            if(checkout.enteredAmount.count > 2) {
+//            if(checkout.enteredAmount.count > 1) {
+//            } else {
+//            }
+            guard let amount = Double(checkout.enteredAmount) else {
+                return
+            }
+            if amount > 0 {
                 checkOutView.proceedBtn.isHidden = false
             } else {
                 checkOutView.proceedBtn.isHidden = true
             }
-            let amount = Double(checkout.enteredAmount)
-            let amountWithDecimal:Double = amount!/100
+            let amountWithDecimal:Double = amount/100
             let finalAmount = String(format: "%.2f", amountWithDecimal)
             payment = Payment(amount: finalAmount)
             let finalStr = String(format: "$%.2f", amountWithDecimal)
@@ -1191,7 +1196,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         }, completion: nil)
         
        // self.paymentTextField.frame = CGRect(x: 16, y: 61, width: self.manualEntryView.frame.width-32, height: 50)
-        self.cardView.frame = CGRect(x: 16, y: 61, width: self.manualEntryView.frame.width-32, height: 50)
+        self.cardView.frame = CGRect(x: 16, y: 61, width: self.manualEntryView.frame.width-32, height: 190)
         self.cardView.isHidden = false
 
 //        self.plsSwipeView.removeFromSuperview()
@@ -1208,7 +1213,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
 
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.paymentModeView.alpha = 1.0
-            self.paymentModeViewHeight.constant = 470
+            self.paymentModeViewHeight.constant = 520
             self.checkOutView.proceedBtn.isHidden = true
         }, completion: nil)
         
@@ -1225,7 +1230,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             self.pvIsUp = true
             self.paymentModeView.frame.origin.y = 20
-            self.paymentModeViewHeight.constant = screenHeight
+            self.paymentModeViewHeight.constant = screenHeight-100
             self.modeViewHeight.constant = 0
             self.modeView.frame.size.height = 0
             
@@ -1248,7 +1253,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         UIView.transition(with: paymentModeView, duration: 0.4, options: UIView.AnimationOptions.curveEaseOut, animations: {
             if(self.pvIsUp) {
                 
-                self.paymentModeViewHeight.constant = 470
+                self.paymentModeViewHeight.constant = 520
               //  self.paymentModeView.frame.size.height = CGFloat(actualViewHeight)
                 self.modeViewHeight.constant = self.modeViewUpdatedHeight
                 self.modeView.frame.size.height = self.modeViewUpdatedHeight
