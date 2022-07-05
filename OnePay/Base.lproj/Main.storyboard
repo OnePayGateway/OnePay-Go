@@ -1743,9 +1743,9 @@
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiY-Pc-C7m">
                                                     <rect key="frame" x="187" y="0.0" width="187" height="50"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="All" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjE-nY-qO2">
-                                                            <rect key="frame" x="10" y="14.5" width="137" height="21"/>
-                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source Application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjE-nY-qO2">
+                                                            <rect key="frame" x="10" y="15" width="137" height="20"/>
+                                                            <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                             <color key="textColor" name="txtColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
@@ -1795,12 +1795,20 @@
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tf3-iu-PW6">
                                             <rect key="frame" x="20" y="65" width="374" height="50"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHp-q6-9C6">
-                                                    <rect key="frame" x="10" y="25" width="324" height="0.0"/>
-                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="15"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OnepayGo" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PHp-q6-9C6">
+                                                    <rect key="frame" x="10" y="15" width="324" height="20"/>
+                                                    <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                     <color key="textColor" name="txtColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="aeu-hF-DkX">
+                                                    <rect key="frame" x="10" y="5" width="359" height="40"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <outlet property="delegate" destination="0j2-cU-tF7" id="yWM-zg-vkG"/>
+                                                    </connections>
+                                                </textField>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="vP7-mO-Hp1">
                                                     <rect key="frame" x="344" y="17" width="20" height="16"/>
                                                     <color key="tintColor" name="blueTextColor"/>
@@ -1834,8 +1842,12 @@
                                                 <constraint firstItem="PHp-q6-9C6" firstAttribute="centerY" secondItem="tf3-iu-PW6" secondAttribute="centerY" id="EZU-kA-Jhf"/>
                                                 <constraint firstItem="R6y-2Y-4iO" firstAttribute="top" secondItem="tf3-iu-PW6" secondAttribute="top" id="KJx-8I-zoH"/>
                                                 <constraint firstAttribute="height" constant="50" id="Xc0-qw-QnP"/>
+                                                <constraint firstItem="aeu-hF-DkX" firstAttribute="leading" secondItem="tf3-iu-PW6" secondAttribute="leading" constant="10" id="bK0-Tx-vww"/>
+                                                <constraint firstAttribute="trailing" secondItem="aeu-hF-DkX" secondAttribute="trailing" constant="5" id="bat-pA-5yG"/>
                                                 <constraint firstItem="vP7-mO-Hp1" firstAttribute="centerY" secondItem="tf3-iu-PW6" secondAttribute="centerY" id="kRK-lP-mK2"/>
                                                 <constraint firstAttribute="trailing" secondItem="vP7-mO-Hp1" secondAttribute="trailing" constant="10" id="pbB-dr-CK0"/>
+                                                <constraint firstItem="aeu-hF-DkX" firstAttribute="top" secondItem="tf3-iu-PW6" secondAttribute="top" constant="5" id="qJs-t5-tel"/>
+                                                <constraint firstAttribute="bottom" secondItem="aeu-hF-DkX" secondAttribute="bottom" constant="5" id="rUo-Q6-eEh"/>
                                                 <constraint firstItem="R6y-2Y-4iO" firstAttribute="leading" secondItem="tf3-iu-PW6" secondAttribute="leading" id="wgp-cw-ckU"/>
                                             </constraints>
                                         </view>
@@ -2084,13 +2096,16 @@
                     <connections>
                         <outlet property="dateLbl" destination="haP-2O-bex" id="yAR-Fi-wpe"/>
                         <outlet property="dateTimeView" destination="Kyc-v1-Y5N" id="sFH-tl-4tv"/>
+                        <outlet property="filterBtn" destination="R6y-2Y-4iO" id="Mot-UU-FcG"/>
                         <outlet property="filterKeyBtn" destination="6la-8b-kjJ" id="AjO-zA-5xB"/>
                         <outlet property="filterKeyLbl" destination="ZjE-nY-qO2" id="2qS-IF-a0u"/>
+                        <outlet property="filterTextField" destination="aeu-hF-DkX" id="wfW-zj-XlI"/>
                         <outlet property="filterValueLbl" destination="PHp-q6-9C6" id="4Yr-wm-18y"/>
                         <outlet property="optionListTable" destination="bXu-BD-jxL" id="9DH-Or-hDP"/>
                         <outlet property="optionListTableHeight" destination="GsG-am-eaI" id="0aC-If-ltW"/>
                         <outlet property="optionListTableOriginY" destination="vL1-De-AJA" id="mya-rc-5IQ"/>
                         <outlet property="optionListTableWidth" destination="SAZ-uZ-Q8N" id="Umn-Oy-OBi"/>
+                        <outlet property="searchImgView" destination="vP7-mO-Hp1" id="cXQ-yt-JAt"/>
                         <outlet property="transactionTableView" destination="F1r-5D-beu" id="6eU-Dp-1UZ"/>
                         <segue destination="fPt-oh-sFw" kind="show" id="ZOF-Dl-mro"/>
                     </connections>
@@ -4601,7 +4616,7 @@
             <color red="0.66699999570846558" green="0.66699999570846558" blue="0.66699999570846558" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="successColor">
-            <color red="0.12549019607843137" green="0.74509803921568629" blue="0.47450980392156861" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.125" green="0.74500000476837158" blue="0.47499999403953552" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <namedColor name="txtColor">
             <color red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>

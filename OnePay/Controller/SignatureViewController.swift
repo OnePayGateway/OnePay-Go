@@ -160,7 +160,11 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
 //                    self.confirmBtn.alpha = 0.5
                     self.stopLocationFetching()
                    // self.miura.displayText("Transaction Approved\n Thank you.".center, completion: nil)
-                    self.perform(#selector(self.makeTransactionWith), with: nil, afterDelay: 1.0)
+                     DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+                        self.makeTransactionWith()
+                            //call any function
+                     }
+                    
                    // self.makeTransactionWith()
                   //  self.showPaymentAlertWith(title: "Approved", btnName: "Continue", amount: amount, authCode: authcode, success: true)
                 } else if let status = response["result_text"]?.stringValue {

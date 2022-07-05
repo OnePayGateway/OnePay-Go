@@ -10,14 +10,15 @@ import Foundation
 
 extension Date {
     
-    static func changeDaysBy(days : Int) -> String {
-        let currentDate = Date()
+    func changeDaysBy(days : Int, time:String) -> String {
+       // let currentDate = Date()
         var dateComponents = DateComponents()
         dateComponents.day = days
-        let dateValue = Calendar.current.date(byAdding: dateComponents, to: currentDate)!
+        let dateValue = Calendar.current.date(byAdding: dateComponents, to: self)!
         let formatter = DateFormatter()
-        formatter.dateFormat = "MM/dd/yyyy hh:mm a"
-        return (formatter.string(from: dateValue) as NSString) as String
+        formatter.dateFormat = "MM/dd/yyyy"
+        let dateStr = formatter.string(from: dateValue)
+        return String(format: "%@ %@", dateStr,time)
     }
     
     func generateCurrentTimeStampAsNonce () -> String {
