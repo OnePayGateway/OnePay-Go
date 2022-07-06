@@ -12,6 +12,7 @@ class StatusViewController: UIViewController {
 
     var reference_transaction_id: String!
     @IBOutlet weak var statuView: PaymentStatusView!
+    
 
     var status: String!
     var transactionId: String?
@@ -25,6 +26,7 @@ class StatusViewController: UIViewController {
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         UIViewController.attemptRotationToDeviceOrientation()
+        
         statuView.loadUI(with: amount, transId: transactionId, status: status, name: customer ?? "", date: transactionDate)
         // Do any additional setup after loading the view.
     }
@@ -39,9 +41,19 @@ class StatusViewController: UIViewController {
     }
     
     @IBAction func cancelClicked(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name("resetSalePage"), object: nil, userInfo: nil)
         self.navigationController?.popToRootViewController(animated: true)
     }
-
+    
+    @IBAction func retryOrReceiptClicked(_ sender: Any) {
+        if status.lowercased() == "successful" {
+            NotificationCenter.default.post(name: Notification.Name("resetSalePage"), object: nil, userInfo: nil)
+            self.performSegue(withIdentifier: "fromStatusToReceipt", sender: nil)
+        } else {
+            self.navigationController?.popToRootViewController(animated: true)
+        }
+    }
+    
     
     // MARK: - Navigation
 

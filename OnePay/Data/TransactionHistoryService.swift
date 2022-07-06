@@ -46,7 +46,7 @@ class TransactionHistoryService: BaseRequest {
 
     func parseTransactionsData(data:Data, onComplete: @escaping(JSON?, Error?) -> ()) {
             do {
-                let dict = try JSON(data: data)
+                let dict = try JSON(data: data, options: .fragmentsAllowed)
                 onComplete(dict,nil)
             } catch let myJSONError {
                 print(myJSONError)

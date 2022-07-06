@@ -14,13 +14,13 @@ class VoidTransactionService: BaseRequest {
     var params = [String:Any]()
     
     
-    func makePayment(amount:String, transactionId: String, cardInfo:Dictionary<String, Any>, marketCode:String, Oncomplete: @escaping(JSON?, Error?) -> Void) {
+    func makePayment(amount:String, transType:String, transactionId: String, cardInfo:Dictionary<String, Any>, marketCode:String, Oncomplete: @escaping(JSON?, Error?) -> Void) {
         
         let payment = Payment()
         let custom_fields = [payment.customDic]
         let additionalData = [payment.userDic,payment.sourceDic]
         
-        let parameters = ["amount":amount, "method":"CC", "type":"5", "nonce":Date().generateCurrentTimeStampAsNonce(), "reference_transaction_id":transactionId,  "notes":"", "card":cardInfo, "custom_fields": custom_fields, "additionalData":additionalData] as [String : Any]
+        let parameters = ["amount":amount, "method":"CC", "type":transType, "nonce":Date().generateCurrentTimeStampAsNonce(), "reference_transaction_id":transactionId,  "notes":"", "card":cardInfo, "custom_fields": custom_fields, "additionalData":additionalData] as [String : Any]
         
         self.url = APIs().paymentAPI()
         self.params = parameters

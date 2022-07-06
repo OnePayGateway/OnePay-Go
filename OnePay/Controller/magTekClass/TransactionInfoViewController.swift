@@ -50,6 +50,11 @@ class TransactionInfoViewController: UITableViewController {
                 self.transactionIdLbl.text = "ID:\(self.transactionId!)"
                 self.cardInfoLbl.text = "\(detail.cardType!)***\(detail.lastFourDigits!)"
                 self.settleStatusLbl.text = detail.settlementStatus
+                if detail.settlementStatus?.lowercased() == "settled" {
+                    self.voidBtn.setTitle("Refund", for: .normal)
+                } else {
+                    self.voidBtn.setTitle("Void", for: .normal)
+                }
             }
         }
     }
@@ -58,9 +63,9 @@ class TransactionInfoViewController: UITableViewController {
         super.viewDidLoad()
         
         cardBrandImageView.image = cardBrandImage
-        if(transactionStatus == "Void" || transactionStatus == "Declined") {
-            self.voidBtn.alpha = 0.3
-            self.voidBtn.isUserInteractionEnabled = false
+        if(transactionStatus.lowercased() == "void" || transactionStatus.lowercased() == "declined") {
+            self.voidBtn.isHidden = true
+            self.receiptBtn.isHidden = true
         }
         
         if transactionStatus.lowercased() == "approved" {
@@ -159,7 +164,7 @@ class TransactionInfoViewController: UITableViewController {
     func makeVoidTransaction() {
         var cardInfo = Dictionary<String, Any>()
         cardInfo["number"] = self.transactionDetail?.lastFourDigits
-        VoidTransactionService().makePayment(amount:String(format: "%0.2f", self.transactionDetail!.totalAmount!), transactionId: "\(self.transactionId!)", cardInfo: cardInfo, marketCode: "R") { (json, err) in
+        VoidTransactionService().makePayment(amount:String(format: "%0.2f", self.transactionDetail!.totalAmount!), transType: self.voidBtn.currentTitle == "Void" ? "5" : "8", transactionId: "\(self.transactionId!)", cardInfo: cardInfo, marketCode: "R") { (json, err) in
             DispatchQueue.main.async {
                 self.hideSpinner()
                 guard err == nil else {

@@ -1,21 +1,23 @@
 {
   "images" : [
     {
+      "filename" : "declined.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "idiom" : "universal",
       "filename" : "declined@2x.png",
+      "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "declined@3x.png",
       "idiom" : "universal",
       "scale" : "3x"
     }
   ],
   "info" : {
-    "version" : 1,
-    "author" : "xcode"
+    "author" : "xcode",
+    "version" : 1
   }
 }

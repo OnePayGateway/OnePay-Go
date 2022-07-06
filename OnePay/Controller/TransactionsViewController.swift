@@ -14,7 +14,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var transactionTableView: UITableView!
     @IBOutlet weak var searchImgView: UIImageView!
     @IBOutlet weak var filterTextField: UITextField!
-    @IBOutlet weak var filterBtn: UIButton!
     @IBOutlet weak var filterKeyBtn: UIButton!
 
     @IBOutlet weak var dateLbl: UILabel!
@@ -44,19 +43,17 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         dateTimeView.loadUI()
         self.addDateTimeViewObserver()
         self.dateLbl.text = Date().generateCurrentDateString()
+        
        // transactionTableView.contentInset = UIEdgeInsets(top: 80, left: 0, bottom: 0, right: 0)
-        showSpinner(onView: self.view)
+       // showSpinner(onView: self.view)
         
         filterKeyArr = Array(arrayLiteral: "All","Transaction ID","Customer ID","First Name","Last Name","Email","Phone","Transaction Amount","Card Last 4 Digits","Source Application")
         filterValueArr = ["OnepayGO","WOOCOMMERCE","PLE","Jmeter","PS","VT","EXE","paypage","Snap"]
         
         selectedFilterKey = "Source Application"
         selectedFilterValue = "OnepayGo"
-        
-      //  if let curdate = Date().generateCurrentDateString().convertToDate(with: "MM/dd/yyyy") {
-            self.selectedDate = Date()
-            getTransactionsList()
-      //  }
+        self.selectedDate = Date()
+        getTransactionsList()
        
         // Do any additional setup after loading the view.
     }
@@ -84,6 +81,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     func getTransactionsList() {
+        showSpinner(onView: self.view)
         let fromDate = selectedDate.changeDaysBy(days: 0, time: "00:00:00")
         let toDate = selectedDate.changeDaysBy(days: 0, time: "23:59:00")
         TransactionHistoryService().retrieveTransactions(from: fromDate, to: toDate) { (json, err) in
@@ -104,13 +102,13 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                     return
                 }
                 print(json)
+                self.hideSpinner()
                 self.transactionHistroy = TransactionHistory(transactionsList: json!.arrayValue)
                 if let valueType = self.selectedFilterValue {
                     self.filterTransactions(for: valueType)
                 } else {
                     self.showTransactions(for: self.selectedDate)
                 }
-                self.hideSpinner()
               }
             else {
                 self.hideSpinner()
@@ -122,6 +120,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func calClicked(_ sender: Any) {
         self.optionListTable.isHidden = true
+        self.filterTextField.resignFirstResponder()
         isDroppedDown = false
         self.dateTimeView.isHidden = false
     }
@@ -143,24 +142,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         isDroppedDown = true
     }
     
-    @IBAction func filterValueClicked(_ sender: Any) {
-        guard isDroppedDown == false else {
-            self.optionListTable.isHidden = true
-            isDroppedDown = false
-            return
-        }
-        self.optionListTableWidth.constant = self.view.frame.size.width - 40
-        self.optionListTableOriginY.constant = 134
-        self.optionListTable.delegate = self
-        if filterValueArr.count < 5 {
-            self.optionListTableHeight.constant = CGFloat(50 * filterValueArr.count)
-        }
-        self.optionListTable.loadFilterValue(list: filterValueArr.reversed())
-        self.optionListTable.reloadData()
-        self.dateTimeView.isHidden = true
-        self.optionListTable.isHidden = false
-        isDroppedDown = true
-    }
     
     func showTransactions(for selectedDay: Date) {
         guard self.transactionHistroy != nil else {
@@ -191,64 +172,63 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                   break
               case "Transaction ID":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-        
-                      if transactionHistroy.transactionId(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.transactionId(forIndex: index)?.hasPrefix(valueType) == true  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Customer ID":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.customerId(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.customerId(forIndex: index)?.hasPrefix(valueType) == true  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "First Name":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.firstName(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0   {
+                      if transactionHistroy.firstName(forIndex: index)?.lowercased().hasPrefix(valueType) == true  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Last Name":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.lastName(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0   {
+                      if transactionHistroy.lastName(forIndex: index)?.lowercased().hasPrefix(valueType) == true   {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Email":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.email(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.email(forIndex: index)?.lowercased().hasPrefix(valueType) == true  {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Phone":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.phone(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.phone(forIndex: index)?.lowercased().hasPrefix(valueType) == true {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Transaction Amount":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if String(format: "$%0.2f", transactionHistroy.amount(forIndex: index)!)  == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0   {
+                      if String(format: "$%0.2f", transactionHistroy.amount(forIndex: index)!).hasPrefix(valueType) == true {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Card Last 4 Digits":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.lastFourDigit(forIndex: index) == valueType, let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.lastFourDigit(forIndex: index)?.hasPrefix(valueType) == true {
                           transactionsList.append(transaction)
                       }
                   }
                   break
               case "Source Application":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == valueType.lowercased(), let tranDate = self.transactionHistroy.transactionDate(forIndex: index)?.convertToDate(with: "MM/dd/yyyy hh:mm:ss a")?.generateCurrentDateString().convertToDate(with: "MM/dd/yyyy"), self.selectedDate.days(from: tranDate) == 0  {
+                      if transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == valueType.lowercased() {
                           transactionsList.append(transaction)
                       }
                   }
@@ -391,101 +371,18 @@ extension TransactionsViewController {
             if let keyValue = filterKeyArr[indexPath.row] as? String {
                 self.filterKeyLbl.text = keyValue
                 self.filterValueLbl.text = ""
+                self.filterTextField.text = ""
                 self.optionListTable.isHidden = true
                 self.selectedFilterKey = keyValue
                 isDroppedDown = false
                 self.selectedFilterValue = nil
-                self.filterValueArr.removeAll()
                 self.filteredHistory  = nil
-                
                 if selectedFilterKey == "All" || selectedFilterKey == "Source Application" {
-                    DispatchQueue.main.async {
-                        self.filterBtn.isHidden = false
-                        self.searchImgView.image = UIImage(systemName: "arrowtriangle.down.fill")
-                    }
-                    
+                    self.searchImgView.image = UIImage(systemName: "arrowtriangle.down.fill")
+                    selectedFilterValue = selectedFilterKey == "Source Application" ? "OnepayGo" : nil
+                    self.showTransactions(for: selectedDate)
                 } else {
-                    DispatchQueue.main.async {
-                      self.searchImgView.image = UIImage(systemName: "text.magnifyingglass")
-                      self.filterBtn.isHidden = true
-                    }
-                }
-                
-                guard self.transactionHistroy != nil else {
-                    return
-                }
-                
-                switch selectedFilterKey {
-                case "All":
-                    if let selectedDate = self.dateTimeView.apptDate  {
-                        self.showTransactions(for: selectedDate)
-                    } else if let currentDate = Date().generateCurrentDateString().convertToDate(with: "MM/dd/yyyy") {
-                        self.showTransactions(for: currentDate)
-                    }
-                    break
-                case "Transaction ID":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let transactionID =  transactionHistroy.transactionId(forIndex: index), !transactionID.isEmpty {
-                            filterValueArr.update(with: transactionID)
-                        }
-                    }
-                    break
-                case "Customer ID":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let customerId =  transactionHistroy.customerId(forIndex: index), !customerId.isEmpty {
-                            filterValueArr.update(with: customerId)
-                        }
-                    }
-                    break
-                case "First Name":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let firstName =  transactionHistroy.firstName(forIndex: index), !firstName.isEmpty {
-                            filterValueArr.update(with: firstName)
-                        }
-                    }
-                    break
-                case "Last Name":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let lastName =  transactionHistroy.lastName(forIndex: index), !lastName.isEmpty {
-                            filterValueArr.update(with: lastName)
-                        }
-                    }
-                    break
-                case "Email":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let email =  transactionHistroy.email(forIndex: index), !email.isEmpty {
-                            filterValueArr.update(with: email)
-                        }
-                    }
-                    break
-                case "Phone":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let phone =  transactionHistroy.phone(forIndex: index), !phone.isEmpty {
-                            filterValueArr.update(with: phone)
-                        }
-                    }
-                    break
-                case "Transaction Amount":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let amount =  transactionHistroy.amount(forIndex: index) {
-                            filterValueArr.update(with: String(format: "$%0.2f", amount))
-                        }
-                    }
-                    break
-                case "Card Last 4 Digits":
-                    for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                        if let lastFourDigit =  transactionHistroy.lastFourDigit(forIndex: index), !lastFourDigit.isEmpty {
-                            filterValueArr.update(with: lastFourDigit)
-                        }
-                    }
-                    break
-                case "Source Application":
-                    filterValueArr = ["OnepayGO","WOOCOMMERCE","PLE","Jmeter","PS","VT","EXE","paypage","Snap"]
-
-                    break
-                
-                default:
-                    break
+                    self.searchImgView.image = UIImage(systemName: "text.magnifyingglass")
                 }
             }
         } else if tableView.tag == 11 {
@@ -524,7 +421,33 @@ extension TransactionsViewController : UITextFieldDelegate {
         guard let oldText = textField.text, let r = Range(range, in: oldText) else {
             return true
         }
-        let updatedText = oldText.replacingCharacters(in: r, with: string)
+        var updatedText = oldText.replacingCharacters(in: r, with: string)
+        if selectedFilterKey == "Transaction Amount" {
+            updatedText = "$".appending(updatedText)
+        }
+        filterTransactions(for: updatedText)
+        return true
+    }
+    
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
+        if selectedFilterKey == "All" {
+            return false
+        } else if selectedFilterKey == "Source Application" {
+            guard isDroppedDown == false else {
+                self.optionListTable.isHidden = true
+                isDroppedDown = false
+                return false
+            }
+            self.optionListTableWidth.constant = self.view.frame.size.width - 40
+            self.optionListTableOriginY.constant = 134
+            self.optionListTable.delegate = self
+            self.optionListTable.loadFilterValue(list: filterValueArr.reversed())
+            self.optionListTable.reloadData()
+            self.dateTimeView.isHidden = true
+            self.optionListTable.isHidden = false
+            isDroppedDown = true
+            return false
+        }
         return true
     }
 }

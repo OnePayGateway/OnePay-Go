@@ -199,12 +199,17 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             self.manualEntryClicked(Any.self)
         }
         
+        self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
+    }
+    
+    @objc func resetAll() {
         self.resetPaymentModeView()
         self.removeDisplayedBrandImage()
         self.connectBtn.setTitle("CONNECT", for: .normal)
         self.resetPaymentInfo()
+        checkout = Checkout(amount: "0")
+        checkout = nil
         miura.closeSession()
-        self.performSegue(withIdentifier: "ManualEntryToSign", sender: nil)
     }
     
     
@@ -1368,6 +1373,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                                                name: NSNotification.Name.EAAccessoryDidConnect,
                                                object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(resetAll), name: NSNotification.Name("resetSalePage"), object: nil)
+
+        
         appDelegate = UIApplication.shared.delegate as? AppDelegate
         miura = appDelegate.miura
         miura.delegate = self
@@ -1700,7 +1708,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
        // paymentTextField.clear()
-        cardView.clear()
+       // cardView.clear()
         removeFromDefaults()
         fetchAccessoryList()
     }
@@ -1869,8 +1877,6 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         signVc?.customerDic = self.customerInfo
         signVc?.emv = emv
         signVc?.deviceCode = device_code
-        checkout = Checkout(amount: "0")
-        checkout = nil
     }
 }
 
