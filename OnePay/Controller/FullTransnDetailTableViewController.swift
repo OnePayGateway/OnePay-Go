@@ -12,15 +12,32 @@ import SwiftyJSON
 class FullTransnDetailTableViewController: UITableViewController {
 
     var transactionInfo: JSON = [:]
-    var keysArr = Array<String>()
-    var titlesArr = Array<String>()
     
+    var payemntKeysArr = Array<String>()
+    var settlementKeysArr = Array<String>()
+    var authorisationKeysArr = Array<String>()
+
+    var paymentSectionArr = Array<String>()
+    var settlementSectionArr = Array<String>()
+    var authorisationSectionArr = Array<String>()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        keysArr = ["Id", "TerminalId", "TransactionAmount", "ApprovedAmount", "SettlementAmount", "Method", "TransactionType", "AccountNumberLast4", "ExpirationDate", "CardType", "InvoiceNumber", "Nonce", "ReferenceTransactionId", "RelatedTransactionID", "TransactionNotes", "CustomerId", "Email", "FirstName", "LastName", "Street1", "Street2", "City", "State", "Zip", "PhoneNumber", "ResultCode", "ResultSubCode", "ResultText", "TransactionDatetime", "MerchantTransactionDateTime", "BatchId", "SettledStatus", "AVSResultCode", "CVVResultCode", "AuthID", "AuthNtwkName", "ProcessorTranID", "ProcessorACI", "ProcessorCardLevelResultCode", "ClientIP", "SourceApplication", "SourceUser", "SourceIP"]
+        payemntKeysArr = ["TransactionType", "AccountNumberLast4", "ExpirationDate", "TransactionAmount", "Method", "Token", "POSEntryModeDesc"]
         
-        titlesArr = ["Transaction Id", "Terminal Id", "Transaction Amount", "Approved Amount", "Settlement Amount", "Transaction Method", "Transaction Type", "Account Number Last4", "Expiration Date", "Card Type", "Invoice Number", "Nonce", "Reference Transaction Id", "Related Transaction ID", "Transaction Notes", "Customer Id", "Email", "First Name", "Last Name", "Street1", "Street2", "City", "State", "Zip", "Phone Number", "Result Code", "Result Sub Code", "Result Text", "Transaction Datetime", "Merchant Transaction DateTime", "BatchId", "SettledStatus", "AVS Result Code", "CVV Result Code", "Authorization ID", "AuthNtwkName", "Processor Transaction Id", "Processor ACI", "Processor Card Level Result Code", "Client IP", "Source Application", "Source User", "Source IP"]
+        settlementKeysArr = ["SettlementAmount", "SettlementDatetime", "SettledStatus"]
+
+        
+        authorisationKeysArr = ["ApprovedAmount", "TransactionDatetime", "AuthID", "ReferenceTransactionId", "RelatedTransactionID", "TransactionNotes", "TransactionType", "Id", "TerminalId", "TerminalName", "IndustryTransactionCode", "Product", "Address Verification"]
+        
+        
+        paymentSectionArr = ["Type", "Account Number", "Expiration Date", "Transaction Amount", "Payment Method", "Token", "Entry Mode"]
+        
+        settlementSectionArr = ["Settlement Amount", "Settlement Date Time", "Settled Status"]
+        
+        authorisationSectionArr = ["Authorized Amount", "Transaction Date Time", "Authorization Code", "Reference Transaction ID", "Related Transaction ID", "Transaction Notes", "Transaction Type", "Transaction Id", "Terminal Id", "Terminal Name", "Market Type", "Product", "Address Verification"]
+
         
         
 //        let transaction = transactionInfo["Transaction"].dictionaryValue
@@ -45,7 +62,7 @@ class FullTransnDetailTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return 3
     }
 
     @IBAction func backClicked(_ sender: Any) {
@@ -54,20 +71,47 @@ class FullTransnDetailTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        print(keysArr)
-        print(keysArr.count)
-        return keysArr.count
+        if section == 0 {
+            return paymentSectionArr.count
+        } else if section == 1 {
+            return settlementSectionArr.count
+        }
+        return authorisationSectionArr.count
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if section == 0 {
+            return "Payment Information"
+        } else if section == 1 {
+            return "Settlement Information"
+        }
+        return "Authorization Information"
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "transDetailCell", for: indexPath)
-        let keyStr = keysArr[indexPath.row]
+        
         let transaction = transactionInfo["Transaction"].dictionaryValue
-        let value = transaction[keyStr]?.stringValue
-        cell.textLabel?.text = titlesArr[indexPath.row]
-        cell.detailTextLabel?.text = value
+        
+        var titleStr = ""
+        var keyStr = ""
+        var valueStr = ""
+
+        if indexPath.section == 0 {
+            titleStr = paymentSectionArr[indexPath.row]
+            keyStr = payemntKeysArr[indexPath.row]
+        } else if indexPath.section == 1 {
+            titleStr = settlementSectionArr[indexPath.row]
+            keyStr = settlementKeysArr[indexPath.row]
+        } else {
+            titleStr = authorisationSectionArr[indexPath.row]
+            keyStr = authorisationKeysArr[indexPath.row]
+        }
+        cell.textLabel?.text = titleStr
+        valueStr = transaction[keyStr]?.stringValue ?? ""
+        cell.detailTextLabel?.text = valueStr
         return cell
         
     }
