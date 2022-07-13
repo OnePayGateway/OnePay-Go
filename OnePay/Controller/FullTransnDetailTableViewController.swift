@@ -24,9 +24,9 @@ class FullTransnDetailTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        payemntKeysArr = ["TransactionType", "AccountNumberLast4", "ExpirationDate", "TransactionAmount", "Method", "Token", "POSEntryModeDesc"]
+        payemntKeysArr = ["AccountType", "AccountNumberLast4", "ExpirationDate", "ApprovedAmount", "Method", "Token", "POSEntryModeDesc"]
         
-        settlementKeysArr = ["SettlementAmount", "SettlementDatetime", "SettledStatus"]
+        settlementKeysArr = ["SettlementAmount", "SettlementDate", "SettledStatus"]
 
         
         authorisationKeysArr = ["ApprovedAmount", "TransactionDatetime", "AuthID", "ReferenceTransactionId", "RelatedTransactionID", "TransactionNotes", "TransactionType", "Id", "TerminalId", "TerminalName", "IndustryTransactionCode", "Product", "Address Verification"]
@@ -110,7 +110,11 @@ class FullTransnDetailTableViewController: UITableViewController {
             keyStr = authorisationKeysArr[indexPath.row]
         }
         cell.textLabel?.text = titleStr
-        valueStr = transaction[keyStr]?.stringValue ?? ""
+        if (indexPath.section == 0 && indexPath.row == 3) || (indexPath.section == 1 && indexPath.row == 0) || (indexPath.section == 2 && indexPath.row == 0) {
+            valueStr = transactionInfo[keyStr].stringValue
+        } else {
+            valueStr = transaction[keyStr]?.stringValue ?? ""
+        }
         cell.detailTextLabel?.text = valueStr
         return cell
         
