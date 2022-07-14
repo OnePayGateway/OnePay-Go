@@ -26,6 +26,8 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
     var customerDic = Dictionary<String, Any>()
     var emv: Dictionary<String, Any>?
     var deviceCode: String!
+    
+    var statusString = "Successful"
         
     var locationManager: CLLocationManager!
     let geoCoder = CLGeocoder()
@@ -170,8 +172,10 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
                 } else if let status = response["result_text"]?.stringValue {
                     print(status)
                     self.hideSpinner()
+                    self.statusString = "Failed"
+                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
                    // self.miura.displayText("Transaction Declined\n Try again.".center, completion: nil)
-                    self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
+                  //  self.showPaymentAlertWith(title: "Declined", btnName: "Retry", amount: "", authCode: "", success: false)
                 }
             }
         }
@@ -241,6 +245,8 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
                     self.performSegue(withIdentifier: "signToStatus", sender: nil)
                 } else if let status = response["result_text"]?.stringValue {
                     print(status)
+                    self.statusString = "Failed"
+                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
                 }
             }
         }
@@ -333,7 +339,7 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
          }
          statusVc?.transactionId = reference_transaction_id
          statusVc?.transactionDate = Date().generateCurrentDateTime()
-         statusVc?.status = "Successful"
+         statusVc?.status = statusString
      }
     
 }

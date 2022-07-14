@@ -38,8 +38,10 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     var filterKeyArr = Array<Any>()
     var filterValueArr = Set<AnyHashable>()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+
         dateTimeView.loadUI()
         self.addDateTimeViewObserver()
         self.dateLbl.text = Date().generateCurrentDateString()
@@ -383,6 +385,26 @@ extension TransactionsViewController {
                     self.showTransactions(for: selectedDate)
                 } else {
                     self.searchImgView.image = UIImage(systemName: "text.magnifyingglass")
+                    switch selectedFilterKey {
+                    case "Transaction ID":
+                        self.filterTextField.keyboardType = .numberPad
+                    case "Customer ID":
+                        self.filterTextField.keyboardType = .numberPad
+                    case "First Name":
+                        self.filterTextField.keyboardType = .namePhonePad
+                    case "Last Name":
+                        self.filterTextField.keyboardType = .namePhonePad
+                    case "Email":
+                        self.filterTextField.keyboardType = .emailAddress
+                    case "Phone":
+                        self.filterTextField.keyboardType = .phonePad
+                    case "Transaction Amount":
+                        self.filterTextField.keyboardType = .numberPad
+                    case "Card Last 4 Digits":
+                        self.filterTextField.keyboardType = .numberPad
+                    default:
+                        break
+                    }
                 }
             }
         } else if tableView.tag == 11 {
@@ -412,6 +434,14 @@ extension TransactionsViewController {
             self.navigationController?.pushViewController(detailVc!, animated: true)
         }
        
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if (transactionTableView.isDragging || transactionTableView.isDecelerating)
+        {
+            self.optionListTable.isHidden = true
+            self.isDroppedDown = false
+        }
     }
     
 }

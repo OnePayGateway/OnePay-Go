@@ -13,45 +13,56 @@ class FullTransnDetailTableViewController: UITableViewController {
 
     var transactionInfo: JSON = [:]
     
+    var sectionTitles = Array<String>()
+    
     var payemntKeysArr = Array<String>()
     var settlementKeysArr = Array<String>()
     var authorisationKeysArr = Array<String>()
+    var trnsnSourceKeysArr = Array<String>()
+    var orderInfoKeysArr = Array<String>()
+    var custrBillKeysArr = Array<String>()
+    var trnsnResultsKeysArr = Array<String>()
+    var cardInfoKeysArr = Array<String>()
 
-    var paymentSectionArr = Array<String>()
-    var settlementSectionArr = Array<String>()
-    var authorisationSectionArr = Array<String>()
+    var paymentValuesArr = Array<String>()
+    var settlementValuesArr = Array<String>()
+    var authorisationValuesArr = Array<String>()
+    var trnsnSourceValuesArr = Array<String>()
+    var orderInfoValuesArr = Array<String>()
+    var custrBillValuesArr = Array<String>()
+    var trnsnResultsValuesArr = Array<String>()
+    var cardInfoValuesArr = Array<String>()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sectionTitles = Array(arrayLiteral: "Payment Information","Settlement Information","Authorization Information","Transaction Source","Order Information","Customer Billing Information","Transaction Result","Card Information")
+        
         payemntKeysArr = ["AccountType", "AccountNumberLast4", "ExpirationDate", "ApprovedAmount", "Method", "Token", "POSEntryModeDesc"]
-        
         settlementKeysArr = ["SettlementAmount", "SettlementDate", "SettledStatus"]
+        authorisationKeysArr = ["ApprovedAmount", "TransactionDatetime", "AuthID", "ReferenceTransactionId", "RelatedTransactionID", "TransactionNotes", "TransactionType", "Id", "TerminalId", "MerchantTerminalID", "IndustryTransactionCode", "ProductDescription", "AVSResultCode"]
+        
+        trnsnSourceKeysArr = ["ClientIP", "SourceApplication", "SourceUser", "SourceIP"]
+        orderInfoKeysArr = ["InvoiceNumber", "Nonce"]
+        custrBillKeysArr = ["FirstName", "Company", "Street1", "City", "State", "Country", "Zip", "PhoneNumber", "Email", "CustomerId", "EmailReceipt"]
+        
+        trnsnResultsKeysArr = ["ResultCode", "ResultSubCode", "ResultText", "BatchId", "AuthNtwkName", "ProcessorTranID", "ProcessorACI", "ProcessorCardLevelResultCode"]
+        
+        cardInfoKeysArr = ["CardCaptCap", "card_class", "product_id", "prepaid_indicator", "detailcard_indicator", "debitnetwork_indicator"]
+        
+        
+        
+        paymentValuesArr = ["Type", "Account Number", "Expiration Date", "Transaction Amount", "Payment Method", "Token", "Entry Mode"]
+        settlementValuesArr = ["Settlement Amount", "Settlement Date Time", "Settled Status"]
+        authorisationValuesArr = ["Authorized Amount", "Transaction Date Time", "Authorization Code", "Reference Transaction ID", "Related Transaction ID", "Transaction Notes", "Transaction Type", "Transaction Id", "Terminal Id", "Terminal Name", "Market Type", "Product", "Address Verification"]
+        
+        trnsnSourceValuesArr = ["Customer IP", "Solution Name", "Source User", "Source IP"]
+        orderInfoValuesArr = ["Invoice Number", "Nonce"]
+        custrBillValuesArr = ["Name", "Company", "Address", "City", "State", "Country", "Zip", "Phone Number", "Email", "Customer ID", "Email Receipt"]
+        trnsnResultsValuesArr = ["Result Code", "Result Subcode", "Result Text", "Batch ID", "AuthNtwkName", "Processor Transaction Id", "Processor ACI", "Processor Card Level"]
+        cardInfoValuesArr = ["Card Info", "Card Class", "Product ID", "Prepaid Indicator", "Detail Card Indicator", "Debit Network Indicator"]
 
-        
-        authorisationKeysArr = ["ApprovedAmount", "TransactionDatetime", "AuthID", "ReferenceTransactionId", "RelatedTransactionID", "TransactionNotes", "TransactionType", "Id", "TerminalId", "TerminalName", "IndustryTransactionCode", "Product", "Address Verification"]
-        
-        
-        paymentSectionArr = ["Type", "Account Number", "Expiration Date", "Transaction Amount", "Payment Method", "Token", "Entry Mode"]
-        
-        settlementSectionArr = ["Settlement Amount", "Settlement Date Time", "Settled Status"]
-        
-        authorisationSectionArr = ["Authorized Amount", "Transaction Date Time", "Authorization Code", "Reference Transaction ID", "Related Transaction ID", "Transaction Notes", "Transaction Type", "Transaction Id", "Terminal Id", "Terminal Name", "Market Type", "Product", "Address Verification"]
-
-        
-        
-//        let transaction = transactionInfo["Transaction"].dictionaryValue
-//        let keys = Array(requiredDataDic.keys)
-//
-//        for key in keys {
-//            let value = transaction[key]?.stringValue
-//           // if(value!.count > 0) {
-//                keysArr.append(key)
-//          //  }
-//        }
-        
-        
-        // Uncomment the following line to preserve selection between presentations
+        // Uncomment the following line to preserve selection between pressentations
         // self.clearsSelectionOnViewWillAppear = false
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
@@ -62,7 +73,7 @@ class FullTransnDetailTableViewController: UITableViewController {
 
     override func numberOfSections(in tableView: UITableView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 3
+        return sectionTitles.count
     }
 
     @IBAction func backClicked(_ sender: Any) {
@@ -72,20 +83,37 @@ class FullTransnDetailTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
         if section == 0 {
-            return paymentSectionArr.count
+            return paymentValuesArr.count
         } else if section == 1 {
-            return settlementSectionArr.count
+            return settlementValuesArr.count
+        } else if section == 2 {
+            return authorisationValuesArr.count
+        } else if section == 3 {
+            return trnsnSourceKeysArr.count
+        } else if section == 4 {
+            return orderInfoKeysArr.count
+        } else if section == 5 {
+            return custrBillKeysArr.count
+        } else if section == 6 {
+            return trnsnResultsKeysArr.count
+        } else if section == 7 {
+            return cardInfoKeysArr.count
         }
-        return authorisationSectionArr.count
+        return 0
     }
     
     override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if section == 0 {
-            return "Payment Information"
-        } else if section == 1 {
-            return "Settlement Information"
+        let titleStr = sectionTitles[section]
+        return titleStr
+    }
+    
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        if let headerView = view as? UITableViewHeaderFooterView {
+            let titleStr = sectionTitles[section]
+            headerView.textLabel?.text = titleStr
+            headerView.textLabel?.font = UIFont(name: "poppins-semibold", size: 16)
+            headerView.textLabel?.textColor = UIColor(named: "blueTextColor")
         }
-        return "Authorization Information"
     }
 
     
@@ -100,20 +128,47 @@ class FullTransnDetailTableViewController: UITableViewController {
         var valueStr = ""
 
         if indexPath.section == 0 {
-            titleStr = paymentSectionArr[indexPath.row]
+            titleStr = paymentValuesArr[indexPath.row]
             keyStr = payemntKeysArr[indexPath.row]
         } else if indexPath.section == 1 {
-            titleStr = settlementSectionArr[indexPath.row]
+            titleStr = settlementValuesArr[indexPath.row]
             keyStr = settlementKeysArr[indexPath.row]
-        } else {
-            titleStr = authorisationSectionArr[indexPath.row]
+        } else if indexPath.section == 2 {
+            titleStr = authorisationValuesArr[indexPath.row]
             keyStr = authorisationKeysArr[indexPath.row]
+        } else if indexPath.section == 3 {
+            titleStr = trnsnSourceValuesArr[indexPath.row]
+            keyStr = trnsnSourceKeysArr[indexPath.row]
+        } else if indexPath.section == 4 {
+            titleStr = orderInfoValuesArr[indexPath.row]
+            keyStr = orderInfoKeysArr[indexPath.row]
+        } else if indexPath.section == 5 {
+            titleStr = custrBillValuesArr[indexPath.row]
+            keyStr = custrBillKeysArr[indexPath.row]
+        } else if indexPath.section == 6 {
+            titleStr = trnsnResultsValuesArr[indexPath.row]
+            keyStr = trnsnResultsKeysArr[indexPath.row]
+        } else if indexPath.section == 7 {
+            titleStr = cardInfoValuesArr[indexPath.row]
+            keyStr = cardInfoKeysArr[indexPath.row]
         }
+        
         cell.textLabel?.text = titleStr
+        
         if (indexPath.section == 0 && indexPath.row == 3) || (indexPath.section == 1 && indexPath.row == 0) || (indexPath.section == 2 && indexPath.row == 0) {
             valueStr = transactionInfo[keyStr].stringValue
         } else {
             valueStr = transaction[keyStr]?.stringValue ?? ""
+        }
+        
+        if indexPath.section == 1, indexPath.row == 2 {
+            if valueStr == "1" {
+                valueStr = "Settled"
+            } else if valueStr == "2" && valueStr == "3" {
+                valueStr = "Void"
+            } else {
+                valueStr = "Unsettled"
+            }
         }
         cell.detailTextLabel?.text = valueStr
         return cell
