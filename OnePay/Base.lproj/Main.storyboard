@@ -1700,27 +1700,27 @@
                                     <rect key="frame" x="0.0" y="0.0" width="414" height="120"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
-                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AR7-YW-BhG">
+                                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="AR7-YW-BhG">
                                             <rect key="frame" x="20" y="5" width="374" height="50"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wku-qe-N4f">
-                                                    <rect key="frame" x="0.0" y="0.0" width="177" height="50"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="182" height="50"/>
                                                     <subviews>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="calender" translatesAutoresizingMaskIntoConstraints="NO" id="AjU-h2-fng">
-                                                            <rect key="frame" x="137" y="10" width="30" height="30"/>
+                                                            <rect key="frame" x="142" y="10" width="30" height="30"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="30" id="C09-cg-zQF"/>
                                                                 <constraint firstAttribute="height" constant="30" id="hfK-V9-c7k"/>
                                                             </constraints>
                                                         </imageView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="haP-2O-bex">
-                                                            <rect key="frame" x="10" y="14.5" width="117" height="21"/>
+                                                            <rect key="frame" x="10" y="14.5" width="122" height="21"/>
                                                             <fontDescription key="fontDescription" name="Poppins-Medium" family="Poppins" pointSize="15"/>
                                                             <color key="textColor" name="blueTextColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="doa-4H-Wj1">
-                                                            <rect key="frame" x="0.0" y="0.0" width="177" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="182" height="50"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="calClicked:" destination="0j2-cU-tF7" eventType="touchUpInside" id="se9-zC-XPe"/>
@@ -1741,16 +1741,16 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YiY-Pc-C7m">
-                                                    <rect key="frame" x="187" y="0.0" width="187" height="50"/>
+                                                    <rect key="frame" x="192" y="0.0" width="182" height="50"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Source Application" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZjE-nY-qO2">
-                                                            <rect key="frame" x="10" y="15" width="137" height="20"/>
+                                                            <rect key="frame" x="10" y="15" width="132" height="20"/>
                                                             <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="14"/>
                                                             <color key="textColor" name="txtColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="arrowtriangle.down.fill" catalog="system" translatesAutoresizingMaskIntoConstraints="NO" id="3Fx-h7-Yfj">
-                                                            <rect key="frame" x="157" y="17" width="20" height="16"/>
+                                                            <rect key="frame" x="152" y="17" width="20" height="16"/>
                                                             <color key="tintColor" name="blueTextColor"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="width" constant="20" id="OMR-GC-jK1"/>
@@ -1766,7 +1766,7 @@
                                                             </variation>
                                                         </imageView>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6la-8b-kjJ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="187" height="50"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="182" height="50"/>
                                                             <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
                                                             <connections>
                                                                 <action selector="filterTypeClicked:" destination="0j2-cU-tF7" eventType="touchUpInside" id="BGr-ew-Dfn"/>
@@ -1788,9 +1788,7 @@
                                                 </view>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="YiY-Pc-C7m" firstAttribute="leading" secondItem="Wku-qe-N4f" secondAttribute="trailing" constant="10" id="53J-Lp-GDf"/>
                                                 <constraint firstAttribute="height" constant="50" id="9Om-Fb-yuo"/>
-                                                <constraint firstItem="YiY-Pc-C7m" firstAttribute="leading" secondItem="AR7-YW-BhG" secondAttribute="leading" constant="187" id="FwH-vl-5ET"/>
                                             </constraints>
                                         </stackView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tf3-iu-PW6">
@@ -1845,10 +1843,10 @@
                                     </subviews>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="AR7-YW-BhG" secondAttribute="trailing" constant="20" id="1Wi-Zh-sii"/>
                                         <constraint firstItem="AR7-YW-BhG" firstAttribute="top" secondItem="ZJi-DM-Zd7" secondAttribute="top" constant="5" id="EhT-RS-PTn"/>
-                                        <constraint firstAttribute="trailing" secondItem="AR7-YW-BhG" secondAttribute="trailing" constant="20" id="VDE-P5-yME"/>
                                         <constraint firstItem="tf3-iu-PW6" firstAttribute="top" secondItem="AR7-YW-BhG" secondAttribute="bottom" constant="10" id="YZj-It-u31"/>
-                                        <constraint firstItem="AR7-YW-BhG" firstAttribute="leading" secondItem="ZJi-DM-Zd7" secondAttribute="leading" constant="20" id="fgA-RS-60G"/>
+                                        <constraint firstItem="AR7-YW-BhG" firstAttribute="leading" secondItem="ZJi-DM-Zd7" secondAttribute="leading" constant="20" symbolic="YES" id="iR1-XM-FcO"/>
                                         <constraint firstItem="tf3-iu-PW6" firstAttribute="leading" secondItem="ZJi-DM-Zd7" secondAttribute="leading" constant="20" id="iyZ-aC-FYc"/>
                                         <constraint firstAttribute="trailing" secondItem="tf3-iu-PW6" secondAttribute="trailing" constant="20" id="tZP-5D-ynQ"/>
                                     </constraints>
@@ -1954,7 +1952,7 @@
                                     <action selector="menuClicked:" destination="0j2-cU-tF7" eventType="touchUpInside" id="6jh-oF-A42"/>
                                 </connections>
                             </button>
-                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" pagingEnabled="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bXu-BD-jxL" customClass="FilterTableView" customModule="OnePay" customModuleProvider="target">
+                            <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bXu-BD-jxL" customClass="FilterTableView" customModule="OnePay" customModuleProvider="target">
                                 <rect key="frame" x="207" y="180" width="187" height="250"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
