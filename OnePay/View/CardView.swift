@@ -162,6 +162,7 @@ extension CardView : UITextFieldDelegate {
         }
         print(text)
         handleAllFields(text: text)
+        cardViewDelegate?.CardViewTextFieldDidChange()
     }
 
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
@@ -338,7 +339,7 @@ extension CardView {
             if CardState(fromNumber: cardNumber) == .identified(.amex), text.count == 4 {
                 cvc = text
                // cvcField.resignFirstResponder()
-            } else if text.count == 3 {
+            } else if CardState(fromNumber: cardNumber) != .identified(.amex), text.count == 3 {
                 cvc = text
               //  cvcField.resignFirstResponder()
             } else {

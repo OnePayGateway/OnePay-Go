@@ -30,7 +30,7 @@ class FilterTableView: UITableView {
     
     func addUI() {
         self.dataSource = self
-        self.isHidden = true
+      //  self.isHidden = true
         self.layer.cornerRadius = 10
         self.clipsToBounds = false
         self.layer.masksToBounds = false

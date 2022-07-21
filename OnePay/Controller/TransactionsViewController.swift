@@ -30,6 +30,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     var isDroppedDown: Bool = false
     var selectedDate = Date()
     
+    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var optionListTable: FilterTableView!
     @IBOutlet weak var optionListTableWidth: NSLayoutConstraint!
     @IBOutlet weak var optionListTableHeight: NSLayoutConstraint!
@@ -41,7 +42,15 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.scrollView.contentSize = CGSize(width: 400, height: 250)
+        self.scrollView.layer.cornerRadius = 10
+        self.scrollView.clipsToBounds = false
+        self.scrollView.layer.masksToBounds = false
+        self.scrollView.layer.shadowColor = UIColor.lightGray.cgColor
+        self.scrollView.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.scrollView.layer.shadowRadius = 5.0
+        self.scrollView.layer.shadowOpacity = 0.5
+        
         dateTimeView.loadUI()
         self.addDateTimeViewObserver()
         self.dateLbl.text = Date().generateCurrentDateString()
@@ -121,7 +130,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     @IBAction func calClicked(_ sender: Any) {
-        self.optionListTable.isHidden = true
+        self.scrollView.isHidden = true
         self.filterTextField.resignFirstResponder()
         isDroppedDown = false
         self.dateTimeView.isHidden = false
@@ -129,10 +138,11 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBAction func filterTypeClicked(_ sender: Any) {
         guard isDroppedDown == false else {
-            self.optionListTable.isHidden = true
+            self.scrollView.isHidden = true
             isDroppedDown = false
             return
         }
+        self.scrollView.isHidden = false
         self.optionListTableWidth.constant = self.filterKeyBtn.frame.size.width
         self.optionListTableHeight.constant = 250
         self.optionListTableOriginY.constant = 74
@@ -140,7 +150,6 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
         self.optionListTable.loadFilterKey(list: filterKeyArr)
         self.optionListTable.reloadData()
         self.dateTimeView.isHidden = true
-        self.optionListTable.isHidden = false
         isDroppedDown = true
     }
     
@@ -374,7 +383,7 @@ extension TransactionsViewController {
                 self.filterKeyLbl.text = keyValue
                 self.filterValueLbl.text = ""
                 self.filterTextField.text = ""
-                self.optionListTable.isHidden = true
+                self.scrollView.isHidden = true
                 self.selectedFilterKey = keyValue
                 isDroppedDown = false
                 self.selectedFilterValue = nil
@@ -389,7 +398,7 @@ extension TransactionsViewController {
                     case "Transaction ID":
                         self.filterTextField.keyboardType = .numberPad
                     case "Customer ID":
-                        self.filterTextField.keyboardType = .numberPad
+                        self.filterTextField.keyboardType = .default
                     case "First Name":
                         self.filterTextField.keyboardType = .namePhonePad
                     case "Last Name":
@@ -410,7 +419,7 @@ extension TransactionsViewController {
         } else if tableView.tag == 11 {
             if let valueType = filterValueArr.reversed()[indexPath.row] as? String {
                 self.filterValueLbl.text = valueType
-                self.optionListTable.isHidden = true
+                self.scrollView.isHidden = true
                 isDroppedDown = false
                 self.selectedFilterValue = valueType
                 self.filterTransactions(for: valueType)
@@ -437,9 +446,9 @@ extension TransactionsViewController {
     }
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if (transactionTableView.isDragging || transactionTableView.isDecelerating)
+        if scrollView.tag != 100, (transactionTableView.isDragging || transactionTableView.isDecelerating)
         {
-            self.optionListTable.isHidden = true
+            self.scrollView.isHidden = true
             self.isDroppedDown = false
         }
     }
@@ -464,7 +473,7 @@ extension TransactionsViewController : UITextFieldDelegate {
             return false
         } else if selectedFilterKey == "Source Application" {
             guard isDroppedDown == false else {
-                self.optionListTable.isHidden = true
+                self.scrollView.isHidden = true
                 isDroppedDown = false
                 return false
             }
@@ -474,7 +483,7 @@ extension TransactionsViewController : UITextFieldDelegate {
             self.optionListTable.loadFilterValue(list: filterValueArr.reversed())
             self.optionListTable.reloadData()
             self.dateTimeView.isHidden = true
-            self.optionListTable.isHidden = false
+            self.scrollView.isHidden = false
             isDroppedDown = true
             return false
         }

@@ -26,11 +26,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         IQKeyboardManager.shared.enable = true
-        IQKeyboardManager.shared.keyboardDistanceFromTextField = 30.0
+       // IQKeyboardManager.shared.keyboardDistanceFromTextField = 30.0
         IQKeyboardManager.shared.shouldResignOnTouchOutside = true
       //  IQKeyboardManager.shared.previousNextDisplayMode = .alwaysHide
       //  IQKeyboardManager.shared.shouldShowToolbarPlaceholder = false
-        IQKeyboardManager.shared.enableAutoToolbar = false
+      //  IQKeyboardManager.shared.enableAutoToolbar = false
         
 //        MSAIApplicationInsights.setup(withInstrumentationKey: "349b4bcf-54cd-4618-8266-c074f29abb96")
 //        MSAIApplicationInsights.start()
