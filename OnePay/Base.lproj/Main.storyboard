@@ -1952,33 +1952,28 @@
                                     <action selector="menuClicked:" destination="0j2-cU-tF7" eventType="touchUpInside" id="6jh-oF-A42"/>
                                 </connections>
                             </button>
-                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="z8m-GF-9KJ">
+                            <scrollView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" tag="100" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z8m-GF-9KJ">
                                 <rect key="frame" x="210" y="180" width="185" height="250"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" estimatedSectionHeaderHeight="-1" sectionFooterHeight="18" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bXu-BD-jxL" customClass="FilterTableView" customModule="OnePay" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="185" height="250"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="bXu-BD-jxL" customClass="FilterTableView" customModule="OnePay" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="0.0" width="180" height="250"/>
+                                        <color key="backgroundColor" red="0.94901960784313721" green="0.94901960784313721" blue="0.96862745098039216" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="187" id="Gjb-7H-Qb6"/>
+                                            <constraint firstAttribute="width" constant="180" id="Iwy-Il-6zI"/>
                                         </constraints>
                                         <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="optionCell" id="bwO-zG-W6R">
-                                                <rect key="frame" x="16" y="49.5" width="153" height="43.5"/>
+                                                <rect key="frame" x="0.0" y="49.5" width="180" height="43.5"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="bwO-zG-W6R" id="b2q-5s-ZL3">
-                                                    <rect key="frame" x="0.0" y="0.0" width="153" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="180" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
                                         </prototypes>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="Gjb-7H-Qb6"/>
-                                            </mask>
-                                        </variation>
                                     </tableView>
                                 </subviews>
-                                <color key="backgroundColor" name="BgColor"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="bXu-BD-jxL" secondAttribute="trailing" id="9Ei-ps-t2o"/>
                                     <constraint firstAttribute="height" constant="250" id="9bb-Xx-Tw4"/>
@@ -1992,6 +1987,12 @@
                                 </constraints>
                                 <viewLayoutGuide key="contentLayoutGuide" id="G1R-zk-EHC"/>
                                 <viewLayoutGuide key="frameLayoutGuide" id="EAj-KD-dFQ"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="GSj-6v-slB"/>
+                                        <exclude reference="ZkH-Ig-5wZ"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reporting" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hh9-aa-261">
                                 <rect key="frame" x="165" y="82" width="84" height="24"/>
@@ -2110,13 +2111,14 @@
                         <outlet property="dateTimeView" destination="Kyc-v1-Y5N" id="sFH-tl-4tv"/>
                         <outlet property="filterKeyBtn" destination="6la-8b-kjJ" id="AjO-zA-5xB"/>
                         <outlet property="filterKeyLbl" destination="ZjE-nY-qO2" id="2qS-IF-a0u"/>
+                        <outlet property="filterTableWidth" destination="Iwy-Il-6zI" id="xji-4D-OhB"/>
                         <outlet property="filterTextField" destination="aeu-hF-DkX" id="wfW-zj-XlI"/>
                         <outlet property="filterValueLbl" destination="PHp-q6-9C6" id="4Yr-wm-18y"/>
                         <outlet property="optionListTable" destination="bXu-BD-jxL" id="9DH-Or-hDP"/>
-                        <outlet property="optionListTableHeight" destination="9bb-Xx-Tw4" id="epb-0e-ZKR"/>
-                        <outlet property="optionListTableOriginY" destination="Ypv-Ct-BA5" id="4sj-Rg-ghr"/>
-                        <outlet property="optionListTableWidth" destination="AhV-yb-3cL" id="LdB-wr-TY7"/>
                         <outlet property="scrollView" destination="z8m-GF-9KJ" id="5dy-pJ-ghf"/>
+                        <outlet property="scrollViewHeight" destination="9bb-Xx-Tw4" id="epb-0e-ZKR"/>
+                        <outlet property="scrollViewOriginY" destination="Ypv-Ct-BA5" id="4sj-Rg-ghr"/>
+                        <outlet property="scrollViewWidth" destination="AhV-yb-3cL" id="LdB-wr-TY7"/>
                         <outlet property="searchImgView" destination="vP7-mO-Hp1" id="cXQ-yt-JAt"/>
                         <outlet property="transactionTableView" destination="F1r-5D-beu" id="6eU-Dp-1UZ"/>
                         <segue destination="fPt-oh-sFw" kind="show" id="ZOF-Dl-mro"/>

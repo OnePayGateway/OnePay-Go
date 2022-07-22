@@ -32,10 +32,11 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
     
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var optionListTable: FilterTableView!
-    @IBOutlet weak var optionListTableWidth: NSLayoutConstraint!
-    @IBOutlet weak var optionListTableHeight: NSLayoutConstraint!
-    @IBOutlet weak var optionListTableOriginY: NSLayoutConstraint!
-    
+    @IBOutlet weak var scrollViewWidth: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewHeight: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewOriginY: NSLayoutConstraint!
+    @IBOutlet weak var filterTableWidth: NSLayoutConstraint!
+
     var filterKeyArr = Array<Any>()
     var filterValueArr = Set<AnyHashable>()
     
@@ -143,9 +144,15 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
             return
         }
         self.scrollView.isHidden = false
-        self.optionListTableWidth.constant = self.filterKeyBtn.frame.size.width
-        self.optionListTableHeight.constant = 250
-        self.optionListTableOriginY.constant = 74
+        self.scrollViewWidth.constant = self.filterKeyBtn.frame.size.width
+        if self.filterKeyBtn.frame.size.width > 180 {
+            self.filterTableWidth.constant = self.filterKeyBtn.frame.size.width
+        } else {
+            self.filterTableWidth.constant = 200
+        }
+        self.scrollViewWidth.constant = self.filterKeyBtn.frame.size.width
+        self.scrollViewHeight.constant = 250
+        self.scrollViewOriginY.constant = 74
         self.optionListTable.delegate = self
         self.optionListTable.loadFilterKey(list: filterKeyArr)
         self.optionListTable.reloadData()
@@ -477,8 +484,9 @@ extension TransactionsViewController : UITextFieldDelegate {
                 isDroppedDown = false
                 return false
             }
-            self.optionListTableWidth.constant = self.view.frame.size.width - 40
-            self.optionListTableOriginY.constant = 134
+            self.scrollViewWidth.constant = self.view.frame.size.width - 40
+            self.filterTableWidth.constant = self.view.frame.size.width - 40
+            self.scrollViewOriginY.constant = 134
             self.optionListTable.delegate = self
             self.optionListTable.loadFilterValue(list: filterValueArr.reversed())
             self.optionListTable.reloadData()
