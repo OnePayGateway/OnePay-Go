@@ -1,0 +1,6 @@
+framework module MiuraSDK {
+  umbrella header "MiuraSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

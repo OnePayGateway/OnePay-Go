@@ -3,4 +3,22 @@
    uuid = "B19C243C-F0A3-4664-BF65-02B4CBFC206B"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B92B0E69-B089-4E0E-9A7E-0F8C825F143A"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "OnePay/Controller/CheckoutViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2504"
+            endingLineNumber = "2504"
+            landmarkName = "miuraManager(_:cardStatusChange:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>

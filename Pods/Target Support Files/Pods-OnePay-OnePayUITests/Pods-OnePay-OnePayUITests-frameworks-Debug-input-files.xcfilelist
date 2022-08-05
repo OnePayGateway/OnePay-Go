@@ -1,5 +1,6 @@
 ${PODS_ROOT}/Target Support Files/Pods-OnePay-OnePayUITests/Pods-OnePay-OnePayUITests-frameworks.sh
 ${BUILT_PRODUCTS_DIR}/IQKeyboardManagerSwift/IQKeyboardManagerSwift.framework
+${BUILT_PRODUCTS_DIR}/MiuraSDK/MiuraSDK.framework
 ${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework
 ${BUILT_PRODUCTS_DIR}/SideMenuSwift/SideMenuSwift.framework
 ${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework

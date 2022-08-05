@@ -50,11 +50,27 @@ class TransactionInfoViewController: UITableViewController {
                 self.transactionIdLbl.text = "ID:\(self.transactionId!)"
                 self.cardInfoLbl.text = "\(detail.cardType!)***\(detail.lastFourDigits!)"
                 self.settleStatusLbl.text = detail.settlementStatus
-                if detail.settlementStatus?.lowercased() == "settled" {
-                    self.voidBtn.setTitle("Refund", for: .normal)
-                } else {
-                    self.voidBtn.setTitle("Void", for: .normal)
+                
+                if self.transactionStatus.lowercased() != "declined" {
+                    self.receiptBtn.isHidden = false
                 }
+                
+                if detail.resultCode == 1 {
+                if detail.TransactionType == 1 || detail.TransactionType == 7 || detail.TransactionType == 8 {
+                    if detail.settlementStatus?.lowercased() != "settled" {
+                        self.voidBtn.setTitle("Void", for: .normal)
+                        self.voidBtn.isHidden = false
+                    }
+                } else if detail.TransactionType == 2 {
+                    if detail.settlementStatus?.lowercased() == "settled"  {
+                        self.voidBtn.setTitle("Refund", for: .normal)
+                        self.voidBtn.isHidden = false
+                    } else if detail.settlementStatus?.lowercased() == "unsettled" {
+                        self.voidBtn.setTitle("Void", for: .normal)
+                        self.voidBtn.isHidden = false
+                    }
+                }
+              }
             }
         }
     }
@@ -63,10 +79,6 @@ class TransactionInfoViewController: UITableViewController {
         super.viewDidLoad()
         
         cardBrandImageView.image = cardBrandImage
-        if(transactionStatus.lowercased() == "void" || transactionStatus.lowercased() == "declined") {
-            self.voidBtn.isHidden = true
-            self.receiptBtn.isHidden = true
-        }
         
         if transactionStatus.lowercased() == "approved" {
             topView.backgroundColor = UIColor(named: "successColor")
@@ -109,13 +121,21 @@ class TransactionInfoViewController: UITableViewController {
                 let cardType = transaction?["AuthNtwkName"]?.stringValue
                 let lastFour = transaction?["AccountNumberLast4"]?.stringValue
                 let receiptNum = transaction?["InvoiceNumber"]?.stringValue
-                
+                let transType = transaction?["TransactionType"]?.intValue
                 let settleStatus = transaction?["SettledStatus"]?.intValue
                 let paymentStatus = transaction?["ResultText"]?.stringValue
+                let resultCode = transaction?["ResultCode"]?.intValue
+
                 let dateTime = json?["DateTime"].stringValue.convertToDate(with: "MM/dd/yy hh:mm a")?.generateCurrentDateTime()
                 
-                let detail = TransactionDetail(itemname: itemName, itemamount: itemAmount, totalamount: totalAmount, cardtype: cardType, lastfour: lastFour, receiptnum: receiptNum)
-                detail.settlementStatus = settleStatus == 1 ? "Settled" : "Unsettled"
+                let detail = TransactionDetail(itemname: itemName, itemamount: itemAmount, totalamount: totalAmount, cardtype: cardType, lastfour: lastFour, receiptnum: receiptNum, transactionType: transType, resultcode: resultCode)
+                if settleStatus == 1 {
+                    detail.settlementStatus = "Settled"
+                } else if settleStatus == 2 || settleStatus == 3 {
+                    detail.settlementStatus = "Void"
+                } else {
+                    detail.settlementStatus = "Unsettled"
+                }
                 detail.paymentStatus = paymentStatus
                 if let dateTimeArr = dateTime?.components(separatedBy: ","), dateTimeArr.count > 1 {
                     detail.date = dateTimeArr[0]
@@ -164,7 +184,7 @@ class TransactionInfoViewController: UITableViewController {
     func makeVoidTransaction() {
         var cardInfo = Dictionary<String, Any>()
         cardInfo["number"] = self.transactionDetail?.lastFourDigits
-        VoidTransactionService().makePayment(amount:String(format: "%0.2f", self.transactionDetail!.totalAmount!), transType: self.voidBtn.currentTitle == "Void" ? "5" : "8", transactionId: "\(self.transactionId!)", cardInfo: cardInfo, marketCode: "R") { (json, err) in
+        VoidTransactionService().makePayment(amount:String(format: "%0.2f", self.transactionDetail!.totalAmount!), transType: self.voidBtn.currentTitle == "Void" ? "5" : "7", transactionId: "\(self.transactionId!)", cardInfo: cardInfo, marketCode: "R") { (json, err) in
             DispatchQueue.main.async {
                 self.hideSpinner()
                 guard err == nil else {
@@ -182,7 +202,9 @@ class TransactionInfoViewController: UITableViewController {
                 if let code = response["result_code"]?.intValue, code == 1 {
                     print("payment success")
                     self.hideSpinner()
-                    self.showConfirmAlert()
+                    if let status = response["result_text"]?.stringValue {
+                        self.showConfirmAlert(message: status)
+                    }
                 } else if let status = response["result_text"]?.stringValue {
                     self.hideSpinner()
                     self.displayAlert(title: status, message: "")
@@ -191,9 +213,9 @@ class TransactionInfoViewController: UITableViewController {
         }
     }
     
-    func showConfirmAlert() {
-        let alertVc = UIAlertController(title: "Void transaction is done", message: "", preferredStyle: .alert)
-        let action = UIAlertAction(title: "Done", style: .default) { (done) in
+    func showConfirmAlert(message:String) {
+        let alertVc = UIAlertController(title: message, message: "", preferredStyle: .alert)
+        let action = UIAlertAction(title: "Ok", style: .default) { (done) in
             self.vDelegate.madeVoidPayment()
             self.navigationController?.popViewController(animated: true)
         }

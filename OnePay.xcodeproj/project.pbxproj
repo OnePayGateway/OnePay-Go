@@ -90,20 +90,6 @@
 		E3ACAA7222C617D800CBEAA1 /* onepay-logo-animation.gif in Resources */ = {isa = PBXBuildFile; fileRef = E3ACAA7122C617D800CBEAA1 /* onepay-logo-animation.gif */; };
 		E3ACAA7422C622A500CBEAA1 /* PortalWebviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3ACAA7322C622A500CBEAA1 /* PortalWebviewViewController.swift */; };
 		E3B64BCA24C58F23004B0FC2 /* MTDataViewerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B64BC924C58F22004B0FC2 /* MTDataViewerViewController.swift */; };
-		E3B734C626BAD0FB006AA7AE /* DisplayMediaData.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734A826BAD0FB006AA7AE /* DisplayMediaData.m */; };
-		E3B734C726BAD0FB006AA7AE /* MPIUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734A926BAD0FB006AA7AE /* MPIUtil.m */; };
-		E3B734C826BAD0FB006AA7AE /* MPIKernelHashValues.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734AA26BAD0FB006AA7AE /* MPIKernelHashValues.m */; };
-		E3B734C926BAD0FB006AA7AE /* MPIXMLParserUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734AB26BAD0FB006AA7AE /* MPIXMLParserUtil.m */; };
-		E3B734CA26BAD0FB006AA7AE /* MPIBase64Util.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734AC26BAD0FB006AA7AE /* MPIBase64Util.m */; };
-		E3B734CB26BAD0FB006AA7AE /* MPIBinaryUtil.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734AD26BAD0FB006AA7AE /* MPIBinaryUtil.m */; };
-		E3B734CC26BAD0FB006AA7AE /* MPICommandCreator.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734B426BAD0FB006AA7AE /* MPICommandCreator.m */; };
-		E3B734CD26BAD0FB006AA7AE /* MPICommandExecutor.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734B526BAD0FB006AA7AE /* MPICommandExecutor.m */; };
-		E3B734CE26BAD0FB006AA7AE /* MiuraManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734B926BAD0FB006AA7AE /* MiuraManager.m */; };
-		E3B734CF26BAD0FB006AA7AE /* MPIDescription.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734BC26BAD0FB006AA7AE /* MPIDescription.m */; };
-		E3B734D026BAD0FB006AA7AE /* MPITLVParser.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734BD26BAD0FB006AA7AE /* MPITLVParser.m */; };
-		E3B734D126BAD0FB006AA7AE /* MPITag.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734BF26BAD0FB006AA7AE /* MPITag.m */; };
-		E3B734D226BAD0FB006AA7AE /* MPIResponseData.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734C326BAD0FB006AA7AE /* MPIResponseData.m */; };
-		E3B734D326BAD0FB006AA7AE /* MPITLVObject.m in Sources */ = {isa = PBXBuildFile; fileRef = E3B734C426BAD0FB006AA7AE /* MPITLVObject.m */; };
 		E3B9A8BB2292A3F800B01A28 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8BA2292A3F800B01A28 /* ViewController.swift */; };
 		E3B9A8BD2292A86C00B01A28 /* TransactionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8BC2292A86C00B01A28 /* TransactionsViewController.swift */; };
 		E3B9A8BF2292C7FB00B01A28 /* Menu.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3B9A8BE2292C7FA00B01A28 /* Menu.swift */; };
@@ -253,37 +239,6 @@
 		E3ACAA7122C617D800CBEAA1 /* onepay-logo-animation.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; path = "onepay-logo-animation.gif"; sourceTree = "<group>"; };
 		E3ACAA7322C622A500CBEAA1 /* PortalWebviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortalWebviewViewController.swift; sourceTree = "<group>"; };
 		E3B64BC924C58F22004B0FC2 /* MTDataViewerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MTDataViewerViewController.swift; sourceTree = "<group>"; };
-		E3B734A326BAD0FB006AA7AE /* StringDefines.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StringDefines.h; sourceTree = "<group>"; };
-		E3B734A526BAD0FB006AA7AE /* MPIBinaryUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIBinaryUtil.h; sourceTree = "<group>"; };
-		E3B734A626BAD0FB006AA7AE /* MPIBase64Util.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIBase64Util.h; sourceTree = "<group>"; };
-		E3B734A726BAD0FB006AA7AE /* MPIXMLParserUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIXMLParserUtil.h; sourceTree = "<group>"; };
-		E3B734A826BAD0FB006AA7AE /* DisplayMediaData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DisplayMediaData.m; sourceTree = "<group>"; };
-		E3B734A926BAD0FB006AA7AE /* MPIUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIUtil.m; sourceTree = "<group>"; };
-		E3B734AA26BAD0FB006AA7AE /* MPIKernelHashValues.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIKernelHashValues.m; sourceTree = "<group>"; };
-		E3B734AB26BAD0FB006AA7AE /* MPIXMLParserUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIXMLParserUtil.m; sourceTree = "<group>"; };
-		E3B734AC26BAD0FB006AA7AE /* MPIBase64Util.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIBase64Util.m; sourceTree = "<group>"; };
-		E3B734AD26BAD0FB006AA7AE /* MPIBinaryUtil.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIBinaryUtil.m; sourceTree = "<group>"; };
-		E3B734AE26BAD0FB006AA7AE /* MPIKernelHashValues.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIKernelHashValues.h; sourceTree = "<group>"; };
-		E3B734AF26BAD0FB006AA7AE /* MPIUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIUtil.h; sourceTree = "<group>"; };
-		E3B734B026BAD0FB006AA7AE /* DisplayMediaData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DisplayMediaData.h; sourceTree = "<group>"; };
-		E3B734B126BAD0FB006AA7AE /* DebugDefine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DebugDefine.h; sourceTree = "<group>"; };
-		E3B734B226BAD0FB006AA7AE /* MiuraSdk-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MiuraSdk-Prefix.pch"; sourceTree = "<group>"; };
-		E3B734B426BAD0FB006AA7AE /* MPICommandCreator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPICommandCreator.m; sourceTree = "<group>"; };
-		E3B734B526BAD0FB006AA7AE /* MPICommandExecutor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPICommandExecutor.m; sourceTree = "<group>"; };
-		E3B734B626BAD0FB006AA7AE /* MiuraManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiuraManager.h; sourceTree = "<group>"; };
-		E3B734B726BAD0FB006AA7AE /* MPICommandExecutor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPICommandExecutor.h; sourceTree = "<group>"; };
-		E3B734B826BAD0FB006AA7AE /* MPICommandCreator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPICommandCreator.h; sourceTree = "<group>"; };
-		E3B734B926BAD0FB006AA7AE /* MiuraManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiuraManager.m; sourceTree = "<group>"; };
-		E3B734BC26BAD0FB006AA7AE /* MPIDescription.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIDescription.m; sourceTree = "<group>"; };
-		E3B734BD26BAD0FB006AA7AE /* MPITLVParser.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITLVParser.m; sourceTree = "<group>"; };
-		E3B734BE26BAD0FB006AA7AE /* MPIResponseData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIResponseData.h; sourceTree = "<group>"; };
-		E3B734BF26BAD0FB006AA7AE /* MPITag.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITag.m; sourceTree = "<group>"; };
-		E3B734C026BAD0FB006AA7AE /* MPITLVObject.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITLVObject.h; sourceTree = "<group>"; };
-		E3B734C126BAD0FB006AA7AE /* MPITLVParser.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITLVParser.h; sourceTree = "<group>"; };
-		E3B734C226BAD0FB006AA7AE /* MPIDescription.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPIDescription.h; sourceTree = "<group>"; };
-		E3B734C326BAD0FB006AA7AE /* MPIResponseData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPIResponseData.m; sourceTree = "<group>"; };
-		E3B734C426BAD0FB006AA7AE /* MPITLVObject.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MPITLVObject.m; sourceTree = "<group>"; };
-		E3B734C526BAD0FB006AA7AE /* MPITag.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MPITag.h; sourceTree = "<group>"; };
 		E3B9A8BA2292A3F800B01A28 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E3B9A8BC2292A86C00B01A28 /* TransactionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsViewController.swift; sourceTree = "<group>"; };
 		E3B9A8BE2292C7FA00B01A28 /* Menu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Menu.swift; sourceTree = "<group>"; };
@@ -584,7 +539,6 @@
 				E317CC19229D64CA00480CD5 /* libstdc++.dylib */,
 				E3C6590922A13863005F5A53 /* OnePay-Bridging-Header.h */,
 				E317CC1B229D667600480CD5 /* magtekParser */,
-				E3B734A126BAD0FB006AA7AE /* MiuraSdk */,
 				E3C658E322A13432005F5A53 /* magTekClass */,
 				E3A0950222C4DC2200489480 /* bbPosLibrary */,
 				E36C1055228E9ED900147F67 /* Extention */,
@@ -660,85 +614,6 @@
 			);
 			name = bbPosLibrary;
 			path = Controller/bbPosLibrary;
-			sourceTree = "<group>";
-		};
-		E3B734A126BAD0FB006AA7AE /* MiuraSdk */ = {
-			isa = PBXGroup;
-			children = (
-				E3B734A226BAD0FB006AA7AE /* Resources */,
-				E3B734A426BAD0FB006AA7AE /* Others */,
-				E3B734B126BAD0FB006AA7AE /* DebugDefine.h */,
-				E3B734B226BAD0FB006AA7AE /* MiuraSdk-Prefix.pch */,
-				E3B734B326BAD0FB006AA7AE /* MiuraManager */,
-				E3B734BA26BAD0FB006AA7AE /* TLVParser */,
-			);
-			name = MiuraSdk;
-			path = Controller/MiuraSdk;
-			sourceTree = "<group>";
-		};
-		E3B734A226BAD0FB006AA7AE /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				E3B734A326BAD0FB006AA7AE /* StringDefines.h */,
-			);
-			path = Resources;
-			sourceTree = "<group>";
-		};
-		E3B734A426BAD0FB006AA7AE /* Others */ = {
-			isa = PBXGroup;
-			children = (
-				E3B734A526BAD0FB006AA7AE /* MPIBinaryUtil.h */,
-				E3B734A626BAD0FB006AA7AE /* MPIBase64Util.h */,
-				E3B734A726BAD0FB006AA7AE /* MPIXMLParserUtil.h */,
-				E3B734A826BAD0FB006AA7AE /* DisplayMediaData.m */,
-				E3B734A926BAD0FB006AA7AE /* MPIUtil.m */,
-				E3B734AA26BAD0FB006AA7AE /* MPIKernelHashValues.m */,
-				E3B734AB26BAD0FB006AA7AE /* MPIXMLParserUtil.m */,
-				E3B734AC26BAD0FB006AA7AE /* MPIBase64Util.m */,
-				E3B734AD26BAD0FB006AA7AE /* MPIBinaryUtil.m */,
-				E3B734AE26BAD0FB006AA7AE /* MPIKernelHashValues.h */,
-				E3B734AF26BAD0FB006AA7AE /* MPIUtil.h */,
-				E3B734B026BAD0FB006AA7AE /* DisplayMediaData.h */,
-			);
-			path = Others;
-			sourceTree = "<group>";
-		};
-		E3B734B326BAD0FB006AA7AE /* MiuraManager */ = {
-			isa = PBXGroup;
-			children = (
-				E3B734B426BAD0FB006AA7AE /* MPICommandCreator.m */,
-				E3B734B526BAD0FB006AA7AE /* MPICommandExecutor.m */,
-				E3B734B626BAD0FB006AA7AE /* MiuraManager.h */,
-				E3B734B726BAD0FB006AA7AE /* MPICommandExecutor.h */,
-				E3B734B826BAD0FB006AA7AE /* MPICommandCreator.h */,
-				E3B734B926BAD0FB006AA7AE /* MiuraManager.m */,
-			);
-			path = MiuraManager;
-			sourceTree = "<group>";
-		};
-		E3B734BA26BAD0FB006AA7AE /* TLVParser */ = {
-			isa = PBXGroup;
-			children = (
-				E3B734BB26BAD0FB006AA7AE /* Parser */,
-			);
-			path = TLVParser;
-			sourceTree = "<group>";
-		};
-		E3B734BB26BAD0FB006AA7AE /* Parser */ = {
-			isa = PBXGroup;
-			children = (
-				E3B734BC26BAD0FB006AA7AE /* MPIDescription.m */,
-				E3B734BD26BAD0FB006AA7AE /* MPITLVParser.m */,
-				E3B734BE26BAD0FB006AA7AE /* MPIResponseData.h */,
-				E3B734BF26BAD0FB006AA7AE /* MPITag.m */,
-				E3B734C026BAD0FB006AA7AE /* MPITLVObject.h */,
-				E3B734C126BAD0FB006AA7AE /* MPITLVParser.h */,
-				E3B734C226BAD0FB006AA7AE /* MPIDescription.h */,
-				E3B734C326BAD0FB006AA7AE /* MPIResponseData.m */,
-				E3B734C426BAD0FB006AA7AE /* MPITLVObject.m */,
-				E3B734C526BAD0FB006AA7AE /* MPITag.h */,
-			);
-			path = Parser;
 			sourceTree = "<group>";
 		};
 		E3C658E322A13432005F5A53 /* magTekClass */ = {
@@ -1021,7 +896,6 @@
 				E3ACAA7422C622A500CBEAA1 /* PortalWebviewViewController.swift in Sources */,
 				E3E8746828649B790078B963 /* FilterTableView.swift in Sources */,
 				E311680026C566AF006CE2BA /* RkiImportStatus+description.swift in Sources */,
-				E3B734CB26BAD0FB006AA7AE /* MPIBinaryUtil.m in Sources */,
 				E3F3BE5228634D73007508AF /* CalenderHeaderCell.swift in Sources */,
 				E35D49CC22D36E8A00171E30 /* DevicesListTableViewController.swift in Sources */,
 				E3C788FD22DF167C00FABBCE /* TransactionDetailService.swift in Sources */,
@@ -1030,10 +904,7 @@
 				E390E80E228D5E1F0069004A /* LoginViewController.swift in Sources */,
 				E3EC7C7422A93A9300F43456 /* BLEScannerList.swift in Sources */,
 				E30A92FE2297D3C500A0434F /* SignatureViewController.swift in Sources */,
-				E3B734D026BAD0FB006AA7AE /* MPITLVParser.m in Sources */,
-				E3B734D326BAD0FB006AA7AE /* MPITLVObject.m in Sources */,
 				E3616DFB2293F37900728C3C /* Checkout.swift in Sources */,
-				E3B734D126BAD0FB006AA7AE /* MPITag.m in Sources */,
 				E3F214EC2862191C00144581 /* ProfileTableViewCell.swift in Sources */,
 				E332A2512296E6AC00F4D383 /* PaymentService.swift in Sources */,
 				E3C788FF22DF168D00FABBCE /* TransactionDetail.swift in Sources */,
@@ -1043,36 +914,29 @@
 				E3F3BE5628634D73007508AF /* Date+Exts.swift in Sources */,
 				E3259E3F22DC96DB000FD252 /* ApiKeyService.swift in Sources */,
 				E36C1054228E9BCA00147F67 /* LoginView.swift in Sources */,
-				E3B734CF26BAD0FB006AA7AE /* MPIDescription.m in Sources */,
 				E3F3BE5428634D73007508AF /* CalenderCell.swift in Sources */,
 				E3CB3CCD231D12B40070D676 /* FullTransnDetailTableViewController.swift in Sources */,
 				E3B9A8BF2292C7FB00B01A28 /* Menu.swift in Sources */,
 				E36AF5AD2317F228004D3D63 /* Button.swift in Sources */,
 				E355EB7A22FD668E000271CF /* Signature.swift in Sources */,
 				E311680226C566AF006CE2BA /* RestRKIManager.swift in Sources */,
-				E3B734C726BAD0FB006AA7AE /* MPIUtil.m in Sources */,
 				E38EC4E122B24DB600277ECA /* BorderedButton.swift in Sources */,
 				E3F3BE4928634D44007508AF /* DateTimeSelectionView.swift in Sources */,
 				E36C105C228EA45A00147F67 /* BaseRequest.swift in Sources */,
-				E3B734CC26BAD0FB006AA7AE /* MPICommandCreator.m in Sources */,
 				E3E2EE7522DE178400C8C4BC /* Date.swift in Sources */,
 				E3C64D1423E1B589000A9DC3 /* HexUtil.swift in Sources */,
-				E3B734CD26BAD0FB006AA7AE /* MPICommandExecutor.m in Sources */,
 				E3C73E9622BBCD14007DB7FB /* View.swift in Sources */,
-				E3B734C826BAD0FB006AA7AE /* MPIKernelHashValues.m in Sources */,
 				E3CE81BB285B632400613FD9 /* StatusViewController.swift in Sources */,
 				E3F3BE5328634D73007508AF /* Day.swift in Sources */,
 				E3B9A8C32292DA4C00B01A28 /* ReportsViewController.swift in Sources */,
 				E36C1059228EA2C800147F67 /* LoginService.swift in Sources */,
 				E3A094E722C4D43100489480 /* Utils.swift in Sources */,
 				E3E2EE7722DE1F5700C8C4BC /* Image.swift in Sources */,
-				E3B734C926BAD0FB006AA7AE /* MPIXMLParserUtil.m in Sources */,
 				E31D297A285892D600565E3C /* textField.swift in Sources */,
 				E3B9A8BD2292A86C00B01A28 /* TransactionsViewController.swift in Sources */,
 				E3B9A8C92292E54F00B01A28 /* CheckoutView.swift in Sources */,
 				E316843722AFC6B800A824E9 /* ReceiptView.swift in Sources */,
 				E3B9A8CD2292E59F00B01A28 /* MenuListView.swift in Sources */,
-				E3B734D226BAD0FB006AA7AE /* MPIResponseData.m in Sources */,
 				E31167FF26C566AF006CE2BA /* RkiInitStatus+description.swift in Sources */,
 				E36C105E228EA46700147F67 /* BaseAPIs.swift in Sources */,
 				E3B9A8BB2292A3F800B01A28 /* ViewController.swift in Sources */,
@@ -1082,8 +946,6 @@
 				E3616E012295463B00728C3C /* Payment.swift in Sources */,
 				E3616DFF22953DEF00728C3C /* PaymentModeView.swift in Sources */,
 				E3F81AE72869820300621A29 /* PaymentStatusView.swift in Sources */,
-				E3B734C626BAD0FB006AA7AE /* DisplayMediaData.m in Sources */,
-				E3B734CE26BAD0FB006AA7AE /* MiuraManager.m in Sources */,
 				E30A930022981ED800A0434F /* YPDrawSignatureView.swift in Sources */,
 				E3F214E42861EE0A00144581 /* ProfileTableViewController.swift in Sources */,
 				E36C1060228EA51A00147F67 /* Login.swift in Sources */,
@@ -1091,7 +953,6 @@
 				E39A5A672330EB1400AD4CC6 /* CardParser.swift in Sources */,
 				E388F95722AA9F85005CA2EB /* ReceiptViewController.swift in Sources */,
 				E38AB5B022CE0BBA00999CF6 /* AppSettingsTableViewController.swift in Sources */,
-				E3B734CA26BAD0FB006AA7AE /* MPIBase64Util.m in Sources */,
 				E3C7890122DF35E700FABBCE /* VoidTransactionService.swift in Sources */,
 				E36C1063228EAD5C00147F67 /* Session.swift in Sources */,
 				E36C1065228EE99E00147F67 /* MenuListViewController.swift in Sources */,
@@ -1277,7 +1138,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 25NMC73834;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1329,7 +1190,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 10;
+				CURRENT_PROJECT_VERSION = 11;
 				DEVELOPMENT_TEAM = 25NMC73834;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",

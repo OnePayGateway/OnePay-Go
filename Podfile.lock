@@ -9,6 +9,7 @@ PODS:
     - AppCenter/Core
   - ApplicationInsights (1.0-beta.8)
   - IQKeyboardManagerSwift (6.5.6)
+  - MiuraSDK (0.1.0)
   - ReachabilitySwift (5.0.0)
   - SideMenuSwift (2.0.7)
   - SkyFloatingLabelTextField (3.8.0)
@@ -18,6 +19,7 @@ DEPENDENCIES:
   - AppCenter
   - ApplicationInsights (= 1.0-beta.8)
   - IQKeyboardManagerSwift
+  - MiuraSDK (from `./Mobile-SDK-iOS`)
   - ReachabilitySwift
   - SideMenuSwift
   - SkyFloatingLabelTextField (~> 3.0)
@@ -33,15 +35,20 @@ SPEC REPOS:
     - SkyFloatingLabelTextField
     - SwiftyJSON
 
+EXTERNAL SOURCES:
+  MiuraSDK:
+    :path: "./Mobile-SDK-iOS"
+
 SPEC CHECKSUMS:
   AppCenter: 87ef6eefd8ade4df59e88951288587429f3dd2a5
   ApplicationInsights: 40e61e9ee7cce11aac7e5f8bffc91e1309f3c3de
   IQKeyboardManagerSwift: c7df9d2deb356c04522f5c4b7b6e4ce4d8ed94fe
+  MiuraSDK: 84eaab97f9a31efa644d337124dd22ee6301f4e4
   ReachabilitySwift: 985039c6f7b23a1da463388634119492ff86c825
   SideMenuSwift: ffbbc88d23741932177ad1320df837cedfb3bc5e
   SkyFloatingLabelTextField: 5a338412114808e961fe2d14ea2c5452c8b6e4aa
   SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 7be3ce3d3edab0cc1c74275506d356ef52d42d10
+PODFILE CHECKSUM: 869066221fd6510d18bb72a4cfb483376204a859
 
 COCOAPODS: 1.11.2

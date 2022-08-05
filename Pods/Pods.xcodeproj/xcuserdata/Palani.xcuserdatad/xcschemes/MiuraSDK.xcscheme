@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "039154830D37C8BDB1FEF4E03DC95BB0"
-               BuildableName = "Pods_OnePayTests.framework"
-               BlueprintName = "Pods-OnePayTests"
+               BlueprintIdentifier = "E4871F524C67488A259B46183F15915A"
+               BuildableName = "MiuraSDK.framework"
+               BlueprintName = "MiuraSDK"
                ReferencedContainer = "container:Pods.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>

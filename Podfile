@@ -13,6 +13,7 @@ target 'OnePay' do
     pod 'ReachabilitySwift'
     pod "ApplicationInsights", '1.0-beta.8'
     pod 'AppCenter'
+    pod 'MiuraSDK', :path => './Mobile-SDK-iOS'
 
   target 'OnePayTests' do
     inherit! :search_paths

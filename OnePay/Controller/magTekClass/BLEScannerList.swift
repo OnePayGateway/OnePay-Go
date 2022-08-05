@@ -8,11 +8,8 @@
 
 import UIKit
 
-
 protocol BLEScanListEvent {
-    
     func didSelectBLEReader(_ per: CBPeripheral);
-
 }
 
 class BLEScannerList: UITableViewController, MTSCRAEventDelegate {
@@ -27,7 +24,6 @@ class BLEScannerList: UITableViewController, MTSCRAEventDelegate {
     init(style: UITableView.Style, lib:MTSCRA) {
         super.init(style: style);
         self.lib = lib
-        
     }
 
     required init?(coder aDecoder: NSCoder) {
@@ -38,9 +34,8 @@ class BLEScannerList: UITableViewController, MTSCRAEventDelegate {
         super.viewDidAppear(animated)
        // UIApplication.shared.statusBarUIView?.backgroundColor = UIColor.black
 
-        let barButton = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action:#selector(cancelClicked))
+        let barButton = UIBarButtonItem(title: "Cancel", style: .done, target: self, action:#selector(cancelClicked))
         self.navigationItem.leftBarButtonItem = barButton
-        
         if(lib != nil)
         {
             lib?.delegate = self;
@@ -48,18 +43,14 @@ class BLEScannerList: UITableViewController, MTSCRAEventDelegate {
             let delayTime = DispatchTime.now() + Double(Int64(0.1 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
             DispatchQueue.main.asyncAfter(deadline: delayTime) {
                 self.lib?.startScanningForPeripherals();
-                
             }
         }
-
     }
-    
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
        // UIApplication.shared.statusBarUIView?.backgroundColor = UIColor.black
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad();
@@ -79,6 +70,10 @@ class BLEScannerList: UITableViewController, MTSCRAEventDelegate {
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1;
+    }
+    
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Available Devices"
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

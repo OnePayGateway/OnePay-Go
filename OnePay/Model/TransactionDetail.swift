@@ -21,14 +21,17 @@ class TransactionDetail : NSObject {
     var date: String?
     var time: String?
     var settlementStatus: String?
+    var TransactionType: Int?
+    var resultCode: Int?
 
-
-    init(itemname: String?, itemamount:Float?, totalamount:Float?, cardtype:String?, lastfour: String?, receiptnum: String?) {
+    init(itemname: String?, itemamount:Float?, totalamount:Float?, cardtype:String?, lastfour: String?, receiptnum: String?, transactionType: Int?, resultcode:Int?) {
         self.itemName = itemname
         self.itemAmount = itemamount
         self.totalAmount = totalamount
         self.cardType = cardtype
         self.lastFourDigits = lastfour
         self.receiptNumber = receiptnum
+        self.TransactionType = transactionType
+        self.resultCode = resultcode
     }
 }
