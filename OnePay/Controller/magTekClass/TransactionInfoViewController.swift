@@ -57,7 +57,7 @@ class TransactionInfoViewController: UITableViewController {
                 
                 if detail.resultCode == 1 {
                 if detail.TransactionType == 1 || detail.TransactionType == 7 || detail.TransactionType == 8 {
-                    if detail.settlementStatus?.lowercased() != "settled" {
+                    if detail.settlementStatus?.lowercased() == "unsettled" {
                         self.voidBtn.setTitle("Void", for: .normal)
                         self.voidBtn.isHidden = false
                     }

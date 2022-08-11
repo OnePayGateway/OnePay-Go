@@ -246,7 +246,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                   break
               case "Source Application":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == valueType.lowercased() {
+                      if transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == valueType.lowercased() || transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == "api" {
                           transactionsList.append(transaction)
                       }
                   }
