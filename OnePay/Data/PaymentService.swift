@@ -19,7 +19,7 @@ class PaymentService: BaseRequest {
         var parameters = [String : Any]()
         let amount = payment.amount
         if(emv != nil) {
-            parameters = ["amount":amount!, "method":"CC", "type":payment.type_code, "nonce":Date().generateCurrentTimeStampAsNonce(), "test":"0", "device_code":"MAGTEK", "market_code":PaymentSettings.shared.selectedTerminalType() == "MOTO" ? "M":"R", "referrer_url":"onepay.com", "emv":emv!] as [String : Any]
+            parameters = ["amount":amount!, "method":"CC", "type":payment.type_code, "nonce":Date().generateCurrentTimeStampAsNonce(), "test":"0", "device_code":device_code, "market_code":PaymentSettings.shared.selectedTerminalType() == "MOTO" ? "M":"R", "referrer_url":"onepay.com", "emv":emv!] as [String : Any]
             
         } else {
             var locDic: Dictionary = ["id":"Location", "value":"0;0"]

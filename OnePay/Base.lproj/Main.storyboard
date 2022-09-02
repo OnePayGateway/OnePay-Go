@@ -270,7 +270,7 @@
                                 </variation>
                                 <connections>
                                     <outlet property="msgLbl" destination="c4F-4d-Ygn" id="CdO-Fw-SlO"/>
-                                    <outlet property="passwordField" destination="l7B-nX-1dU" id="UWI-N6-Zc1"/>
+                                    <outlet property="pswField" destination="l7B-nX-1dU" id="UWI-N6-Zc1"/>
                                     <outlet property="usernameField" destination="1v5-y4-bow" id="5IC-cU-UV2"/>
                                 </connections>
                             </view>
@@ -4588,22 +4588,22 @@
     </scenes>
     <designables>
         <designable name="5wU-aH-4y3">
-            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
+            <size key="intrinsicContentSize" width="101.5" height="34"/>
         </designable>
         <designable name="MYx-wI-UdU">
-            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
+            <size key="intrinsicContentSize" width="101.5" height="34"/>
         </designable>
         <designable name="PCB-Wv-9WI">
-            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
+            <size key="intrinsicContentSize" width="116" height="34"/>
         </designable>
         <designable name="hZ7-hl-pCt">
-            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
+            <size key="intrinsicContentSize" width="70" height="34"/>
         </designable>
         <designable name="qL5-YS-eJy">
-            <size key="intrinsicContentSize" width="294" height="44.913671875000006"/>
+            <size key="intrinsicContentSize" width="142.5" height="34"/>
         </designable>
         <designable name="sIe-GG-Uyv">
-            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
+            <size key="intrinsicContentSize" width="138.5" height="34"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

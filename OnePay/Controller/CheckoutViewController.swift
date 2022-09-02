@@ -216,6 +216,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     @IBAction func cancelClicked(_ sender: Any) {
         self.resetDeviceSetup()
         pullDownPaymentModeView()
+        abortTransaction()
     }
     
     func resetDeviceSetup() {
@@ -754,7 +755,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             }
             
             self.cardInfo.updateValue(cardDataObj.deviceKSN! as Any, forKey: "ksn")
-            self.device_code = ""
+            self.device_code = "MAGTEK"
             self.connectBtn.setTitle("************\(cardDataObj.cardLast4!)", for: .normal)
             self.confirmBtn.isEnabled = true
             self.creditcardSwipeLbl.text = "Credit Card Swipe"
@@ -1098,7 +1099,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
             self.emv?.updateValue(dataString, forKey: "emv_data")
             self.emv?.updateValue(pos_entry_mode, forKey: "pos_entry_mode")
             self.emv?.updateValue(service_code, forKey: "service_code")
-            self.device_code = ""
+            self.device_code = "MAGTEK"
 
             self.confirmBtn.isEnabled = true
             self.confirmBtn.alpha = 1.0
@@ -1769,7 +1770,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
                 self.cardInfo.updateValue("Amex", forKey: "type")
                 self.cardInfo.updateValue("", forKey: "track_data")
                 self.cardInfo.updateValue("", forKey: "ksn")
-                self.device_code = ""
+                self.device_code = "MAGTEK"
                 self.confirmBtn.isEnabled = true
                 self.confirmBtn.alpha = 1.0
                 
@@ -2116,7 +2117,26 @@ extension CheckoutViewController: MiuraManagerDelegate {
             if response.isSuccess() {
                 print("startTransactionResponse \(String(describing: (response.tlv[0] as AnyObject).description))")
                 
+//                print(response.tlv[0] as Any)
+//                print("\n")
+//                print(response.raw.hexadecimalString as Any)
+//                print("\n")
+//                print(response.sw as Any)
+//                print("\n")
+//                print(response.sw1.hexadecimalString as Any)
+//                print("\n")
+//                print(response.sw2.hexadecimalString as Any)
+//                print("\n")
+//                print(response.body.hexadecimalString as Any)
+//                print("\n")
+//                print(response.len.hexadecimalString as Any)
+//                print("\n")
+
               //  self.miura.displayText("Authorization\nin progress\nPlease wait...".center, completion: nil)
+                self.emv = Dictionary<String, Any>()
+                self.emv?.updateValue(response.body.hexadecimalString, forKey: "emv_data")
+                self.emv?.updateValue("05", forKey: "pos_entry_mode")
+                self.emv?.updateValue("", forKey: "service_code")
                 self.sendContinueTransaction()
                // self.performSegue(withIdentifier: self.START_TRANSACTION_RESULT_SEGUE, sender: self)
                 
@@ -2192,7 +2212,8 @@ extension CheckoutViewController: MiuraManagerDelegate {
     
     
     func ARQCFor(_ data: Data!) -> [AnyHashable : Any]? {
-       let dataString = data.hexadecimalString;
+        let dataString = data.hexadecimalString;
+        print(dataString)
           let emvBytes  = HexUtil.getBytesFromHexString(dataString)
        let tlv = (emvBytes)!.parseTLVData();
           // print("\n[ARQC Received]\n\(dataString)")
@@ -2223,29 +2244,35 @@ extension CheckoutViewController: MiuraManagerDelegate {
                 
                 print("continueTransactionResponse \(((response.tlv[0] as AnyObject)))")
                 
-                print("signature is required")
-                if let data = response.tlv[0] as? MPITLVObject {
-                    let tlv =  self.ARQCFor(data.rawData as Data?)
-                    if let sredData = tlv?["DFAE57"] as? MTTLV {
-                        print(sredData.value)
-                        self.SREDData = sredData.value                    }
-                    
-                    if let sredKsn = tlv?["DFAE03"] as? MTTLV {
-                        print(sredKsn.value)
-                        self.SREDKSN = sredKsn.value
-                    }
-                }
+//                print("signature is required")
+//                print(response.tlv[0] as Any)
+//                print("\n")
+//                print(response.raw.hexadecimalString as Any)
+//                print("\n")
+//                print(response.sw as Any)
+//                print("\n")
+//                print(response.sw1.hexadecimalString as Any)
+//                print("\n")
+//                print(response.sw2.hexadecimalString as Any)
+//                print("\n")
+//                print(response.body.hexadecimalString as Any)
+//                print("\n")
+//                print(response.len.hexadecimalString as Any)
+//                print("\n")
 
                    DispatchQueue.main.async {
                         AudioServicesPlaySystemSound(1200);
-                       self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
-                       self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
-                        self.cardInfo.updateValue("02", forKey: "entry_mode")
-                        self.device_code = "41"
-                        self.connectBtn.setTitle(self.track2Data?.pan, for: .normal)
+                        self.device_code = "MIURA"
+                       if let data = response.tlv[0] as? MPITLVObject {
+                          let tlv =  self.ARQCFor(data.rawData as Data?)
+                          if let maskedPan = tlv?["DFAE5A"] as? MTTLV {
+                              self.connectBtn.setTitle(maskedPan.value, for: .normal)
+                           }
+                       }
+
                         self.confirmBtn.isEnabled = true
                         self.creditcardSwipeLbl.text = "Credit Card Swipe"
-                        self.emv = nil
+                       // self.emv = nil
                         if(self.plsSwipeView != nil) {
                           self.plsSwipeView.removeFromSuperview()
                         }
@@ -2330,6 +2357,26 @@ extension CheckoutViewController: MiuraManagerDelegate {
                 (manager, response) in
                 if response.isSuccess() {
                     print("ContactlessTransaction \(String(describing: (response.tlv[0] as AnyObject).description))")
+//                    print(response.tlv[0] as Any)
+//                    print("\n")
+//                    print(response.raw.hexadecimalString as Any)
+//                    print("\n")
+//                    print(response.sw as Any)
+//                    print("\n")
+//                    print(response.sw1.hexadecimalString as Any)
+//                    print("\n")
+//                    print(response.sw2.hexadecimalString as Any)
+//                    print("\n")
+//                    print(response.body.hexadecimalString as Any)
+//                    print("\n")
+//                    print(response.len.hexadecimalString as Any)
+//                    print("\n")
+
+                    self.emv = Dictionary<String, Any>()
+                    self.emv?.updateValue(response.body.hexadecimalString, forKey: "emv_data")
+                    self.emv?.updateValue("05", forKey: "pos_entry_mode")
+                    self.emv?.updateValue("", forKey: "service_code")
+                    
                     self.sendContinueTransaction()
                    // self.performSegue(withIdentifier: self.START_TRANSACTION_RESULT_SEGUE, sender: self)
                     
@@ -2504,7 +2551,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.cardInfo.updateValue(self.track2Data.data ?? "", forKey: "track_data")
                     self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
-                    self.device_code = "41"
+                    self.device_code = "MIURA"
                     self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
                     self.confirmBtn.isEnabled = true
                     self.creditcardSwipeLbl.text = "Credit Card Swipe"
@@ -2603,7 +2650,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
                     self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
                     self.cardInfo.updateValue("01", forKey: "entry_mode")
-                    self.device_code = "41"
+                    self.device_code = "MIURA"
                     self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
                     self.confirmBtn.isEnabled = true
                     self.creditcardSwipeLbl.text = "Credit Card Swipe"

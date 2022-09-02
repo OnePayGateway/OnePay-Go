@@ -11,7 +11,7 @@ import SkyFloatingLabelTextField
 
 class LoginView: UIView {
     @IBOutlet weak var usernameField: UITextField!
-    @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var pswField: UITextField!
     @IBOutlet weak var msgLbl: UILabel!
 
     /*

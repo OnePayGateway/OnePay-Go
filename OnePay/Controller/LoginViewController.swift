@@ -40,7 +40,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                 self.hideSpinner()
                 self.loginView.msgLbl.text = loggedIn.message
                 self.loginView.usernameField.layer.borderColor = UIColor.red.cgColor
-                self.loginView.passwordField.layer.borderColor = UIColor.red.cgColor
+                self.loginView.pswField.layer.borderColor = UIColor.red.cgColor
             }
         }
     }
@@ -50,9 +50,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         loginView.usernameField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
         loginView.usernameField.setLeftPaddingPoints(10)
         loginView.usernameField.setRightPaddingPoints(10)
-        loginView.passwordField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
-        loginView.passwordField.setLeftPaddingPoints(10)
-        loginView.passwordField.setRightPaddingPoints(10)
+        loginView.pswField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: .editingChanged)
+        loginView.pswField.setLeftPaddingPoints(10)
+        loginView.pswField.setRightPaddingPoints(10)
         // Do any additional setup after loading the view.
     }
     
@@ -62,11 +62,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.loginView.msgLbl.text = ""
             if #available(iOS 13.0, *) {
                 self.loginView.usernameField.layer.borderColor = UIColor.systemGray4.cgColor
-                self.loginView.passwordField.layer.borderColor = UIColor.systemGray4.cgColor
+                self.loginView.pswField.layer.borderColor = UIColor.systemGray4.cgColor
 
             } else {
                 self.loginView.usernameField.layer.borderColor = UIColor.lightGray.cgColor
-                self.loginView.passwordField.layer.borderColor = UIColor.lightGray.cgColor
+                self.loginView.pswField.layer.borderColor = UIColor.lightGray.cgColor
                 // Fallback on earlier versions
             }
         }
@@ -83,9 +83,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             self.loginView.usernameField.layer.borderColor = UIColor.red.cgColor
             return
         }
-        guard let password = loginView.passwordField.text, !password.isEmpty else {
+        guard let password = loginView.pswField.text, !password.isEmpty else {
             self.loginView.msgLbl.text = "Please enter password"
-            self.loginView.passwordField.layer.borderColor = UIColor.red.cgColor
+            self.loginView.pswField.layer.borderColor = UIColor.red.cgColor
             return
         }
 
@@ -106,9 +106,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     @IBAction func viewPaswdClicked(_ sender: Any) {
         if let btn = sender as? UIButton {
             if btn.isSelected {
-                self.loginView.passwordField.isSecureTextEntry = true
+                self.loginView.pswField.isSecureTextEntry = true
             } else {
-                self.loginView.passwordField.isSecureTextEntry = false
+                self.loginView.pswField.isSecureTextEntry = false
             }
             btn.isSelected = !btn.isSelected
         }

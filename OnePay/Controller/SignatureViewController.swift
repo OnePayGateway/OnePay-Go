@@ -141,14 +141,14 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
                
                 guard err == nil else {
                     self.hideSpinner()
-                  //  self.resetPaymentInfo()
-                    self.displayAlert(title: err!.localizedDescription, message: "")
+                    self.statusString = "Failed"
+                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
                     return
                 }
                 guard let json = jsonValue else {
                     self.hideSpinner()
-                   // self.resetPaymentInfo()
-                    self.displayAlert(title: "Something went wrong", message: "")
+                    self.statusString = "Failed"
+                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
                     return
                 }
                 print(json)
@@ -197,11 +197,11 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
             amountLbl.font = .boldSystemFont(ofSize: 16)
             showAlert.view.addSubview(amountLbl)
             
-            let authLbl = UILabel(frame: CGRect(x: 10, y: 160, width: 250, height: 20))
-            authLbl.text = "Auth Code: \(authCode)"
-            authLbl.textAlignment = .center
-            authLbl.font = .boldSystemFont(ofSize: 16)
-            showAlert.view.addSubview(authLbl)
+            let aCodeLbl = UILabel(frame: CGRect(x: 10, y: 160, width: 250, height: 20))
+            aCodeLbl.text = "Auth Code: \(authCode)"
+            aCodeLbl.textAlignment = .center
+            aCodeLbl.font = .boldSystemFont(ofSize: 16)
+            showAlert.view.addSubview(aCodeLbl)
         }
         
         let height = NSLayoutConstraint(item: showAlert.view as Any, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: success ? 260 : 200)
@@ -239,15 +239,15 @@ class SignatureViewController: UIViewController,YPSignatureDelegate {
                 }
                 print(json)
                 self.hideSpinner()
-                let response = json["transaction_response"].dictionaryValue
-                if let code = response["result_code"]?.intValue, code == 1 {
-                    print("payment success")
+//                let response = json["transaction_response"].dictionaryValue
+//                if let code = response["result_code"]?.intValue, code == 1 {
+//                    print("payment success")
                     self.performSegue(withIdentifier: "signToStatus", sender: nil)
-                } else if let status = response["result_text"]?.stringValue {
-                    print(status)
-                    self.statusString = "Failed"
-                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
-                }
+//                } else if let status = response["result_text"]?.stringValue {
+//                    print(status)
+//                    self.statusString = "Failed"
+//                    self.performSegue(withIdentifier: "signToStatus", sender: nil)
+//                }
             }
         }
     }
