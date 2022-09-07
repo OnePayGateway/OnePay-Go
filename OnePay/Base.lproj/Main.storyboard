@@ -4588,22 +4588,22 @@
     </scenes>
     <designables>
         <designable name="5wU-aH-4y3">
-            <size key="intrinsicContentSize" width="101.5" height="34"/>
+            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
         </designable>
         <designable name="MYx-wI-UdU">
-            <size key="intrinsicContentSize" width="101.5" height="34"/>
+            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
         </designable>
         <designable name="PCB-Wv-9WI">
-            <size key="intrinsicContentSize" width="116" height="34"/>
+            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
         </designable>
         <designable name="hZ7-hl-pCt">
-            <size key="intrinsicContentSize" width="70" height="34"/>
+            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
         </designable>
         <designable name="qL5-YS-eJy">
-            <size key="intrinsicContentSize" width="142.5" height="34"/>
+            <size key="intrinsicContentSize" width="294" height="44.913671875000006"/>
         </designable>
         <designable name="sIe-GG-Uyv">
-            <size key="intrinsicContentSize" width="138.5" height="34"/>
+            <size key="intrinsicContentSize" width="330" height="41.607421875"/>
         </designable>
     </designables>
     <inferredMetricsTieBreakers>

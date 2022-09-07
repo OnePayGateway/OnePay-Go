@@ -2530,11 +2530,6 @@ extension CheckoutViewController: MiuraManagerDelegate {
         let trackData = cardData.track2Data
         
         if (trackData != nil) {
-        
-            if counter == 0 {
-                counter += 1
-                return
-            }
             
             self.track2Data = trackData
             self.SREDKSN = cardData.sredKSN
@@ -2548,7 +2543,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                 print("signature is required")
                 DispatchQueue.main.async {
                     AudioServicesPlaySystemSound(1200);
-                    self.cardInfo.updateValue(self.track2Data.data ?? "", forKey: "track_data")
+                    self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
                     self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "MIURA"
@@ -2649,7 +2644,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     AudioServicesPlaySystemSound(1200);
                     self.cardInfo.updateValue(self.SREDData ?? "", forKey: "track_data")
                     self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
-                    self.cardInfo.updateValue("01", forKey: "entry_mode")
+                    self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "MIURA"
                     self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
                     self.confirmBtn.isEnabled = true
