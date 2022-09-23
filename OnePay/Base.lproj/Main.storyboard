@@ -352,7 +352,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Charge" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qqY-Ks-Dy4">
-                                        <rect key="frame" x="169" y="60" width="76" height="28"/>
+                                        <rect key="frame" x="174.5" y="60" width="65" height="23.5"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="24" id="11H-2z-ca1"/>
                                         </constraints>
@@ -384,7 +384,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="374" height="352"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$0.00" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="taR-Ca-FAp">
-                                                        <rect key="frame" x="20" y="141" width="334" height="70"/>
+                                                        <rect key="frame" x="20" y="147" width="334" height="58.5"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="47" id="7TZ-QB-9Sv"/>
                                                         </constraints>
@@ -781,13 +781,13 @@
                                                         <rect key="frame" x="5" y="10" width="352" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit Card Entry" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ol9-og-2rs">
-                                                                <rect key="frame" x="50" y="20" width="137" height="22.5"/>
+                                                                <rect key="frame" x="50" y="20" width="124" height="19"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" name="txtColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="bank-card-back-side" translatesAutoresizingMaskIntoConstraints="NO" id="JgL-LP-eA1">
-                                                                <rect key="frame" x="15" y="16.5" width="30" height="30"/>
+                                                                <rect key="frame" x="15" y="14.5" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="width" constant="30" id="gpB-A5-wpz"/>
                                                                     <constraint firstAttribute="height" constant="30" id="guD-CV-Syb"/>
@@ -846,14 +846,14 @@
                                                         <rect key="frame" x="5" y="80" width="352" height="60"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Credit Card Swipe" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vHZ-Xd-meQ">
-                                                                <rect key="frame" x="50" y="20" width="144.5" height="22.5"/>
+                                                                <rect key="frame" x="50" y="20" width="131" height="19"/>
                                                                 <color key="backgroundColor" name="BgColor"/>
                                                                 <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="16"/>
                                                                 <color key="textColor" name="txtColor"/>
                                                                 <nil key="highlightedColor"/>
                                                             </label>
                                                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cardSwipe" translatesAutoresizingMaskIntoConstraints="NO" id="Fj6-TV-0T6">
-                                                                <rect key="frame" x="15" y="16.5" width="30" height="30"/>
+                                                                <rect key="frame" x="15" y="14.5" width="30" height="30"/>
                                                                 <constraints>
                                                                     <constraint firstAttribute="height" constant="30" id="TMg-PP-I1K"/>
                                                                     <constraint firstAttribute="width" constant="30" id="gHl-Xz-wSo"/>
@@ -4229,7 +4229,7 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5XD-hX-u22">
-                                        <rect key="frame" x="24" y="233" width="326" height="91"/>
+                                        <rect key="frame" x="24" y="233" width="326" height="61"/>
                                         <string key="text">By providing your contact information, you agree that businesses that you visited may send you digital receipts, marketing and messages via OnePay Go. See your digital receipts for privacy policy and preferences.</string>
                                         <fontDescription key="fontDescription" name="Poppins-Regular" family="Poppins" pointSize="13"/>
                                         <color key="textColor" name="lightGrayTextColor"/>
@@ -4600,7 +4600,7 @@
             <size key="intrinsicContentSize" width="330" height="41.607421875"/>
         </designable>
         <designable name="qL5-YS-eJy">
-            <size key="intrinsicContentSize" width="294" height="44.913671875000006"/>
+            <size key="intrinsicContentSize" width="294" height="41.153671875000001"/>
         </designable>
         <designable name="sIe-GG-Uyv">
             <size key="intrinsicContentSize" width="330" height="41.607421875"/>
