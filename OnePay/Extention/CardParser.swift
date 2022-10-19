@@ -41,7 +41,7 @@ enum CardType {
                             length = [16]
 
         case .visa:         prefix = ["4"]
-                            length = [13, 16, 19]
+                            length = [13, 16]
 
         }
 

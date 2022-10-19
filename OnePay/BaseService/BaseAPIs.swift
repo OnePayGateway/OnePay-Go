@@ -18,10 +18,10 @@ struct APIs {
     let appTestBaseURL = "https://portalqa.onepay.com"
     let appDevBaseURL = "https://portaldev.onepay.com"
 
-    let gatewayProdBaseURL = "https://api.onepay.com/"
-    let gatewayDemoBaseURL = "https://apisandbox.onepay.com/"
-    let gatewayTestBaseURL = "https://apiqa.onepay.com/"
-    let gatewayDevBaseURL = "https://apidev.onepay.com/"
+    let gatewayProdBaseURL = "https://api.onepay.com"
+    let gatewayDemoBaseURL = "https://apisandbox.onepay.com"
+    let gatewayTestBaseURL = "https://apiqa.onepay.com"
+    let gatewayDevBaseURL = "https://apidev.onepay.com"
 
     let loginRelativeURL = "/EP/Token"
     let getApiKeyURL = "/EP/api/Merchant/GetApiKey"
@@ -45,7 +45,7 @@ struct APIs {
 //        } else if Session.shared.apiZone() == 3 {
 //            return appDevBaseURL
 //        }
-        return appDemoBaseURL
+        return appProdBaseURL
     }
     
     func loginAPI() -> String {
@@ -84,7 +84,7 @@ struct APIs {
 //        } else if Session.shared.apiZone() == 3 {
 //            return gatewayDevBaseURL
 //        }
-        return gatewayDemoBaseURL
+        return gatewayProdBaseURL
     }
     
     func paymentAPI() -> String {

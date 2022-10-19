@@ -182,11 +182,10 @@ extension CardView : UITextFieldDelegate {
                         return true
                     } else if updatedText.count <= card.maxLength {
                         print("invalid card and not exceeded max length")
-                        if card.isValid(oldText), !string.isEmpty {
-                            cardNumber = oldText
-//                            expirationDateField.becomeFirstResponder()
-                            return false
-                        }
+//                        if card.isValid(oldText), !string.isEmpty {
+//                            cardNumber = oldText
+//                            return false
+//                        }
                         return true
                     } else {
                         print("invalid card and exceeded max length")

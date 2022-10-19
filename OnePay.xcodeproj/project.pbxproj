@@ -1138,7 +1138,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 25NMC73834;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1161,7 +1161,7 @@
 					"$(PROJECT_DIR)/OnePay/Lib/iPhoneSimulator",
 					"$(PROJECT_DIR)/OnePay/Controller/bbPosLibrary",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.5;
 				ONLY_ACTIVE_ARCH = YES;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
@@ -1190,7 +1190,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 16;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 25NMC73834;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1213,7 +1213,7 @@
 					"$(PROJECT_DIR)/OnePay/Lib/iPhoneSimulator",
 					"$(PROJECT_DIR)/OnePay/Controller/bbPosLibrary",
 				);
-				MARKETING_VERSION = 1.3;
+				MARKETING_VERSION = 1.5;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
