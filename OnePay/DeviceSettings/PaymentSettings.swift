@@ -96,7 +96,9 @@ class PaymentSettings: NSObject {
         defaults.removeObject(forKey: PAYMENT_DEVICE_ID)
         defaults.removeObject(forKey: SELECTED_TERMINAL_ID)
         defaults.removeObject(forKey: SELECTED_TERMINAL_TYPE)
+        defaults.removeObject(forKey: SELECTED_TERMINAL_NAME)
         defaults.removeObject(forKey: ACTIVE_TERMINAL_IDS)
+        defaults.removeObject(forKey: ACTIVE_TERMINAL_NAMES)
         defaults.removeObject(forKey: ACTIVE_TERMINAL_TYPES)
     }
 }

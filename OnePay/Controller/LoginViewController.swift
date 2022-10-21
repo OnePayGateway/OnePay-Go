@@ -157,6 +157,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                     if(activeTerminalIds.count != 0) {
                         PaymentSettings.shared.setSelectedTerminal(Id: activeTerminalIds[0])
                         PaymentSettings.shared.setSelectedTerminal(Type: activeTerminalTypes[0])
+                        PaymentSettings.shared.setSelectedTerminal(Name: activeTerminalNames[0])
                         PaymentSettings.shared.setActiveTerminal(Ids: activeTerminalIds)
                         PaymentSettings.shared.setActiveTerminal(Types: activeTerminalTypes)
                         PaymentSettings.shared.setActiveTerminal(Names: activeTerminalNames)

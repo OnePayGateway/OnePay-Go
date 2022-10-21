@@ -26,6 +26,7 @@ class CardView: UIView {
     private var cvcField: UITextField!
     
     var cardNumber: String?
+    var cardType: CardType?
     var expiryDate: String?
     var cvc: String?
     
@@ -311,6 +312,7 @@ extension CardView {
                 if card.isValid(text) {
                     print("move to expirationDateField")
                     cardNumber = text
+                    cardType = card
                   //  expirationDateField.becomeFirstResponder()
                 }
             case .indeterminate(let possibleCards):

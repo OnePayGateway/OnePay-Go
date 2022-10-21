@@ -1755,6 +1755,17 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         }
     }
     
+    func cardName(for cardType:CardType) -> String {
+        switch cardType {
+        case .visa:         return "Visa"
+        case .masterCard:   return "Master"
+        case .amex:         return "Amex"
+        case .diners:       return "Diners"
+        case .discover:     return "Discover"
+        case .jcb:          return "JCB"
+        }
+    }
+    
     func CardViewTextFieldDidChange() {
         DispatchQueue.main.async {
             if self.cardView.isValid() {
@@ -1766,11 +1777,10 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
 //                }
                 
                 self.cardInfo.updateValue(self.cardView.cvc!, forKey: "code")
-                
-                self.cardInfo.updateValue("Amex", forKey: "type")
+                self.cardInfo.updateValue(self.cardName(for: self.cardView.cardType ?? .visa), forKey: "type")
                 self.cardInfo.updateValue("", forKey: "track_data")
                 self.cardInfo.updateValue("", forKey: "ksn")
-                self.device_code = "MAGTEK"
+                self.device_code = ""
                 self.confirmBtn.isEnabled = true
                 self.confirmBtn.alpha = 1.0
                 
@@ -2526,7 +2536,7 @@ extension CheckoutViewController: MiuraManagerDelegate {
     func miuraManager(_ manager: MiuraManager, cardStatusChange cardData: CardData) {
         print("cardStatusChange: \(cardData)")
         
-        self.connectBtn.setTitle("PRESENT CARD", for: .normal)
+     //   self.connectBtn.setTitle("PRESENT CARD", for: .normal)
         let trackData = cardData.track2Data
         
         if (trackData != nil) {
