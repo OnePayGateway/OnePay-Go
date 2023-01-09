@@ -11,13 +11,19 @@ import UIKit
 class MenuListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
    
     @IBOutlet weak var menuView: MenuListView!
+    @IBOutlet weak var appVersionLbl: UILabel!
+    
     var menu = Menu()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+        self.appVersionLbl.text = String(format: "App Version %@", appVersion())
         self.menuView.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         // Do any additional setup after loading the view.
+    }
+    
+    func appVersion() -> String {
+        return Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
     }
     
     override func viewWillAppear(_ animated: Bool) {

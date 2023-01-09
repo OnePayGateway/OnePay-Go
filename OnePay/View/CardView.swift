@@ -337,7 +337,7 @@ extension CardView {
                 return
             }
 
-            if CardState(fromNumber: cardNumber) == .identified(.amex), text.count == 4 {
+            if CardState(fromNumber: cardNumber) == .identified(.amex), (text.count == 3 || text.count == 4) {
                 cvc = text
                // cvcField.resignFirstResponder()
             } else if CardState(fromNumber: cardNumber) != .identified(.amex), text.count == 3 {
