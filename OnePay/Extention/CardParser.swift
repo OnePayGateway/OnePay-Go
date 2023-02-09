@@ -29,7 +29,7 @@ enum CardType {
                             length = [15]
 
         case .diners:       prefix = ["300"..."305", "309", "36", "38"..."39"]
-                            length = [14]
+                            length = [14, 16]
 
         case .discover:     prefix = ["6011", "65", "644"..."649", "622126"..."622925"]
                             length = [16]

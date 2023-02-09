@@ -2276,7 +2276,8 @@ extension CheckoutViewController: MiuraManagerDelegate {
                        if let data = response.tlv[0] as? MPITLVObject {
                           let tlv =  self.ARQCFor(data.rawData as Data?)
                           if let maskedPan = tlv?["DFAE5A"] as? MTTLV {
-                              self.connectBtn.setTitle(maskedPan.value, for: .normal)
+                              let lastFour = maskedPan.value.suffix(4)
+                              self.connectBtn.setTitle("**********\(lastFour)", for: .normal)
                            }
                        }
 
@@ -2557,7 +2558,10 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "MIURA"
-                    self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
+                    
+                    let lastFour = self.track2Data.pan?.suffix(4)
+                    self.connectBtn.setTitle("**********\(String(describing: lastFour))", for: .normal)
+                    
                     self.confirmBtn.isEnabled = true
                     self.creditcardSwipeLbl.text = "Credit Card Swipe"
                     self.emv = nil
@@ -2656,7 +2660,10 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.cardInfo.updateValue(self.SREDKSN ?? "", forKey: "ksn")
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "MIURA"
-                    self.connectBtn.setTitle(self.track2Data.pan, for: .normal)
+                    
+                    let lastFour = self.track2Data.pan?.suffix(4)
+                    self.connectBtn.setTitle("**********\(String(describing: lastFour))", for: .normal)
+                    
                     self.confirmBtn.isEnabled = true
                     self.creditcardSwipeLbl.text = "Credit Card Swipe"
                     self.emv = nil

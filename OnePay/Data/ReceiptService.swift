@@ -38,7 +38,7 @@ class ReceiptService: BaseRequest {
                     return
                 }
                 do {
-                    let jsonValue = try JSON(data: data, options: .allowFragments)
+                    let jsonValue = try JSON(data: data, options: .fragmentsAllowed)
                     if let dataFromString = jsonValue.stringValue.data(using: .utf8, allowLossyConversion: false) {
                         do {
                             let json = try JSON(data: dataFromString)

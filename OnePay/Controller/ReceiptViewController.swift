@@ -107,26 +107,26 @@ class ReceiptViewController: UIViewController,UITextFieldDelegate {
     func sendReceipt() {
         self.receiptService.sendReceipt(receipt:receipt) { (jsonValue, err) in
             DispatchQueue.main.async {
-                guard err == nil else {
-                    self.hideSpinner()
-                    self.displayAlert(title: err!.localizedDescription, message: "")
-                    return
-                }
-                guard let json = jsonValue else {
-                    self.hideSpinner()
-                    self.displayAlert(title: "Something went wrong", message: "")
-                    return
-                }
-                print(json)
+//                guard err == nil else {
+//                    self.hideSpinner()
+//                    self.displayAlert(title: err!.localizedDescription, message: "")
+//                    return
+//                }
+//                guard let json = jsonValue else {
+//                    self.hideSpinner()
+//                    self.displayAlert(title: "Something went wrong", message: "")
+//                    return
+//                }
+              //  print(json)
                 self.hideSpinner()
-                let response = json["transaction_response"].dictionaryValue
-                if let code = response["result_code"]?.intValue, code == 1 {
-                    print("payment success")
+//                let response = json["transaction_response"].dictionaryValue
+//                if let code = response["result_code"]?.intValue, code == 1 {
+//                    print("payment success")
                     self.showReceiptAlertWith(title: "Receipt will be sent shortly", btnName: "Done", success: true)
-                } else if let status = response["result_text"]?.stringValue {
-                    print(status)
-                    self.showReceiptAlertWith(title: "Something went wrong, Please try again", btnName: "Done", success: false)
-                }
+//                } else if let status = response["result_text"]?.stringValue {
+//                    print(status)
+//                    self.showReceiptAlertWith(title: "Something went wrong, Please try again", btnName: "Done", success: false)
+//                }
             }
         }
     }

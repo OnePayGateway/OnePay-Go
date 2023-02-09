@@ -231,7 +231,7 @@ extension CardView : UITextFieldDelegate {
                 } else if updatedText.count == 5 {
                     return true
                 } else if updatedText.count > 5 {
-                    expiryDate = oldText
+                   // expiryDate = oldText
                    // cvcField.becomeFirstResponder()
                     return false
                 }

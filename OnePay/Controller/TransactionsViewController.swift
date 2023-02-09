@@ -246,7 +246,7 @@ class TransactionsViewController: UIViewController, UITableViewDelegate, UITable
                   break
               case "Source Application":
                   for (index , transaction) in transactionHistroy.transactionsList.enumerated() {
-                      if transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == valueType.lowercased() || transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == "api" {
+                      if (transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == valueType.lowercased()) || (transactionHistroy.sourceApplication(forIndex: index)?.lowercased() == "api" && valueType.lowercased() == "onepaygo") {
                           transactionsList.append(transaction)
                       }
                   }
@@ -398,7 +398,13 @@ extension TransactionsViewController {
                 if selectedFilterKey == "All" || selectedFilterKey == "Source Application" {
                     self.searchImgView.image = UIImage(systemName: "arrowtriangle.down.fill")
                     selectedFilterValue = selectedFilterKey == "Source Application" ? "OnepayGo" : nil
-                    self.showTransactions(for: selectedDate)
+                    if let valueType = self.selectedFilterValue {
+                        self.filterValueLbl.text = selectedFilterValue
+                        self.filterTransactions(for: valueType)
+                    } else {
+                        self.showTransactions(for: self.selectedDate)
+                    }
+                   // self.showTransactions(for: selectedDate)
                 } else {
                     self.searchImgView.image = UIImage(systemName: "text.magnifyingglass")
                     switch selectedFilterKey {
