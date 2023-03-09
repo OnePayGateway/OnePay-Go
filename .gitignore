@@ -1682,3 +1682,27 @@ Pods/Target Support Files/Pods-OnePay-OnePayUITests/Pods-OnePay-OnePayUITests.de
 Pods/Target Support Files/Pods-OnePay-OnePayUITests/Pods-OnePay-OnePayUITests.release.xcconfig
 Pods/Target Support Files/Pods-OnePayTests/Pods-OnePayTests.debug.xcconfig
 Pods/Target Support Files/Pods-OnePayTests/Pods-OnePayTests.release.xcconfig
+Podfile.lock
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/AppCenter.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/ApplicationInsights.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/IQKeyboardManagerSwift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/MiuraSDK.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/Pods-OnePay-OnePayUITests.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/Pods-OnePay.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/Pods-OnePayTests.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/ReachabilitySwift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/SideMenuSwift.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/SkyFloatingLabelTextField.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/SwiftyJSON.xcscheme
+Pods/Pods.xcodeproj/xcuserdata/pkrishnan.xcuserdatad/xcschemes/xcschememanagement.plist
+Pods/Target Support Files/MiuraSDK/MiuraSDK-Info.plist
+Pods/Target Support Files/MiuraSDK/MiuraSDK.debug.xcconfig
+Pods/Target Support Files/MiuraSDK/MiuraSDK.release.xcconfig
+Pods/Target Support Files/Pods-OnePay-OnePayUITests/Pods-OnePay-OnePayUITests-Info.plist
+Pods/Target Support Files/Pods-OnePayTests/Pods-OnePayTests-Info.plist
+Podfile.lock
+Pods/Target Support Files/MiuraSDK/MiuraSDK-Info.plist
+Pods/Target Support Files/MiuraSDK/MiuraSDK.debug.xcconfig
+Pods/Target Support Files/MiuraSDK/MiuraSDK.release.xcconfig
+Pods/Target Support Files/Pods-OnePay-OnePayUITests/Pods-OnePay-OnePayUITests-Info.plist
+Pods/Target Support Files/Pods-OnePayTests/Pods-OnePayTests-Info.plist
