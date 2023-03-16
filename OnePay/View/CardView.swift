@@ -153,6 +153,7 @@ extension CardView : UITextFieldDelegate {
             return
         }
         print(text)
+        field = Fields(rawValue: textField.tag)
         handleAllFields(text: text)
         cardViewDelegate?.CardViewTextFieldDidChange()
     }
@@ -162,6 +163,7 @@ extension CardView : UITextFieldDelegate {
             return
         }
         print(text)
+        field = Fields(rawValue: textField.tag)
         handleAllFields(text: text)
         cardViewDelegate?.CardViewTextFieldDidChange()
     }
