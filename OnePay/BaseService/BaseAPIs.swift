@@ -45,7 +45,7 @@ struct APIs {
 //        } else if Session.shared.apiZone() == 3 {
 //            return appDevBaseURL
 //        }
-        return appProdBaseURL
+        return appTestBaseURL
     }
     
     func loginAPI() -> String {
@@ -84,7 +84,7 @@ struct APIs {
 //        } else if Session.shared.apiZone() == 3 {
 //            return gatewayDevBaseURL
 //        }
-        return gatewayProdBaseURL
+        return gatewayTestBaseURL
     }
     
     func paymentAPI() -> String {

@@ -1442,9 +1442,9 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
         self.lib.closeDevice()
         miura.closeSession()
 
-        if (self.isMovingFromParent) {
-            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
-        }
+//        if (self.isMovingFromParent) {
+//            UIDevice.current.setValue(Int(UIInterfaceOrientation.portrait.rawValue), forKey: "orientation")
+//        }
         
     }
 
@@ -1455,7 +1455,7 @@ class CheckoutViewController: UIViewController, BBDeviceControllerDelegate, Card
     }
     
     
-    @objc func canRotate() -> Void {}
+  //  @objc func canRotate() -> Void {}
     
     
 //    func connectBbPos() {
@@ -2559,8 +2559,11 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "MIURA"
                     
-                    let lastFour = self.track2Data.pan?.suffix(4)
-                    self.connectBtn.setTitle("**********\(String(describing: lastFour))", for: .normal)
+                    if let lastFour = self.track2Data.pan?.suffix(4) {
+                        self.connectBtn.setTitle("**********\(lastFour)", for: .normal)
+                    } else {
+                        self.connectBtn.setTitle("**********", for: .normal)
+                    }
                     
                     self.confirmBtn.isEnabled = true
                     self.creditcardSwipeLbl.text = "Credit Card Swipe"
@@ -2661,8 +2664,11 @@ extension CheckoutViewController: MiuraManagerDelegate {
                     self.cardInfo.updateValue("02", forKey: "entry_mode")
                     self.device_code = "MIURA"
                     
-                    let lastFour = self.track2Data.pan?.suffix(4)
-                    self.connectBtn.setTitle("**********\(String(describing: lastFour))", for: .normal)
+                    if let lastFour = self.track2Data.pan?.suffix(4) {
+                        self.connectBtn.setTitle("**********\(lastFour)", for: .normal)
+                    } else {
+                        self.connectBtn.setTitle("**********", for: .normal)
+                    }
                     
                     self.confirmBtn.isEnabled = true
                     self.creditcardSwipeLbl.text = "Credit Card Swipe"
